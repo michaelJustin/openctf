@@ -1,0 +1,12 @@
+[Main]
+Parameters=
+SSL=0
+DebugInfo=0
+HTML32=0
+WML=0
+XHTMLMP=0
+RunIn=0
+RunMinimized=0
+RunInTray=1
+[HTTP]
+SpeedLimit=0
