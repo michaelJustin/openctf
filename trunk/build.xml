@@ -2,9 +2,9 @@
 
 	<!-- =================================================================== -->
 
-	<property name="Name" value="OpenCTF" />
-		<property name="version" value="0.9" />
-		<property name="target" value="target" />
+  <property name="Name" value="OpenCTF" />
+  <property name="version" value="0.9" />
+  <property name="target" value="target" />
 
   <macrodef name="iterate">
     <attribute name="target"/>
@@ -22,101 +22,97 @@
        </subant>
      </sequential>
   </macrodef>
-            
-	<!-- =================================================================== -->
-	<!-- Prepares the target directory                                        -->
-	<!-- =================================================================== -->
-	<target name="prepare">
 
-		<delete includeEmptyDirs="true" failonerror="false">
-			<fileset dir="${target}" />
-		</delete>
-    
-		<mkdir dir="${target}" />
-		<mkdir dir="${target}/docs" />
-		<mkdir dir="${target}/source" />
-		<mkdir dir="${target}/examples" />
+  <!-- =================================================================== -->
+  <!-- Prepares the target directory                                        -->
+  <!-- =================================================================== -->
+  <target name="prepare">
 
-	</target>
+    <delete includeEmptyDirs="true" failonerror="false">
+    <fileset dir="${target}" />
+    </delete>
 
+    <mkdir dir="${target}" />
+    <mkdir dir="${target}/docs" />
+    <mkdir dir="${target}/source" />
+    <mkdir dir="${target}/examples" />
 
-	<!-- =================================================================== -->
-	<!-- Copies   the source code                                            -->
-	<!-- =================================================================== -->
-	<target name="copy" depends="prepare">
-
-  
-          <copy todir="${target}">
-            <fileset dir="${basedir}">
-              <include name="common.xml" />
-            </fileset>
-          </copy>
-
-          <copy todir="${target}/source">
-            <fileset dir="${basedir}/etc">
-              <include name="LICENSE.txt" />
-            </fileset>
-          </copy>
-
-          <copy todir="${target}/source">
-            <fileset dir="${basedir}/source">
-              <include name="**/*.pas" />
-              <include name="**/*.inc" />
-            </fileset>
-          </copy>
-
-          <copy todir="${target}/examples">
-            <fileset dir="${basedir}/examples">
-              <include name="**/*.dpr" />
-              <include name="**/*.res" />
-              <include name="**/*.pas" />
-              <include name="**/*.dfm" />
-              <include name="**/*.cmd" />
-              <include name="**/*.xml" />              
-            </fileset>
-          </copy>
-
-
-	  <apply executable="doxygen" output="make/doxygen.log">
-            <fileset dir="make">
-              <patternset>
-                <include name="doxygen.cfg"/>
-              </patternset>
-            </fileset>
-          </apply>
-
-	</target>
+  </target>
 
 
   <!-- =================================================================== -->
-	<!-- Tests    the source code                                            -->
-	<!-- =================================================================== -->
-	<target name="compile" depends="copy">
+  <!-- Copies   the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="copy" depends="prepare">
 
-  <iterate target="compile"/>
+    <copy todir="${target}">
+      <fileset dir="${basedir}">
+        <include name="common.xml" />
+      </fileset>
+    </copy>
 
-  <echo message="compile complete" />      
+    <copy todir="${target}/source">
+      <fileset dir="${basedir}/etc">
+        <include name="LICENSE.txt" />
+      </fileset>
+    </copy>
 
-	</target>
+    <copy todir="${target}/source">
+      <fileset dir="${basedir}/source">
+        <include name="**/*.pas" />
+        <include name="**/*.inc" />
+      </fileset>
+    </copy>
 
-	<!-- =================================================================== -->
-	<!-- Packages the distribution with ZIP  - full version                  -->
-	<!-- =================================================================== -->
-	<target name="zip" depends="compile">
+    <copy todir="${target}/examples">
+      <fileset dir="${basedir}/examples">
+        <include name="**/*.dpr" />
+        <include name="**/*.res" />
+        <include name="**/*.pas" />
+        <include name="**/*.dfm" />
+        <include name="**/*.cmd" />
+        <include name="**/*.xml" />
+      </fileset>
+    </copy>
 
-          <zip zipfile="${target}/${Name}.zip" basedir="${target}" includes="**" />
+    <apply executable="doxygen" output="make/doxygen.log">
+      <fileset dir="make">
+        <patternset>
+          <include name="doxygen.cfg"/>
+        </patternset>
+      </fileset>
+    </apply>
 
-	        <apply executable="iscc" output="make/iscc.log">
-            <fileset dir="make">
-              <patternset>
-                <include name="make.iss"/>
-              </patternset>
-            </fileset>
-          </apply>
-
-     <zip zipfile="${target}/${Name}-installer.zip" basedir="${target}" includes="${Name}-installer.exe" />
+  </target>
 
 
-	</target>
+  <!-- =================================================================== -->
+  <!-- Tests    the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="compile" depends="copy">
+
+    <iterate target="compile"/>
+    <echo message="compile complete" />
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Packages the distribution with ZIP  - full version                  -->
+  <!-- =================================================================== -->
+  <target name="zip" depends="compile">
+
+    <zip zipfile="${target}/${Name}.zip" basedir="${target}" includes="**" />
+
+    <apply executable="iscc" output="make/iscc.log">
+      <fileset dir="make">
+        <patternset>
+          <include name="make.iss"/>
+        </patternset>
+      </fileset>
+    </apply>
+
+    <zip zipfile="${target}/${Name}-installer.zip" basedir="${target}" includes="${Name}-installer.exe" />
+
+  </target>
 
 </project>
