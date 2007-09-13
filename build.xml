@@ -1,10 +1,12 @@
 <project name="OpenCTF" default="zip" basedir=".">
 
-	<!-- =================================================================== -->
+  <!-- =================================================================== -->
 
   <property name="Name" value="OpenCTF" />
-  <property name="version" value="0.9" />
+  <property name="name" value="openctf" />
+  <property name="version" value="0.9.6" />
   <property name="target" value="target" />
+  <property name="target_root" value="${target}/${name}" />
 
   <macrodef name="iterate">
     <attribute name="target"/>
@@ -12,12 +14,6 @@
        <subant target="@{target}">
          <fileset dir="examples/d2006">
            <include name="*/build.xml" />
-           <!-- exclude name="globalization/build.xml" />
-           <exclude name="ibx/build.xml" />
-           <exclude name="iwdb/build.xml" />
-           <exclude name="jvuib/build.xml" />
-           <exclude name="quickreport4/build.xml" />
-           <exclude name="rave/build.xml" / -->
          </fileset>
        </subant>
      </sequential>
@@ -29,13 +25,14 @@
   <target name="prepare">
 
     <delete includeEmptyDirs="true" failonerror="false">
-    <fileset dir="${target}" />
+      <fileset dir="${target}" />
     </delete>
 
     <mkdir dir="${target}" />
-    <mkdir dir="${target}/docs" />
-    <mkdir dir="${target}/source" />
-    <mkdir dir="${target}/examples" />
+    <mkdir dir="${target_root}/" />
+    <mkdir dir="${target_root}/docs" />
+    <mkdir dir="${target_root}/source" />
+    <mkdir dir="${target_root}/examples" />
 
   </target>
 
@@ -45,26 +42,20 @@
   <!-- =================================================================== -->
   <target name="copy" depends="prepare">
 
-    <copy todir="${target}">
-      <fileset dir="${basedir}">
-        <include name="common.xml" />
-      </fileset>
-    </copy>
-
-    <copy todir="${target}/source">
+    <copy todir="${target_root}/source">
       <fileset dir="${basedir}/etc">
         <include name="LICENSE.txt" />
       </fileset>
     </copy>
 
-    <copy todir="${target}/source">
+    <copy todir="${target_root}/source">
       <fileset dir="${basedir}/source">
         <include name="**/*.pas" />
         <include name="**/*.inc" />
       </fileset>
     </copy>
 
-    <copy todir="${target}/examples">
+    <copy todir="${target_root}/examples">
       <fileset dir="${basedir}/examples">
         <include name="**/*.dpr" />
         <include name="**/*.res" />
@@ -91,8 +82,19 @@
   <!-- =================================================================== -->
   <target name="compile" depends="copy">
 
+    <copy todir="${target_root}">
+      <fileset dir="${basedir}">
+        <include name="common.xml" />
+      </fileset>
+    </copy>
+
     <iterate target="compile"/>
+
     <echo message="compile complete" />
+
+    <delete>
+      <fileset dir="${target_root}" includes="common.xml" />
+    </delete>
 
   </target>
 
@@ -101,9 +103,11 @@
   <!-- =================================================================== -->
   <target name="zip" depends="compile">
 
-    <zip zipfile="${target}/${Name}.zip" basedir="${target}" includes="**" />
+    <zip zipfile="${target}/${Name}-${version}-source.zip" basedir="${target}" includes="**" />
 
     <apply executable="iscc" output="make/iscc.log">
+      <arg value="/O${target}"/>
+      <arg value="/F${Name}-${version}-installer"/>
       <fileset dir="make">
         <patternset>
           <include name="make.iss"/>
@@ -111,7 +115,29 @@
       </fileset>
     </apply>
 
-    <zip zipfile="${target}/${Name}-installer.zip" basedir="${target}" includes="${Name}-installer.exe" />
+    <zip zipfile="${target}/${Name}-${version}-installer.zip" basedir="${target}" includes="${Name}-${version}-installer.exe" />
+
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Upload archives to sourceforge                                      -->
+  <!-- =================================================================== -->
+  <target name="sf" >
+
+    <ftp server="upload.sourceforge.net"
+       userid="anonymous"
+       password="michael.justin@gmx.net"
+       passive="yes"
+       binary="yes"
+       remotedir="/incoming"
+       >
+       <fileset dir="${target}">
+         <include name="*.zip"/>
+         <!-- include name="*.exe"/ -->
+       </fileset>
+    </ftp>
+
 
   </target>
 
