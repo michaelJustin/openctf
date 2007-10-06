@@ -29,7 +29,7 @@ uses CTFInterfaces, TestFramework, TypInfo, Contnrs, Classes;
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '0.9.6';
+  CTF_VER = '0.9.7';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -407,19 +407,13 @@ procedure RegisterForm(const Form: TComponent);
  *)
 procedure RegisterForms(const Forms: array of TComponent); overload;
 
+procedure RegisterFormClasses(const FormClasses: array of TComponentClass); overload;
+
 (**
  * \brief For each form which has been created using Application.CreateForm,
  * create a OpenCTF test suite and register it with DUnit
- * \sa UnregisterForms
  *)
 procedure RegisterForms; overload;
-
-(**
- * \brief Free all forms which have been created using Application.CreateForm
- * in reverse order.
- * \sa RegisterForms
- *)
-procedure UnregisterForms;
 
 function GetStringProperty(const Instance: TComponent; PropName: string): string;
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
@@ -451,6 +445,20 @@ begin
     RegisterForm(Forms[I]);
 end;
 
+procedure RegisterFormClasses(const FormClasses: array of TComponentClass); overload;
+var
+  I: Integer;
+  AClass: TComponentClass;
+  AForm: TComponent;
+begin
+  for I := 0 to Length(FormClasses) - 1 do
+  begin
+    AClass := FormClasses[I];
+    Application.CreateForm(AClass, AForm);
+    RegisterForm(AForm);
+  end;
+end;
+
 procedure RegisterForms; overload;
 var
   I: Integer;
@@ -464,14 +472,6 @@ begin
 
     RegisterForm(Application.Components[I]);
   end;
-end;
-
-procedure UnregisterForms;
-var
-  I: Integer;
-begin
-  for I := Application.ComponentCount - 1 downto 0 do
-    Application.Components[I].Free;
 end;
 
 function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
