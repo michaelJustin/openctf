@@ -21,19 +21,15 @@ begin
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TForm2, Form2);
   Application.CreateForm(TForm3, Form3);
-  try
-    // now create and add all tests for this form instance
-    OpenCTF.RegisterForms;
 
-    // run the tests
-    if SysUtils.FindCmdLineSwitch('console') then
-      TextTestRunner.RunRegisteredTests(rxbHaltOnFailures)
-    else
-      GUITestRunner.RunRegisteredTests;
-      
-  finally
-    // cleanup
-    OpenCTF.UnregisterForms;
-  end
+  // now create and add all tests for this form instance
+  OpenCTF.RegisterForms;
+
+  // run the tests
+  if SysUtils.FindCmdLineSwitch('console') then
+    TextTestRunner.RunRegisteredTests(rxbHaltOnFailures)
+  else
+    GUITestRunner.RunRegisteredTests;
 
 end.
+

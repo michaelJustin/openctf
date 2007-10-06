@@ -4,7 +4,7 @@
 
   <property name="Name" value="OpenCTF" />
   <property name="name" value="openctf" />
-  <property name="version" value="0.9.6" />
+  <property name="version" value="0.9.7" />
   <property name="target" value="target" />
   <property name="target_root" value="${target}/${name}" />
 
