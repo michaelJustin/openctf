@@ -1,7 +1,6 @@
 program Testsuite;
 
 uses
-  // FastMM4,
 {$REGION 'OpenCTF'}
   // OpenCTF main unit
   OpenCTF,
@@ -24,31 +23,15 @@ uses
   TestForm2 in 'TestForm2.pas' {Form2};
 
 begin
-  // create datamodule instances
-  DataModule1 := TDataModule1.Create(nil);
-  DataModule2 := TDataModule2.Create(nil);
+{$WARN SYMBOL_PLATFORM OFF}
+  ReportMemoryLeaksOnShutDown := debughook<>0;
+{$WARN SYMBOL_PLATFORM ON}
 
-  // create form instances
-  Form1 := TForm1.Create(nil);
-  Form2 := TForm2.Create(nil);
+  // Register Form classes:
+  OpenCTF.RegisterFormClasses([TDataModule1, TDataModule2, TForm1, TForm2]);
 
-  try
-    // the next line creates OpenCTF test suites for
-    // each form and datamodule and registers the test suite
-    // in DUnit:
-    RegisterForms([DataModule1, DataModule2, Form1, Form2]);
-
-    // use GUI runner to run the tests
-    TGUITestRunner.RunRegisteredTests;
-
-  finally
-
-    // cleanup
-    Form2.Free;
-    Form1.Free;
-    DataModule2.Free;
-    DataModule1.Free;
-  end;
+  // run the tests
+  GUITestRunner.RunRegisteredTests;
 
 end.
 

@@ -170,7 +170,8 @@
 			<VersionInfoKeys Name="ProductName"></VersionInfoKeys>
 			<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
-		</VersionInfoKeys>  <Excluded_Packages>
+		</VersionInfoKeys>  
+    <Excluded_Packages>
       <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclact100.bpl">Borland ActionBar-Komponenten</Excluded_Packages>
       <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclnet100.bpl">Borland Internet-Komponenten</Excluded_Packages>
       <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
