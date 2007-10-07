@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Height = 246
-  Width = 388
+  Height = 182
+  Width = 333
   object SQLConnection1: TSQLConnection
     DriverName = 'Interbase'
     GetDriverFunc = 'getSQLDriverINTERBASE'
@@ -25,25 +25,24 @@ object DataModule1: TDataModule1
     Top = 24
   end
   object SQLDataSet1: TSQLDataSet
-    MaxBlobSize = 0
     Params = <>
     Left = 40
     Top = 104
   end
   object SQLQuery1: TSQLQuery
-    NoMetadata = True
-    MaxBlobSize = 0
     Params = <>
     Left = 112
     Top = 104
   end
   object SQLStoredProc1: TSQLStoredProc
-    SQLConnection = SQLConnection1
+    MaxBlobSize = -1
     Params = <>
+    SQLConnection = SQLConnection1
     Left = 184
     Top = 104
   end
   object SQLTable1: TSQLTable
+    MaxBlobSize = -1
     SQLConnection = SQLConnection1
     Left = 256
     Top = 104

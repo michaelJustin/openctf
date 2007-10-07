@@ -3,11 +3,7 @@ unit Unit1;
 interface
 
 uses
-  SysUtils, Classes, DBXpress,
-  {$if CompilerVersion >= 17}
-  WideStrings,
-  {$IFEND}
-  FMTBcd, SqlExpr, DB;
+  SysUtils, Classes, DBXpress, WideStrings, FMTBcd, SqlExpr, DB;
 
 type
   TDataModule1 = class(TDataModule)
@@ -30,3 +26,4 @@ implementation
 {$R *.dfm}
 
 end.
+
