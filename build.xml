@@ -90,6 +90,8 @@
 
     <iterate target="compile"/>
 
+    <iterate target="run"/>
+
     <echo message="compile complete" />
 
     <delete>
