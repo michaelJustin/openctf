@@ -14,6 +14,7 @@
        <subant target="@{target}">
          <fileset dir="examples/d2006">
            <include name="*/build.xml" />
+           <exclude name="rave/build.xml" />
          </fileset>
        </subant>
      </sequential>
@@ -88,7 +89,7 @@
       </fileset>
     </copy>
 
-    <iterate target="compile"/>
+    <!-- iterate target="compile"/ -->
 
     <iterate target="run"/>
 
