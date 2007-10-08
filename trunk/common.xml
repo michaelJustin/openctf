@@ -24,7 +24,7 @@
 
 	</target>
 
-  <target name="run">
+  <target name="run" depends="compile">
     <exec executable="Project1.exe"
           output="run.log"
           resolveexecutable="true"
