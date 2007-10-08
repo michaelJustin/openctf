@@ -2,6 +2,7 @@ program Project1;
 
 uses
   OpenCTF,
+  OpenCTFRunner,
   ctfTestGlobalization,
   GUITestRunner,
   Unit1 in 'Unit1.pas' {Form1},
@@ -11,8 +12,6 @@ uses
 
 begin
   OpenCTF.RegisterFormClasses([TForm1]);
-
   // run the tests
-  GUITestRunner.RunRegisteredTests;
-
+  OpenCTFRunner.Run;
 end.

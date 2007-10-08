@@ -1,2 +1,2 @@
-call ant
+call ant run
 pause
