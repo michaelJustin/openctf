@@ -2,6 +2,7 @@ program Project1;
 {$APPTYPE CONSOLE}
 uses
   OpenCTF,
+  OpenCTFRunner,
   ctfTestFrame,
   ctfTestNames,
   ctfTestControls,
@@ -13,8 +14,6 @@ uses
 
 begin
   OpenCTF.RegisterFormClasses([TForm1, TFrame2]);
-
   // run the tests
-  GUITestRunner.RunRegisteredTests;
-
+  OpenCTFRunner.Run;
 end.

@@ -4,6 +4,7 @@ uses
 {$REGION 'OpenCTF'}
   // OpenCTF main unit
   OpenCTF,
+  OpenCTFRunner,
   //
   // To activate a required tests, uncomment the line with the test unit name:
   //
@@ -23,15 +24,9 @@ uses
   TestForm2 in 'TestForm2.pas' {Form2};
 
 begin
-{$WARN SYMBOL_PLATFORM OFF}
-  ReportMemoryLeaksOnShutDown := debughook<>0;
-{$WARN SYMBOL_PLATFORM ON}
-
   // Register Form classes:
   OpenCTF.RegisterFormClasses([TDataModule1, TDataModule2, TForm1, TForm2]);
-
   // run the tests
-  GUITestRunner.RunRegisteredTests;
-
+  OpenCTFRunner.Run;
 end.
 

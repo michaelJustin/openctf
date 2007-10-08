@@ -2,6 +2,7 @@ program Project1;
 
 uses
   OpenCTF,
+  OpenCTFRunner,
   ctfTestIBO,
   ctfTestDB,
   GUITestRunner,
@@ -11,8 +12,6 @@ uses
 
 begin
   OpenCTF.RegisterFormClasses([TDataModule1]);
-
   // run the tests
-  GUITestRunner.RunRegisteredTests;
-
+  OpenCTFRunner.Run;
 end.

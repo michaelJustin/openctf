@@ -170,7 +170,8 @@
 			<VersionInfoKeys Name="ProductName"></VersionInfoKeys>
 			<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
-		</VersionInfoKeys>  <Excluded_Packages>
+		</VersionInfoKeys>  
+    <Excluded_Packages>
       <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
       <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDlgsD10D.bpl">JVCL Dialog Components</Excluded_Packages>
       <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDockingD10D.bpl">JVCL Docking Components</Excluded_Packages>

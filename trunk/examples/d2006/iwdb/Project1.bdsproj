@@ -170,7 +170,8 @@
 			<VersionInfoKeys Name="ProductName"></VersionInfoKeys>
 			<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
-		</VersionInfoKeys>  <Excluded_Packages>
+		</VersionInfoKeys>  
+    <Excluded_Packages>
       <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
       <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclbde100.bpl">Borland BDE DB-Komponenten</Excluded_Packages>
       <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\IBO40XDT_D7.bpl">IB Objects TDataset</Excluded_Packages>

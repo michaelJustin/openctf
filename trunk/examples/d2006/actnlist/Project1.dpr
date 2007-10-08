@@ -1,29 +1,16 @@
 program OneFormTest;
-
+{.$APPTYPE CONSOLE}
 uses
-  // FastMM4,
-  // OpenCTF main unit
   OpenCTF,
-  // auto-register tests (see unit initialization)
+  OpenCTFRunner,
   ctfTestActnList,
   ctfTestControls,
   ctfTestMenus,
-  // the form to be tested
-  TestForm in 'TestForm.pas' {Form1},
-  // DUnit units
-  GUITestRunner, TestFramework
-  ;
+  GUITestRunner,
+  TestForm in 'TestForm.pas' {Form1};
+
 begin
-  // create a form instance:
-  Form1 := TForm1.Create(nil);
-  try
-    // the next line creates a OpenCTF test suite for the form
-    // and registers the test suite in DUnit
-    RegisterForm(Form1);
-    // use GUI runner to run the tests
-    TGUITestRunner.RunRegisteredTests;
-  finally
-    Form1.Free;
-  end;
+  OpenCTF.RegisterFormClasses([TForm1]);
+  OpenCTFRunner.Run;
 end.
 

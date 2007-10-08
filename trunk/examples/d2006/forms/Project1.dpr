@@ -2,6 +2,7 @@ program Project1;
 
 uses
   OpenCTF,
+  OpenCTFRunner,
   ctfTestForm,
   GUITestRunner,
   Unit1 in 'Unit1.pas' {Form1},
@@ -11,11 +12,8 @@ uses
 {$R *.res}
 
 begin
-
   OpenCTF.RegisterFormClasses([TForm1, TForm2, TForm3]);
-
   // run the tests
-  GUITestRunner.RunRegisteredTests;
-
+  OpenCTFRunner.Run;
 end.
 

@@ -1,12 +1,10 @@
 program Project1;
-{$APPTYPE CONSOLE}
+
 uses
   OpenCTF,
+  OpenCTFRunner,
   ctfTestIWDB,
   ctfTestDBX,
-  TextTestRunner,
-  GUITestRunner,
-  TestFramework,
   Forms,
   IWMain,
   SysUtils,
@@ -34,10 +32,7 @@ begin
     // now create and add all tests for this form instance
     OpenCTF.RegisterForms([IWUserSession, IWForm1]);
     // run the tests
-    if FindCmdLineSwitch('console') then
-      TextTestRunner.RunRegisteredTests(rxbHaltOnFailures)
-    else
-      GUITestRunner.RunRegisteredTests;
+    OpenCTFRunner.Run;
   finally
     // cleanup
     IWForm1.Free;
