@@ -10,17 +10,6 @@
 
   <target name="compile" depends="clean">
 
-    <!-- apply executable="C:/Programme/Borland/Delphi6/bin/dcc32" output="build-d6.log" failonerror="true">
-     <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard"/>
-     <arg value="-RC:/Programme/Borland/Delphi6/lib"/>
-     <arg value="-Q"/>
-     <fileset dir=".">
-        <patternset>
-           <include name="*.dpr"/>
-        </patternset>
-      </fileset>
-    </apply -->
-
     <apply executable="dcc32" output="build.log" failonerror="true">
      <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/Borland/BDS/4.0/RaveReports/Lib"/>
      <arg value="-Rc:/Programme/Borland/BDS/4.0/lib"/>
@@ -34,5 +23,14 @@
     </apply>
 
 	</target>
+
+  <target name="run">
+    <exec executable="Project1.exe"
+          output="run.log"
+          resolveexecutable="true"
+          failonerror="false">
+      <arg value="/console" />
+    </exec>
+  </target>
 
 </project>

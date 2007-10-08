@@ -811,6 +811,14 @@ begin
   end;
 end;
 
+procedure Run;
+begin
+  if SysUtils.FindCmdLineSwitch('/console') then
+  begin
+
+  end;
+end;
+
 (** \mainpage OpenCTF Documentation
  *
  * \section intro Introduction
