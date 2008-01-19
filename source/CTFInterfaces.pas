@@ -52,8 +52,6 @@ type
     function HasProperty(const Component: TComponent; const PropName: string;
       const AKinds: TTypeKinds = []): Boolean;
 
-    // procedure Initialize;
-
     function GetSuite: ITestSuite;
 
     // properties

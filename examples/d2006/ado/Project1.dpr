@@ -4,18 +4,13 @@ uses
   OpenCTF,
   OpenCTFRunner,
   ctfTestADO,
-  GUITestRunner,
   ActiveX,
   Unit1 in 'Unit1.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
 begin
-
-{$WARN SYMBOL_PLATFORM OFF}
-  ReportMemoryLeaksOnShutDown := debughook<>0;
-{$WARN SYMBOL_PLATFORM ON}
-
+  // Initialize the COM library 
   CoInitialize(nil);
 
   // Register Form classes:

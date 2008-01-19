@@ -26,10 +26,17 @@ unit OpenCTFRunner;
 
 interface
 
+(**
+ * Run the registered DUnit tests.
+ * If a command line switch /console is present, use the TextTestRunner,
+ * otherwise the GUITestRunner.
+ *)
 procedure Run;
 
 implementation
-uses GUITestRunner, TextTestRunner, SysUtils;
+
+uses
+  GUITestRunner, TextTestRunner, SysUtils;
 
 procedure Run;
 begin
