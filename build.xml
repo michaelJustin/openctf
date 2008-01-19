@@ -137,7 +137,7 @@
        >
        <fileset dir="${target}">
          <include name="*.zip"/>
-         <!-- include name="*.exe"/ -->
+         <include name="*.exe"/>
        </fileset>
     </ftp>
 
