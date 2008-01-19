@@ -25,6 +25,7 @@ begin
   Application.CreateForm(TformIWMain, formIWMain);
 
   IWUserSession := TIWUserSession.Create(nil);
+  
   // create a TIWForm1 instance:
   IWForm1 := TIWForm1.Create(nil);
 

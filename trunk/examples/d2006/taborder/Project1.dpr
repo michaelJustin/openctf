@@ -9,7 +9,7 @@ uses
 {$R *.res}
 
 begin
-  // Register Form classes:
+  // Register Form classes
   OpenCTF.RegisterFormClasses([TForm1]);
   // run the tests
   OpenCTFRunner.Run;

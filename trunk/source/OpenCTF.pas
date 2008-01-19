@@ -17,7 +17,7 @@
     59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
     *)
-	
+
 (**
  * \file OpenCTF.pas
  * \brief The Open Component Test Framework main unit.
@@ -25,11 +25,13 @@
 unit OpenCTF;
 
 interface
-uses CTFInterfaces, TestFramework, TypInfo, Contnrs, Classes;
+
+uses
+  CTFInterfaces, TestFramework, TypInfo, Contnrs, Classes;
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '0.9.7';
+  CTF_VER = '1.0';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -95,7 +97,7 @@ type
      * \li To add tests for the form, overwrite the empty default declaration of this method.
      *
      *)
-     procedure AddFormTests; virtual;
+    procedure AddFormTests; virtual;
 
     (**
      * \brief Checks for assigned event handlers.
@@ -185,8 +187,6 @@ type
     constructor Create(const ComponentClass: TClass; const Suitename: string =
       '');
 
-    destructor Destroy; override;
-
     (**
      * \brief Get the test suite.
      *)
@@ -223,7 +223,7 @@ type
 
   public
     (**
-     * \destructor Destroy
+     * Destroy
      *)
     destructor Destroy; override;
 
@@ -382,7 +382,7 @@ type
       const PropertyNames: array of string; const CheckAssigned: Boolean =
       True);
 
-    destructor Destroy; override;  
+    destructor Destroy; override;
 
   end;
 
@@ -407,7 +407,13 @@ procedure RegisterForm(const Form: TComponent);
  *)
 procedure RegisterForms(const Forms: array of TComponent); overload;
 
-procedure RegisterFormClasses(const FormClasses: array of TComponentClass); overload;
+(**
+ * Create an instance of all form classes in the list,
+ * create a OpenCTF test suite and register it with DUnit.
+ * \param FormClasses Array of Form classes
+ *)
+procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
+  overload;
 
 (**
  * \brief For each form which has been created using Application.CreateForm,
@@ -415,7 +421,8 @@ procedure RegisterFormClasses(const FormClasses: array of TComponentClass); over
  *)
 procedure RegisterForms; overload;
 
-function GetStringProperty(const Instance: TComponent; PropName: string): string;
+function GetStringProperty(const Instance: TComponent; PropName: string):
+  string;
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
 var
@@ -424,7 +431,9 @@ var
 procedure Add(const Handler: IComponentHandler);
 
 implementation
-uses Controls, Forms, Variants, SysUtils;
+
+uses
+  Controls, Forms, Variants, SysUtils;
 
 procedure Add(const Handler: IComponentHandler);
 begin
@@ -434,6 +443,8 @@ end;
 procedure RegisterForm(const Form: TComponent);
 begin
   Assert(Assigned(Form));
+  Assert((Form is TDataModule) or (Form is TForm) or (Form is TFrame),
+    'Only subclasses of TForm, TFrame or TDataModule can be used');
   TestFramework.RegisterTest(TComponentTestSuite.Create(Form));
 end;
 
@@ -445,7 +456,8 @@ begin
     RegisterForm(Forms[I]);
 end;
 
-procedure RegisterFormClasses(const FormClasses: array of TComponentClass); overload;
+procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
+  overload;
 var
   I: Integer;
   AClass: TComponentClass;
@@ -467,8 +479,8 @@ begin
   begin
     // skip the default HintWindow class
     if Application.Components[I].ClassNameIs('THintWindow')
-      and (Application.Components[I].ClassParent = Controls.TCustomControl)
-     then Continue;
+      and (Application.Components[I].ClassParent = Controls.TCustomControl) then
+      Continue;
 
     RegisterForm(Application.Components[I]);
   end;
@@ -485,7 +497,8 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
-function GetStringProperty(const Instance: TComponent; PropName: string): string;
+function GetStringProperty(const Instance: TComponent; PropName: string):
+  string;
 var
   PropInfo: PPropInfo;
 begin
@@ -627,17 +640,11 @@ begin
   Assert(Assigned(ComponentClass));
 
   FComponentClass := ComponentClass;
-  
+
   if Suitename = '' then
     FSuiteName := ClassName
   else
     FSuiteName := Suitename
-end;
-
-destructor TComponentHandler.Destroy;
-begin
-
-  inherited;
 end;
 
 function TComponentHandler.GetForm: TComponent;
@@ -724,7 +731,8 @@ end;
 
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
-  inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' + CTF_NAME_VER + ']');
+  inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
+    CTF_NAME_VER + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
@@ -811,14 +819,6 @@ begin
   end;
 end;
 
-procedure Run;
-begin
-  if SysUtils.FindCmdLineSwitch('/console') then
-  begin
-
-  end;
-end;
-
 (** \mainpage OpenCTF Documentation
  *
  * \section intro Introduction
@@ -839,8 +839,6 @@ end;
  * \li \ref howto
  *
  * OpenCTF (c) 2007 betasoft Michael Justin http://www.mikejustin.com/
- *
- * Coming soon: \c CTF.NET - component test framework for Delphi.NET
  *
  * \ref credits
  *
@@ -871,169 +869,15 @@ end;
 (**
  * \page howto Users guide
  *
- * \section project The project file
- *
  * OpenCTF is based on the DUnit open source test framework and extends it
  * by specialized test classes and helper functions.
  *
- * In addition to a normal DUnit project source file, the following steps
- * are required:
+ * An OpenCTF test project contains these elements:
  *
- * \li add the OpenCTF main unit (OpenCTF.pas) to the use clause
- * \li add OpenCTF test units to the use clause
- * \li create an instance of the form(s) or datamodule(s) which you want to test
- * \li register the form(s) or datamodule(s) with OpenCTF
+ * \li OpenCTF, OpenCTFRunner and test units in the uses clause
+ * \li Registration of form, frame or datamodule classes (e.g. OpenCTF.RegisterFormClasses([TDataModule1, TForm1, TForm2]);
+ * \li Test execution with OpenCTFRunner.Run;
  *
- * The standard DUnit methods to run all tests will be ready to run then.
- *
- * \section detailled A step-by-step description
- *
- * Add the OpenCTF main unit (OpenCTF.pas) to the use clause
- * \code
- * program Testsuite;
- * uses
- * // OpenCTF main unit
- * OpenCTF,
- * \endcode
- *
- * Add OpenCTF test units to the use clause:
- * \code
- * // auto-register tests (see unit initialization)
- * ctfTestActnList, ctfTestDBClient, ctfTestProvider, ctfTestDb
- * \endcode
- *
- * \note The included test definition classes are provided as examples only.
- *
- * Create an instance of the form(s) or datamodule(s) which you want to test
- * \code
- * begin
- * // create form instances
- * Form1 := TForm1.Create(nil);
- * \endcode
- *
- * Register the form(s) or datamodule(s) with OpenCTF
- * \code
- * RegisterForm(Form1);
- * \endcode
- *
- * Now you are ready to go with the DUnit tests:
- * \code
- * // use GUI runner to run the tests
- * TGUITestRunner.RunRegisteredTests;
- * \endcode
- *
- * Running the tests
- * \image html OpenCTF.gif "Example screenshot using GUITestrunner"
- *)
-
- (**
- * Example project, testing two forms and one datamodule.
- * \example Testsuite.dpr
- * Running the tests
- * \image html OpenCTF.gif "Example screenshot using GUITestrunner"
- *)
-
-(**
- * Example test handler for action lists.
- * This test iterates over all contained actions in the action list.
- * \example ctfTestActnList.pas
- *)
-
-(**
- * Example test handler for ADO components.
- * This test checks descendants of TCustomADODataSet for an assigned Connection
- * property.
- * \example ctfTestADO.pas
- *)
-
-(**
- * Example test handler for components on the Win32 palette page.
- * \example ctfTestControls.pas
- *)
-
-(**
- * Example test handler for DB components.
- * \example ctfTestDB.pas
- *)
-
-(**
- * Example test handler for DBClient components (TCustomClientDataset).
- * \example ctfTestDBClient.pas
- *)
-
-(**
- * Example test handler for dbExpress components.
- * This test checks TCustomSQLDataSet descendants for an assigned SQLConnection
- * property.
- * \example ctfTestDBX.pas
- *)
-
-(**
- * Example test handler for forms, frames and datamodules.
- * This test checks properties of the form itself.
- * \example ctfTestForm.pas
- *)
-
-(**
- * Example test handler for frames.
- * This test checks properties of all frames in a form.
- * \example ctfTestFrame.pas
- *)
-
-(**
- * Example test handler for IBObjects components.
- * This test checks components for an assigned IB_Connection and IB_Transaction
- * property.
- * \example ctfTestIBO.pas
- *)
-
-(**
- * Example test handler for Interbase Express components.
- * This test checks components for an assigned Database and Transaction
- * property.
- * \example ctfTestIBX.pas
- *)
-
-(**
- * Example test handler for IntraWeb components.
- * \example ctfTestIWDB.pas
- *)
-
- (**
- * Example test handler for JvUIB components.
- * This test checks components for an assigned DataBase and Transaction
- * property.
- * \example ctfTestJvUIB.pas
- *)
-
-(**
- * Example test handler for TMenuItem components.
- * \example ctfTestMenus.pas
- *)
-
-(**
- * Example test handler for name checks of components.
- * \example ctfTestNames.pas
- *)
-
-(**
- * Example test handler for Provider components (TCustomProvider).
- * \example ctfTestProvider.pas
- *)
-
-(**
- * Example test handler for QuickReport 4 components.
- * \example ctfTestQR4.pas
- *)
-
-(**
- * Example test handler for Rave report components.
- * \example ctfTestRave.pas
- *)
-
-(**
- * Example test handler for tab order.
- * \example ctfTestTabOrder.pas
  *)
 
 (**

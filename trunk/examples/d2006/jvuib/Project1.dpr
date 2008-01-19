@@ -10,6 +10,7 @@ uses
 {$R *.res}
 
 begin
+  // Register Form classes
   OpenCTF.RegisterFormClasses([TDataModule1]);
   // run the tests
   OpenCTFRunner.Run;
