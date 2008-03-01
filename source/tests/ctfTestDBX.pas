@@ -21,7 +21,13 @@
 unit ctfTestDBX;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TDBXComponentTestHandler = class(TComponentHandler)

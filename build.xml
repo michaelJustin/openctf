@@ -4,7 +4,7 @@
 
   <property name="Name" value="OpenCTF" />
   <property name="name" value="openctf" />
-  <property name="version" value="1.0" />
+  <property name="version" value="1.1" />
   <property name="target" value="target" />
   <property name="target_root" value="${target}/${name}" />
 
@@ -15,7 +15,10 @@
          <fileset dir="examples/d2006">
            <include name="*/build.xml" />
            <exclude name="rave/build.xml" />
-         </fileset>
+					 <exclude name="ibo/build.xml" />
+					 <exclude name="iwdbild.xml" />
+					 <exclude name="quickreport4/build.xml" />
+				 </fileset>
        </subant>
      </sequential>
   </macrodef>
@@ -89,11 +92,11 @@
       </fileset>
     </copy>
 
-    <!-- iterate target="compile"/ -->
+		<iterate target="run-dunit2"/>
+		<echo message="compile complete" />
 
-    <iterate target="run"/>
-
-    <echo message="compile complete" />
+		<iterate target="run"/>
+		<echo message="compile complete" />
 
     <delete>
       <fileset dir="${target_root}" includes="common.xml" />

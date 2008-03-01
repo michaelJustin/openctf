@@ -21,7 +21,13 @@
 unit ctfTestDB;
 
 interface
-uses OpenCTF, TestFrameWork, DB, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, DB, Classes;
 
 resourcestring
   SMissingParamValue = 'Missing parameter value for input parameter';
@@ -34,7 +40,11 @@ type
 
   TCustomConnectionTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
   TDataSetTestHandler = class(TComponentHandler)
@@ -44,7 +54,11 @@ type
 
   TDataSetTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
   TDataSourceTestHandler = class(TComponentHandler)
@@ -72,7 +86,11 @@ type
     property Component: TComponent read FComponent;
 
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
 
   public
     constructor Create(Component: TComponent; Param: TParam);
@@ -86,7 +104,9 @@ type
   end;
 
 implementation
-uses Forms, TypInfo, SysUtils;
+
+uses
+  Forms, TypInfo, SysUtils;
 
 { TDataSetTestHandler }
 
@@ -97,7 +117,7 @@ end;
 
 { TDataSetTest }
 
-procedure TDataSetTest.RunTest(testResult: TTestResult);
+procedure TDataSetTest.RunTest;
 var
   TmpOnCalc: TDataSetNotifyEvent;
 begin
@@ -167,7 +187,7 @@ end;
 
 { TCustomConnectionTest }
 
-procedure TCustomConnectionTest.RunTest(testResult: TTestResult);
+procedure TCustomConnectionTest.RunTest;
 begin
   inherited;
   with TCustomConnection(Component) do
@@ -186,7 +206,7 @@ begin
   Param.DataType
 end;
 
-procedure TParamTest.RunTest(testResult: TTestResult);
+procedure TParamTest.RunTest;
 begin
   inherited;
 

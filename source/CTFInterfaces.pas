@@ -22,9 +22,15 @@ unit CTFInterfaces;
 
 interface
 {$IFDEF CLR}
-uses NUnit.Framework, NUnit.Core, TypInfo, Contnrs, Classes;
+uses
+  NUnit.Framework, NUnit.Core, TypInfo, Contnrs, Classes;
 {$ELSE}
-uses TestFramework, TypInfo, Contnrs, Classes;
+uses
+  TestFramework,
+{$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+{$ENDIF}
+  TypInfo, Contnrs, Classes;
 {$ENDIF}
 
 type
@@ -42,7 +48,7 @@ type
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
-    // other methods    
+    // other methods
     function Accepts(const Component: TComponent): Boolean;
 
     function Handles(const Form: TComponent): Boolean;

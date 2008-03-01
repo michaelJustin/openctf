@@ -21,7 +21,9 @@
 unit ctfTestForm;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF, TestFrameWork, Classes;
 
 type
   TBasicFormTestHandler = class(TComponentHandler)
@@ -33,12 +35,20 @@ type
 
   TBasicFormTest = class(TFormTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
   TInvalidFormParentTest = class(TFormTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -74,7 +84,7 @@ end;
 
 { TBasicFormTest }
 
-procedure TBasicFormTest.RunTest(testResult: TTestResult);
+procedure TBasicFormTest.RunTest;
 begin
   inherited;
 
@@ -85,7 +95,7 @@ end;
 
 { TInvalidFormParentTest }
 
-procedure TInvalidFormParentTest.RunTest(testResult: TTestResult);
+procedure TInvalidFormParentTest.RunTest;
 begin
   inherited;
   

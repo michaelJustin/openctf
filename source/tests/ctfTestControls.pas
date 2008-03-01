@@ -17,11 +17,17 @@
     59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
     *)
-	
+
 unit ctfTestControls;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TTabSheetHandler = class(TComponentHandler)
@@ -31,7 +37,11 @@ type
 
   TTabSheetTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
   TImageListHandler = class(TComponentHandler)
@@ -41,7 +51,11 @@ type
 
   TImageListTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -57,7 +71,7 @@ end;
 
 { TTabSheetTest }
 
-procedure TTabSheetTest.RunTest(testResult: TTestResult);
+procedure TTabSheetTest.RunTest;
 begin
   inherited;
   if not TTabSheet(Component).TabVisible then
@@ -74,7 +88,7 @@ end;
 
 { TImageListTest }
 
-procedure TImageListTest.RunTest(testResult: TTestResult);
+procedure TImageListTest.RunTest;
 begin
   inherited;
   if TImageList(Component).Count=0 then

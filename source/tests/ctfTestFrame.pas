@@ -31,7 +31,11 @@ type
 
   TFrameTest = class(TFormTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -50,7 +54,7 @@ end;
 
 { TFrameTest }
 
-procedure TFrameTest.RunTest(testResult: TTestResult);
+procedure TFrameTest.RunTest;
 begin
   inherited;
   if HasDefaultName(Form) then

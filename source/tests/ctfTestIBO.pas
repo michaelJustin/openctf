@@ -21,7 +21,13 @@
 unit ctfTestIBO;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TIBOComponentTestHandler = class(TComponentHandler)

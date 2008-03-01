@@ -21,8 +21,14 @@
 unit ctfTestActnList;
 
 interface
-uses OpenCTF, TestFrameWork, ActnList, Classes;
- 
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, ActnList, Classes;
+
 type
   TCustomActionListTestHandler = class(TComponentHandler)
   protected
@@ -31,7 +37,11 @@ type
 
   TContainedActionTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -69,7 +79,11 @@ end;
 
 { TContainedActionTest }
 
+{$IFDEF DUNIT2}
+procedure TContainedActionTest.RunTest;
+{$ELSE}
 procedure TContainedActionTest.RunTest(testResult: TTestResult);
+{$ENDIF}
 var
   TmpAction: TContainedAction;
   Name: TComponentName;
