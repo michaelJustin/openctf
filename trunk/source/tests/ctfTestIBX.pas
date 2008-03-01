@@ -21,7 +21,13 @@
 unit ctfTestIBX;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TIBXComponentTestHandler = class(TComponentHandler)

@@ -21,7 +21,13 @@
 unit ctfTestJvUIB;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TJvUIBComponentTestHandler = class(TComponentHandler)

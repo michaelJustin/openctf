@@ -31,7 +31,11 @@ type
 
   TContainedActionTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -48,7 +52,7 @@ end;
 
 { TContainedActionTest }
 
-procedure TContainedActionTest.RunTest(testResult: TTestResult);
+procedure TContainedActionTest.RunTest;
 var
   I: Integer;
   TmpActionClientItem: TActionClientItem;

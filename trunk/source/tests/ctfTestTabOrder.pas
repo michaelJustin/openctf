@@ -21,7 +21,13 @@
 unit ctfTestTabOrder;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Classes;
 
 type
   TTabOrderTestHandler = class(TComponentHandler)
@@ -32,7 +38,11 @@ type
 
   TTabOrderTest = class(TComponentTest)
   protected
+{$IFDEF DUNIT2}
+    procedure RunTest; override;
+{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+{$ENDIF}
   end;
 
 implementation
@@ -56,7 +66,7 @@ end;
 
 { TTabOrderTest }
 
-procedure TTabOrderTest.RunTest(testResult: TTestResult);
+procedure TTabOrderTest.RunTest;
 var
   ParentControl: TWinControl;
   CurrControl: TWinControl;

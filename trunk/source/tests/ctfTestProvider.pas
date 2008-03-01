@@ -21,7 +21,13 @@
 unit ctfTestProvider;
 
 interface
-uses OpenCTF, TestFrameWork, Provider, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, Provider, Classes;
 
 type
   TCustomProviderTestHandler = class(TComponentHandler)

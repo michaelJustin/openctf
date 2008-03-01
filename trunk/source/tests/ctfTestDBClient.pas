@@ -21,7 +21,13 @@
 unit ctfTestDBClient;
 
 interface
-uses OpenCTF, TestFrameWork, DBClient, Classes;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, DBClient, Classes;
 
 type
   TCustomClientDataSetTestHandler = class(TComponentHandler)

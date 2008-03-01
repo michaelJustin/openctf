@@ -27,11 +27,15 @@ unit OpenCTF;
 interface
 
 uses
-  CTFInterfaces, TestFramework, TypInfo, Contnrs, Classes;
+  CTFInterfaces,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFramework, TypInfo, Contnrs, Classes;
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.0';
+  CTF_VER = '1.1';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -336,7 +340,11 @@ type
     (**
      * \brief Run the test.
      *)
+  {$IFDEF DUNIT2}
+    procedure RunTest; override;
+  {$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+  {$ENDIF}
 
   public
     (**
@@ -367,7 +375,11 @@ type
     (**
      * \brief Run the test.
      *)
+  {$IFDEF DUNIT2}
+    procedure RunTest; override;
+  {$ELSE}
     procedure RunTest(testResult: TTestResult); override;
+  {$ENDIF}
 
   public
     (**
@@ -759,7 +771,11 @@ begin
   inherited;
 end;
 
+{$IFDEF DUNIT2}
+procedure TRequiredEventsTest.RunTest;
+{$ELSE}
 procedure TRequiredEventsTest.RunTest(testResult: TTestResult);
+{$ENDIF}
 var
   I: Integer;
 begin
@@ -800,7 +816,11 @@ begin
   inherited;
 end;
 
+{$IFDEF DUNIT2}
+procedure TRequiredPropertiesTest.RunTest;
+{$ELSE}
 procedure TRequiredPropertiesTest.RunTest(testResult: TTestResult);
+{$ENDIF}
 var
   I: Integer;
 begin

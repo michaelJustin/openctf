@@ -21,7 +21,13 @@
 unit ctfTestADO;
 
 interface
-uses OpenCTF, ADODB;
+
+uses
+  OpenCTF,
+  {$IFDEF DUNIT2}
+  TestFrameworkIFaces,
+  {$ENDIF}
+  TestFrameWork, ADODB;
 
 type
   TCustomADODataSetTestHandler = class(TComponentHandler)
