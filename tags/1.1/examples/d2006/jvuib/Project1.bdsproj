@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality">Delphi.Personality</Option>
+			<Option Name="ProjectType"></Option>
+			<Option Name="Version">1.0</Option>
+			<Option Name="GUID">{777BEE1D-1ACC-4E52-9E8F-B90C42AEF9AB}</Option>
+		</Option>
+	</PersonalityInfo>
+	<Delphi.Personality>
+		<Source>
+			<Source Name="MainSource">Project1.dpr</Source>
+		</Source>
+		<FileVersion>
+			<FileVersion Name="Version">7.0</FileVersion>
+		</FileVersion>
+		<Compiler>
+			<Compiler Name="A">8</Compiler>
+			<Compiler Name="B">0</Compiler>
+			<Compiler Name="C">1</Compiler>
+			<Compiler Name="D">1</Compiler>
+			<Compiler Name="E">0</Compiler>
+			<Compiler Name="F">0</Compiler>
+			<Compiler Name="G">1</Compiler>
+			<Compiler Name="H">1</Compiler>
+			<Compiler Name="I">1</Compiler>
+			<Compiler Name="J">0</Compiler>
+			<Compiler Name="K">0</Compiler>
+			<Compiler Name="L">1</Compiler>
+			<Compiler Name="M">0</Compiler>
+			<Compiler Name="N">1</Compiler>
+			<Compiler Name="O">1</Compiler>
+			<Compiler Name="P">1</Compiler>
+			<Compiler Name="Q">0</Compiler>
+			<Compiler Name="R">0</Compiler>
+			<Compiler Name="S">0</Compiler>
+			<Compiler Name="T">0</Compiler>
+			<Compiler Name="U">0</Compiler>
+			<Compiler Name="V">1</Compiler>
+			<Compiler Name="W">0</Compiler>
+			<Compiler Name="X">1</Compiler>
+			<Compiler Name="Y">1</Compiler>
+			<Compiler Name="Z">1</Compiler>
+			<Compiler Name="ShowHints">True</Compiler>
+			<Compiler Name="ShowWarnings">True</Compiler>
+			<Compiler Name="UnitAliases">WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;</Compiler>
+			<Compiler Name="NamespacePrefix"></Compiler>
+			<Compiler Name="GenerateDocumentation">False</Compiler>
+			<Compiler Name="DefaultNamespace"></Compiler>
+			<Compiler Name="SymbolDeprecated">True</Compiler>
+			<Compiler Name="SymbolLibrary">True</Compiler>
+			<Compiler Name="SymbolPlatform">True</Compiler>
+			<Compiler Name="SymbolExperimental">True</Compiler>
+			<Compiler Name="UnitLibrary">True</Compiler>
+			<Compiler Name="UnitPlatform">True</Compiler>
+			<Compiler Name="UnitDeprecated">True</Compiler>
+			<Compiler Name="UnitExperimental">True</Compiler>
+			<Compiler Name="HResultCompat">True</Compiler>
+			<Compiler Name="HidingMember">True</Compiler>
+			<Compiler Name="HiddenVirtual">True</Compiler>
+			<Compiler Name="Garbage">True</Compiler>
+			<Compiler Name="BoundsError">True</Compiler>
+			<Compiler Name="ZeroNilCompat">True</Compiler>
+			<Compiler Name="StringConstTruncated">True</Compiler>
+			<Compiler Name="ForLoopVarVarPar">True</Compiler>
+			<Compiler Name="TypedConstVarPar">True</Compiler>
+			<Compiler Name="AsgToTypedConst">True</Compiler>
+			<Compiler Name="CaseLabelRange">True</Compiler>
+			<Compiler Name="ForVariable">True</Compiler>
+			<Compiler Name="ConstructingAbstract">True</Compiler>
+			<Compiler Name="ComparisonFalse">True</Compiler>
+			<Compiler Name="ComparisonTrue">True</Compiler>
+			<Compiler Name="ComparingSignedUnsigned">True</Compiler>
+			<Compiler Name="CombiningSignedUnsigned">True</Compiler>
+			<Compiler Name="UnsupportedConstruct">True</Compiler>
+			<Compiler Name="FileOpen">True</Compiler>
+			<Compiler Name="FileOpenUnitSrc">True</Compiler>
+			<Compiler Name="BadGlobalSymbol">True</Compiler>
+			<Compiler Name="DuplicateConstructorDestructor">True</Compiler>
+			<Compiler Name="InvalidDirective">True</Compiler>
+			<Compiler Name="PackageNoLink">True</Compiler>
+			<Compiler Name="PackageThreadVar">True</Compiler>
+			<Compiler Name="ImplicitImport">True</Compiler>
+			<Compiler Name="HPPEMITIgnored">True</Compiler>
+			<Compiler Name="NoRetVal">True</Compiler>
+			<Compiler Name="UseBeforeDef">True</Compiler>
+			<Compiler Name="ForLoopVarUndef">True</Compiler>
+			<Compiler Name="UnitNameMismatch">True</Compiler>
+			<Compiler Name="NoCFGFileFound">True</Compiler>
+			<Compiler Name="ImplicitVariants">True</Compiler>
+			<Compiler Name="UnicodeToLocale">True</Compiler>
+			<Compiler Name="LocaleToUnicode">True</Compiler>
+			<Compiler Name="ImagebaseMultiple">True</Compiler>
+			<Compiler Name="SuspiciousTypecast">True</Compiler>
+			<Compiler Name="PrivatePropAccessor">True</Compiler>
+			<Compiler Name="UnsafeType">True</Compiler>
+			<Compiler Name="UnsafeCode">True</Compiler>
+			<Compiler Name="UnsafeCast">True</Compiler>
+			<Compiler Name="OptionTruncated">True</Compiler>
+			<Compiler Name="WideCharReduced">True</Compiler>
+			<Compiler Name="DuplicatesIgnored">True</Compiler>
+			<Compiler Name="UnitInitSeq">True</Compiler>
+			<Compiler Name="LocalPInvoke">True</Compiler>
+			<Compiler Name="MessageDirective">True</Compiler>
+			<Compiler Name="CodePage"></Compiler>
+		</Compiler>
+		<Linker>
+			<Linker Name="MapFile">0</Linker>
+			<Linker Name="OutputObjs">0</Linker>
+			<Linker Name="GenerateHpps">False</Linker>
+			<Linker Name="ConsoleApp">1</Linker>
+			<Linker Name="DebugInfo">False</Linker>
+			<Linker Name="RemoteSymbols">False</Linker>
+			<Linker Name="GenerateDRC">False</Linker>
+			<Linker Name="MinStackSize">16384</Linker>
+			<Linker Name="MaxStackSize">1048576</Linker>
+			<Linker Name="ImageBase">4194304</Linker>
+			<Linker Name="ExeDescription"></Linker>
+		</Linker>
+		<Directories>
+			<Directories Name="OutputDir"></Directories>
+			<Directories Name="UnitOutputDir"></Directories>
+			<Directories Name="PackageDLLOutputDir"></Directories>
+			<Directories Name="PackageDCPOutputDir"></Directories>
+			<Directories Name="SearchPath">..\..\..\source;..\..\..\source\tests</Directories>
+			<Directories Name="Packages">rtl;vclx;vcl;dbrtl;vcldb;dsnap;bdertl;vclactnband;xmlrtl;vclie;inet;inetdbbde;inetdbxpress;Jcl;dclBTVisualFTPD2006;IndyProtocols;IndySystem;IndyCore;JclVcl;JvCoreD10R;JvUIBD10R</Directories>
+			<Directories Name="Conditionals"></Directories>
+			<Directories Name="DebugSourceDirs"></Directories>
+			<Directories Name="UsePackages">False</Directories>
+		</Directories>
+		<Parameters>
+			<Parameters Name="RunParams"></Parameters>
+			<Parameters Name="HostApplication"></Parameters>
+			<Parameters Name="Launcher"></Parameters>
+			<Parameters Name="UseLauncher">False</Parameters>
+			<Parameters Name="DebugCWD"></Parameters>
+			<Parameters Name="Debug Symbols Search Path"></Parameters>
+			<Parameters Name="LoadAllSymbols">True</Parameters>
+			<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+		</Parameters>
+		<Language>
+			<Language Name="ActiveLang"></Language>
+			<Language Name="ProjectLang">$00000000</Language>
+			<Language Name="RootDir"></Language>
+		</Language>
+		<VersionInfo>
+			<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+			<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+			<VersionInfo Name="MajorVer">1</VersionInfo>
+			<VersionInfo Name="MinorVer">0</VersionInfo>
+			<VersionInfo Name="Release">0</VersionInfo>
+			<VersionInfo Name="Build">0</VersionInfo>
+			<VersionInfo Name="Debug">False</VersionInfo>
+			<VersionInfo Name="PreRelease">False</VersionInfo>
+			<VersionInfo Name="Special">False</VersionInfo>
+			<VersionInfo Name="Private">False</VersionInfo>
+			<VersionInfo Name="DLL">False</VersionInfo>
+			<VersionInfo Name="Locale">1031</VersionInfo>
+			<VersionInfo Name="CodePage">1252</VersionInfo>
+		</VersionInfo>
+		<VersionInfoKeys>
+			<VersionInfoKeys Name="CompanyName"></VersionInfoKeys>
+			<VersionInfoKeys Name="FileDescription"></VersionInfoKeys>
+			<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+			<VersionInfoKeys Name="InternalName"></VersionInfoKeys>
+			<VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
+			<VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+			<VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys>
+			<VersionInfoKeys Name="ProductName"></VersionInfoKeys>
+			<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
+		</VersionInfoKeys>  <Excluded_Packages>
+      <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDlgsD10D.bpl">JVCL Dialog Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDockingD10D.bpl">JVCL Docking Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvCustomD10D.bpl">JVCL Custom Controls</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvPageCompsD10D.bpl">JVCL Page Style Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvStdCtrlsD10D.bpl">JVCL Standard Controls</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvCtrlsD10D.bpl">JVCL Visual Controls</Excluded_Packages>
+      <Excluded_Packages Name="C:\Programme\Borland\BDS\4.0\Bin\dclbde100.bpl">Borland BDE DB-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDBD10D.bpl">JVCL Database Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvBandsD10D.bpl">JVCL Band Objects</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvAppFrmD10D.bpl">JVCL Application and Form Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\IBO40XDT_D7.bpl">IB Objects TDataset</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclIndyProtocols100.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dcldbx100.bpl">Borland dbExpress-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\bin\dclado100.bpl">Borland ADO DB-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclib100.bpl">Borland InterBase Express Components</Excluded_Packages>
+      <Excluded_Packages Name="D:\Michael\Sandbox\Delphi\Bpl\BetaWebzzPackage15.bpl">BetaWebzz 1.5 components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\IBO40CDT_D7.bpl">IB Objects Core Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvCmpD10D.bpl">JVCL Non-Visual Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclIntraweb_80_100.bpl">Intraweb 8.0 Design Package for Borland Development Studio 2006</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclofficexp100.bpl">Microsoft Office XP Beispiele für gekapselte Komponenten für Automation Server</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclsmp100.bpl">Borland Sample Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclsoap100.bpl">Borland SOAP-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dcl31w100.bpl">Delphi 1.0 Kompatibilitätskomponenten</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dcldbxcds100.bpl">Borland SimpleDataset-Komponente (DBX)</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dclie100.bpl">Internet Explorer-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\applet100.bpl">Borland Control Panel Applet-Package</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JclDebugExpert100.bpl">JCL Debug IDE extension</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JclProjectAnalysisExpert100.bpl">JCL Project Analyzer</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JclFavoriteFoldersExpert100.bpl">JCL Open and Save IDE dialogs with favorite folders</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JclRepositoryExpert100.bpl">JCL Package containing repository wizards</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JclSIMDViewExpert100.bpl">JCL Debug Window of XMM registers</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvBDED10D.bpl">JVCL BDE Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvCryptD10D.bpl">JVCL Encryption and Compression</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvDotNetCtrlsD10D.bpl">JVCL DotNet Controls</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvEDID10D.bpl">JVCL EDI Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvGlobusD10D.bpl">JVCL Globus Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvHMID10D.bpl">JVCL HMI Controls</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvInterpreterD10D.bpl">JVCL Interpreter Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvPluginD10D.bpl">JVCL Plugin Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvPrintPreviewD10D.bpl">JVCL Print Preview Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvRuntimeDesignD10D.bpl">JVCL Runtime Design Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvSystemD10D.bpl">JVCL System Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvWizardD10D.bpl">JVCL Wizard</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvJansD10D.bpl">JVCL Jans Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvManagedThreadsD10D.bpl">JVCL Managed Threads</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvMMD10D.bpl">JVCL Multimedia and Image Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvNetD10D.bpl">JVCL Network Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvTimeFrameworkD10D.bpl">JVCL Time Framework</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvValidatorsD10D.bpl">JVCL Validators and Error Provider Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Dokumente und Einstellungen\michael\Eigene Dateien\Borland Studio-Projekte\Bpl\JvXPCtrlsD10D.bpl">JVCL XP Controls</Excluded_Packages>
+      <Excluded_Packages Name="c:\programme\borland\bds\4.0\Bin\dcltee100.bpl">TeeChart-Komponenten</Excluded_Packages>
+      <Excluded_Packages Name="D:\Michael\Sandbox\Delphi\Bpl\dclXBConnectD2006.bpl">XB_Connect 0.9</Excluded_Packages>
+    </Excluded_Packages>
+  </Delphi.Personality>
+</BorlandProject>

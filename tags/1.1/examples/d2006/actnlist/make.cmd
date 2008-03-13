@@ -1,0 +1,2 @@
+call ant run
+pause
