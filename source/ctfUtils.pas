@@ -1,17 +1,21 @@
 unit ctfUtils;
 
 interface
-uses Classes;
+
+uses
+  Classes;
 
 function HasDefaultName(const Component: TComponent): Boolean;
 
 implementation
-uses SysUtils;
+
+uses
+  SysUtils;
 
 function HasDefaultName(const Component: TComponent): Boolean;
 var
-  NumericPart: string;
-  ClazzName: string;
+  NumericPart: AnsiString;
+  ClazzName: AnsiString;
   ClazzNameLength: Integer;
   IsNumeric: Boolean;
 begin

@@ -21,22 +21,15 @@
 unit CTFInterfaces;
 
 interface
-{$IFDEF CLR}
-uses
-  NUnit.Framework, NUnit.Core, TypInfo, Contnrs, Classes;
-{$ELSE}
+
 uses
   TestFramework,
 {$IFDEF DUNIT2}
   TestFrameworkIFaces,
 {$ENDIF}
   TypInfo, Contnrs, Classes;
-{$ENDIF}
 
 type
-{$IFDEF CLR}
-  ITestSuite = TestSuite;
-{$ENDIF}
 
   (**
    * \interface IComponentHandler
@@ -55,7 +48,7 @@ type
 
     procedure AddTests;
 
-    function HasProperty(const Component: TComponent; const PropName: string;
+    function HasProperty(const Component: TComponent; const PropName: AnsiString;
       const AKinds: TTypeKinds = []): Boolean;
 
     function GetSuite: ITestSuite;
