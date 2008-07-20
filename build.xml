@@ -92,8 +92,8 @@
       </fileset>
     </copy>
 
-		<iterate target="run-dunit2"/>
-		<echo message="compile complete" />
+		<!-- iterate target="run-dunit2"/>
+		<echo message="compile complete" / -->
 
 		<iterate target="run"/>
 		<echo message="compile complete" />
