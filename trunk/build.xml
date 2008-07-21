@@ -50,7 +50,6 @@
     <copy todir="${target_root}/source">
       <fileset dir="${basedir}/etc">
         <include name="LICENSE.txt" />
-        <include name="*.pdf" />
       </fileset>
     </copy>
 
@@ -69,6 +68,12 @@
         <include name="**/*.dfm" />
         <include name="**/*.cmd" />
         <include name="**/*.xml" />
+      </fileset>
+    </copy>
+
+    <copy todir="${target_root}/docs">
+      <fileset dir="${basedir}/etc">
+        <include name="*.pdf" />
       </fileset>
     </copy>
 
@@ -94,11 +99,11 @@
       </fileset>
     </copy>
 
-		<!-- iterate target="run-dunit2"/>
-		<echo message="compile complete" / -->
+	<!-- iterate target="run-dunit2"/>
+	<echo message="compile complete" / -->
 
-		<iterate target="run"/>
-		<echo message="compile complete" />
+	<iterate target="run"/>
+	<echo message="compile complete" />
 
     <delete>
       <fileset dir="${target_root}" includes="common.xml" />
@@ -124,28 +129,6 @@
     </apply>
 
     <zip zipfile="${target}/${Name}-${version}-installer.zip" basedir="${target}" includes="${Name}-${version}-installer.exe" />
-
-  </target>
-
-
-  <!-- =================================================================== -->
-  <!-- Upload archives to sourceforge                                      -->
-  <!-- =================================================================== -->
-  <target name="sf" >
-
-    <ftp server="upload.sourceforge.net"
-       userid="anonymous"
-       password="michael.justin@gmx.net"
-       passive="yes"
-       binary="yes"
-       remotedir="/incoming"
-       >
-       <fileset dir="${target}">
-         <include name="*.zip"/>
-         <include name="*.exe"/>
-       </fileset>
-    </ftp>
-
 
   </target>
 
