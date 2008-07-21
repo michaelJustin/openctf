@@ -1,4 +1,4 @@
-program OneFormTest;
+program Project1;
 
 {$APPTYPE CONSOLE}
 
