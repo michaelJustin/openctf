@@ -54,6 +54,8 @@ Source: "docs\*.*"; DestDir: "{app}\docs"; Components: help; Flags: recursesubdi
 [Icons]
 Name: "{group}\OpenCTF API Documentation (HTML)"; Filename: "{app}\docs\html\index.html"
 Name: "{group}\OpenCTF API Documentation (CHM) "; Filename: "{app}\docs\html\OpenCTF.chm"
+Name: "{group}\Einstieg in OpenCTF (PDF) "; Filename: "{app}\docs\EinstiegInOpenCTF.pdf"
+Name: "{group}\OpenCTF Getting Started (PDF) "; Filename: "{app}\docs\OpenCTFGettingStarted.pdf"
 
 [Run]
 Filename: "{app}\docs\html\OpenCTF.chm"; Description: "View Documentation"; Flags: shellexec postinstall skipifsilent
