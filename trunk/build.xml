@@ -15,8 +15,9 @@
          <fileset dir="examples/d2006">
            <include name="*/build.xml" />
            <exclude name="rave/build.xml" />
+					 <exclude name="dbx/build.xml" />
 					 <exclude name="ibo/build.xml" />
-					 <exclude name="iwdbild.xml" />
+					 <exclude name="iwdb/build.xml" />
 					 <exclude name="quickreport4/build.xml" />
 				 </fileset>
        </subant>
@@ -49,6 +50,7 @@
     <copy todir="${target_root}/source">
       <fileset dir="${basedir}/etc">
         <include name="LICENSE.txt" />
+        <include name="*.pdf" />
       </fileset>
     </copy>
 
