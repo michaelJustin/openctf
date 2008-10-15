@@ -1,8 +1,8 @@
 [Setup]
 AppName=OpenCTF
-AppVerName=OpenCTF 1.1
-DefaultDirName={sd}\OpenCTF-1.1
-AppCopyright=Copyright © 2007 betasoft Michael Justin
+AppVerName=OpenCTF 1.2
+DefaultDirName={sd}\OpenCTF-1.2
+AppCopyright=Copyright © 2008 betasoft Michael Justin
 AppPublisher=betasoft Michael Justin
 AppPublisherURL=http://www.mikejustin.com/
 AppSupportURL=http://www.mikejustin.com/
