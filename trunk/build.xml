@@ -15,7 +15,7 @@
      <sequential>
        <subant target="@{target}">
          <property name="d2009" value="${d2009}"/>
-         <fileset dir="examples/d2006">
+         <fileset dir="examples/d2009">
            <include name="*/build.xml" />
            <exclude name="rave/build.xml" />
 					 <exclude name="dbx/build.xml" />
