@@ -21,7 +21,7 @@
 
 	<target name="compile" depends="clean">
 
-		<apply executable="dcc32" output="build.log" failonerror="true">
+		<apply executable="${d2009}\bin\dcc32" output="build.log" failonerror="true">
 		 <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
 		 <arg value="-O../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
 		 <arg value="-I../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
@@ -57,7 +57,7 @@
 
 	<target name="compile-dunit2" depends="clean">
 
-		<apply executable="dcc32" output="build.log" failonerror="true">
+		<apply executable="${d2009}\bin\dcc32" output="build.log" failonerror="true">
 		 <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
 		 <arg value="-O../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
 		 <arg value="-I../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>

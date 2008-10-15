@@ -51,7 +51,7 @@ type
   private
     FComponent: TComponent;
     FComponentClass: TClass;
-    FSuiteName: AnsiString;
+    FSuiteName: string;
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
@@ -117,13 +117,13 @@ type
      * end;
      * \endcode
      *)
-    procedure CheckEvents(const Events: array of AnsiString);
+    procedure CheckEvents(const Events: array of string);
 
     (**
      * \brief Checks for unassigned event handlers.
      * \sa CheckEvents
      *)
-    procedure CheckUnassignedEvents(const Events: array of AnsiString);
+    procedure CheckUnassignedEvents(const Events: array of string);
 
     (**
      * \brief Checks for assigned properties.
@@ -136,13 +136,13 @@ type
      * end;
      * \endcode
      *)
-    procedure CheckProperties(const Properties: array of AnsiString);
+    procedure CheckProperties(const Properties: array of string);
 
     (**
     * \brief Check for unassigned properties.
     * \sa CheckProperties
     *)
-    procedure CheckUnassignedProperties(const Properties: array of AnsiString);
+    procedure CheckUnassignedProperties(const Properties: array of string);
 
     (**
      * \brief Form filter method.
@@ -168,7 +168,7 @@ type
     (**
      * \brief Checks for the existence of a property.
      *)
-    function HasProperty(const Component: TComponent; const PropName: AnsiString;
+    function HasProperty(const Component: TComponent; const PropName: string;
       const AKinds: TTypeKinds = []): Boolean;
 
     (**
@@ -188,7 +188,7 @@ type
      * tested).
      * \param Suitename optional test suite name
      *)
-    constructor Create(const ComponentClass: TClass; const Suitename: AnsiString =
+    constructor Create(const ComponentClass: TClass; const Suitename: string =
       '');
 
     (**
@@ -272,7 +272,7 @@ type
      * \param Form the form to be tested.
      * \param Testname optional test name.
      *)
-    constructor Create(Form: TComponent; const Testname: AnsiString = '');
+    constructor Create(Form: TComponent; const Testname: string = '');
 
   end;
 
@@ -303,7 +303,7 @@ type
      * \param Component the component to be tested.
      * \param Testname optional test name.
      *)
-    constructor Create(Component: TComponent; const Testname: AnsiString = '');
+    constructor Create(Component: TComponent; const Testname: string = '');
 
   end;
 
@@ -355,7 +355,7 @@ type
      * handler is missing (unassigned);
      * if false, the test fails if at least one event handler is assigned
      *)
-    constructor Create(Component: TComponent; const EventNames: array of AnsiString;
+    constructor Create(Component: TComponent; const EventNames: array of string;
       const CheckAssigned: Boolean = True);
 
     destructor Destroy; override;
@@ -391,7 +391,7 @@ type
      * is assigned
      *)
     constructor Create(Component: TComponent;
-      const PropertyNames: array of AnsiString; const CheckAssigned: Boolean =
+      const PropertyNames: array of string; const CheckAssigned: Boolean =
       True);
 
     destructor Destroy; override;
@@ -433,9 +433,9 @@ procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
  *)
 procedure RegisterForms; overload;
 
-function GetStringProperty(const Instance: TComponent; PropName: AnsiString):
-  AnsiString;
-function HasPropValue(Instance: TComponent; PropName: AnsiString): Boolean;
+function GetStringProperty(const Instance: TComponent; PropName: string):
+  string;
+function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
 var
   HandlerManager: THandlerManager;
@@ -498,7 +498,7 @@ begin
   end;
 end;
 
-function HasEventHandler(Instance: TObject; const PropName: AnsiString): Boolean;
+function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
 var
   PropInfo: PPropInfo;
 begin
@@ -509,8 +509,8 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
-function GetStringProperty(const Instance: TComponent; PropName: AnsiString):
-  AnsiString;
+function GetStringProperty(const Instance: TComponent; PropName: string):
+  string;
 var
   PropInfo: PPropInfo;
 begin
@@ -529,10 +529,10 @@ begin
   end;
 end;
 
-function HasPropValue(Instance: TComponent; PropName: AnsiString): Boolean;
+function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
   PropInfo: PPropInfo;
-  SubComponentName: AnsiString;
+  SubComponentName: string;
   SubComponent: TObject;
 begin
   if Pos('.', PropName) > 0 then
@@ -577,15 +577,15 @@ begin
       tkDynArray:
         Result := GetOrdProp(Instance, PropInfo) <> 0;
     else
-      raise EPropertyConvertError.Create('Invalid property type ' +
-        PropInfo.PropType^.Name);
+      raise EPropertyConvertError.Create(string('Invalid property type ' +
+        PropInfo.PropType^.Name));
     end;
   end;
 end;
 
 { TFormTest }
 
-constructor TFormTest.Create(Form: TComponent; const Testname: AnsiString);
+constructor TFormTest.Create(Form: TComponent; const Testname: string);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') ' + Testname);
   FForm := Form;
@@ -593,7 +593,7 @@ end;
 
 { TComponentTest }
 
-constructor TComponentTest.Create(Component: TComponent; const Testname: AnsiString
+constructor TComponentTest.Create(Component: TComponent; const Testname: string
   = '');
 begin
   inherited Create(Component.Name + ' (' + Component.ClassName + ') '
@@ -646,7 +646,7 @@ end;
 { TComponentHandler }
 
 constructor TComponentHandler.Create(const ComponentClass: TClass; const
-  Suitename: AnsiString = '');
+  Suitename: string = '');
 begin
   inherited Create;
   Assert(Assigned(ComponentClass));
@@ -680,7 +680,7 @@ begin
 end;
 
 function TComponentHandler.HasProperty(const Component: TComponent; const
-  PropName: AnsiString; const AKinds: TTypeKinds = []): Boolean;
+  PropName: string; const AKinds: TTypeKinds = []): Boolean;
 begin
   Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
@@ -714,26 +714,26 @@ begin
   CurrentSuite.AddTest(Test);
 end;
 
-procedure TComponentHandler.CheckEvents(const Events: array of AnsiString);
+procedure TComponentHandler.CheckEvents(const Events: array of string);
 begin
   CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events));
 end;
 
 procedure TComponentHandler.CheckUnassignedEvents(const Events: array of
-  AnsiString);
+  string);
 begin
   CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events,
     False));
 end;
 
-procedure TComponentHandler.CheckProperties(const Properties: array of AnsiString);
+procedure TComponentHandler.CheckProperties(const Properties: array of string);
 begin
   CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
     Properties));
 end;
 
 procedure TComponentHandler.CheckUnassignedProperties(const Properties: array of
-  AnsiString);
+  string);
 begin
   CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
     Properties, False));
@@ -751,7 +751,7 @@ end;
 { TRequiredEventsTest }
 
 constructor TRequiredEventsTest.Create(Component: TComponent;
-  const EventNames: array of AnsiString; const CheckAssigned: Boolean = True);
+  const EventNames: array of string; const CheckAssigned: Boolean = True);
 var
   I: Integer;
 begin
@@ -797,7 +797,7 @@ end;
 { TRequiredPropertiesTest }
 
 constructor TRequiredPropertiesTest.Create(Component: TComponent;
-  const PropertyNames: array of AnsiString; const CheckAssigned: Boolean = True);
+  const PropertyNames: array of string; const CheckAssigned: Boolean = True);
 var
   I: Integer;
 begin

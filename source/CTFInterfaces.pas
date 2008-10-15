@@ -48,7 +48,7 @@ type
 
     procedure AddTests;
 
-    function HasProperty(const Component: TComponent; const PropName: AnsiString;
+    function HasProperty(const Component: TComponent; const PropName: string;
       const AKinds: TTypeKinds = []): Boolean;
 
     function GetSuite: ITestSuite;
