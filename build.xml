@@ -105,6 +105,9 @@
 	<!-- iterate target="run-dunit2"/>
 	<echo message="compile complete" / -->
 
+	<iterate target="compile"/>
+	<echo message="compile complete" />
+
 	<!-- iterate target="run"/>
 	<echo message="compile complete" / -->
 
