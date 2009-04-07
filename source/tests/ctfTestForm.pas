@@ -35,23 +35,16 @@ type
 
   TBasicFormTest = class(TFormTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
   TInvalidFormParentTest = class(TFormTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
 implementation
+
 uses ctfUtils, Forms, SysUtils;
 
 resourcestring

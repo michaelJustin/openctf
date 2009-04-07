@@ -24,9 +24,6 @@ interface
 
 uses
   OpenCTF,
-  {$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-  {$ENDIF}
   TestFrameWork, ActnList, Classes;
 
 type
@@ -37,15 +34,13 @@ type
 
   TContainedActionTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
 implementation
-uses SysUtils;
+
+uses
+  SysUtils;
 
 { TCustomActionListTestHandler }
 
@@ -79,11 +74,7 @@ end;
 
 { TContainedActionTest }
 
-{$IFDEF DUNIT2}
-procedure TContainedActionTest.RunTest;
-{$ELSE}
 procedure TContainedActionTest.RunTest(testResult: TTestResult);
-{$ENDIF}
 var
   TmpAction: TContainedAction;
   Name: TComponentName;

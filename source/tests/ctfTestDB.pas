@@ -24,9 +24,6 @@ interface
 
 uses
   OpenCTF,
-  {$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-  {$ENDIF}
   TestFrameWork, DB, Classes;
 
 resourcestring
@@ -40,11 +37,7 @@ type
 
   TCustomConnectionTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
   TDataSetTestHandler = class(TComponentHandler)
@@ -54,11 +47,7 @@ type
 
   TDataSetTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
   TDataSourceTestHandler = class(TComponentHandler)
@@ -86,11 +75,7 @@ type
     property Component: TComponent read FComponent;
 
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
 
   public
     constructor Create(Component: TComponent; Param: TParam);

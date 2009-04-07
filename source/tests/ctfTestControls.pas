@@ -24,9 +24,6 @@ interface
 
 uses
   OpenCTF,
-  {$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-  {$ENDIF}
   TestFrameWork, Classes;
 
 type
@@ -37,11 +34,7 @@ type
 
   TTabSheetTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
   TImageListHandler = class(TComponentHandler)
@@ -51,14 +44,11 @@ type
 
   TImageListTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
 implementation
+
 uses ComCtrls, Controls, SysUtils;
 
 { TTabSheetHandler }

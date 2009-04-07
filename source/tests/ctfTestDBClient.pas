@@ -24,9 +24,6 @@ interface
 
 uses
   OpenCTF,
-  {$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-  {$ENDIF}
   TestFrameWork, DBClient, Classes;
 
 type
