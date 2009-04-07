@@ -31,11 +31,7 @@ type
 
   TContainedActionTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
 implementation

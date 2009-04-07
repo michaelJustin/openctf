@@ -24,9 +24,6 @@ interface
 
 uses
   OpenCTF,
-  {$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-  {$ENDIF}
   TestFrameWork, Classes;
 
 type
@@ -38,14 +35,11 @@ type
 
   TQR4ProjectTest = class(TComponentTest)
   protected
-{$IFDEF DUNIT2}
-    procedure RunTest; override;
-{$ELSE}
     procedure RunTest(testResult: TTestResult); override;
-{$ENDIF}
   end;
 
 implementation
+
 uses SysUtils;
 
 { TQR4TestHandler }

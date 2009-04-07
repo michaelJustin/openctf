@@ -24,14 +24,10 @@ interface
 
 uses
   TestFramework,
-{$IFDEF DUNIT2}
-  TestFrameworkIFaces,
-{$ENDIF}
   TypInfo, Contnrs, Classes;
 
 type
-
-  (**
+   (**
    * \interface IComponentHandler
    * The interface which defines the methods and properties
    * of a 'Component Handler' class.
