@@ -3,10 +3,6 @@
   <!-- =================================================================== -->
   <loadproperties srcFile="build.properties" />
 
-  <!-- property name="Name" value="OpenCTF" />
-  <property name="name" value="openctf" />
-  <property name="version" value="1.1" / -->
-
   <property name="target" value="target" />
   <property name="target_root" value="${target}/${name}" />
 
@@ -100,16 +96,10 @@
       <fileset dir="${basedir}">
         <include name="common.xml" />
       </fileset>
-    </copy>
-
-	<!-- iterate target="run-dunit2"/>
-	<echo message="compile complete" / -->
+	</copy>
 
 	<iterate target="compile"/>
 	<echo message="compile complete" />
-
-	<!-- iterate target="run"/>
-	<echo message="compile complete" / -->
 
     <delete>
       <fileset dir="${target_root}" includes="common.xml" />
