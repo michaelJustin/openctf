@@ -857,8 +857,7 @@ end;
  * \section trademarks TRADEMARKS
  * The names of actual companies and products mentioned herein may be the
  * trademarks of their respective owners.
- * Delphi and Kylix are trademarks or registered trademarks of Borland Software
- * Corporation in the U.S. and other countries.
+ * Embarcadero, the Embarcadero Technologies logos and all other Embarcadero Technologies product or service names are trademarks, servicemarks, and/or registered trademarks of Embarcadero Technologies, Inc. and are protected by the laws of the United States and other countries. All other trademarks are property of their respective owners.
  * Java, JavaBean, JDK, Sun, Sun Microsystems, and the Sun Logo are trademarks
  * or registered trademarks of Sun Microsystems, Inc. in the U.S. and other
  * countries.
