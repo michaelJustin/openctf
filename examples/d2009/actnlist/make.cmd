@@ -1,2 +1,0 @@
-call ant run
-pause
