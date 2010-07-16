@@ -16,75 +16,31 @@
 	</target>
 
 	<!-- =================================================================== -->
-	<!-- Compile using DUnit 9.2                                             -->
+	<!-- Compile using DUnit                                                 -->
 	<!-- =================================================================== -->
 
 	<target name="compile" depends="clean">
 
+	    <property name="path" value = "${source};${dunit}/src" />
+		
+		<!-- echo message="${path}" / -->
+		
 		<apply executable="${d2009}\bin\dcc32" output="build-d2009.log" failonerror="true">
-		 <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-O../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-I../../../source;../../../source/tests;c:/Delphi/dunit-9.2.1/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-Rc:/Programme/CodeGear/RAD Studio/5.0/lib"/>
-		 <arg value="-Q"/>
-		 <arg value="-D"/>
+			<arg value="-U${path}" />
+			<arg value="-O${path}" />
+			<arg value="-I${path}" />
+			<arg value="-Q"/>
+			<!-- arg value="-no-config"/ -->
 
-		 <fileset dir=".">
+			<fileset dir=".">
 				<patternset>
-					 <include name="*.dpr"/>
+					<include name="*.dpr"/>
 				</patternset>
 			</fileset>
 		</apply>
 
+		<!-- echo message="compiled" / -->
 	</target>
 
-	<!-- =================================================================== -->
-	<!-- Compile usng DUnit 9.2 then run the tests                           -->
-	<!-- =================================================================== -->
-
-	<target name="run" depends="compile">
-		<!-- exec executable="Project1.exe"
-					output="run.log"
-					resolveexecutable="true"
-					failonerror="false">
-			<arg value="/console" />
-		</exec -->
-	</target>
-
-	<!-- =================================================================== -->
-	<!-- Compile using DUnit 2                                               -->
-	<!-- =================================================================== -->
-
-	<target name="compile-dunit2" depends="clean">
-
-		<apply executable="${d2009}\bin\dcc32" output="build.log" failonerror="true">
-		 <arg value="-U../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-O../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-I../../../source;../../../source/tests;c:/Delphi/dunit2/src;c:/Delphi/QRStandard;c:/Programme/CodeGear/RAD Studio/5.0/RaveReports/Lib"/>
-		 <arg value="-Rc:/Programme/CodeGear/RAD Studio/5.0/lib"/>
-		 <arg value="-Q"/>
-		 <arg value="-DDUNIT2"/>
-
-		 <fileset dir=".">
-				<patternset>
-					 <include name="*.dpr"/>
-				</patternset>
-			</fileset>
-		</apply>
-
-	</target>
-
-	<!-- =================================================================== -->
-	<!-- Compile using DUnit 2 then run the tests                            -->
-	<!-- =================================================================== -->
-
-	<target name="run-dunit2" depends="compile-dunit2">
-		<exec executable="Project1.exe"
-					output="run.log"
-					resolveexecutable="true"
-					failonerror="false">
-			<arg value="/console" />
-		</exec>
-	</target>
 
 </project>
