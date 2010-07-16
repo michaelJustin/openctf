@@ -26,7 +26,7 @@
 			<DCC_DependencyCheckOutputName>Project1.exe</DCC_DependencyCheckOutputName>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
 			<DCC_Platform>x86</DCC_Platform>
-			<DCC_UnitSearchPath>..\..\..\source;..\..\..\source\tests;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_UnitSearchPath>..\..\..\source;..\..\..\source\tests;C:\Delphi\dunit-9.4\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
 			<DCC_UNSAFE_CODE>true</DCC_UNSAFE_CODE>
 			<DCC_K>false</DCC_K>
 			<DCC_N>true</DCC_N>

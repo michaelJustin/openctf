@@ -1,6 +1,6 @@
 (*
     OpenCTF - Component Test Framework
-    Copyright (c) 2007  Michael Justin
+    Copyright (c) 2007-2010  Michael Justin
 
     This program is free software; you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
@@ -32,7 +32,7 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.4';
+  CTF_VER = '1.4.1';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -436,6 +436,9 @@ implementation
 uses
   Controls, Forms, Variants, SysUtils;
 
+const
+  {$I versioninfo.inc}
+
 procedure Add(const Handler: IComponentHandler);
 begin
   HandlerManager.Add(Handler);
@@ -733,7 +736,7 @@ end;
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
-    CTF_NAME_VER + ']');
+    CTF_NAME_VER + '/ DUnit ' + {versioninfo.inc}ReleaseStr + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
@@ -839,7 +842,7 @@ end;
  *
  * \li \ref howto
  *
- * OpenCTF (c) 2007 betasoft Michael Justin http://www.mikejustin.com/
+ * OpenCTF (c) 2007-2010 betasoft Michael Justin http://www.mikejustin.com/
  *
  * \ref credits
  *
@@ -857,7 +860,9 @@ end;
  * \section trademarks TRADEMARKS
  * The names of actual companies and products mentioned herein may be the
  * trademarks of their respective owners.
- * Embarcadero, the Embarcadero Technologies logos and all other Embarcadero Technologies product or service names are trademarks, servicemarks, and/or registered trademarks of Embarcadero Technologies, Inc. and are protected by the laws of the United States and other countries. All other trademarks are property of their respective owners.
+ * Embarcadero, the Embarcadero Technologies logos and all other Embarcadero
+ * Technologies product or service names are trademarks, servicemarks, and/or
+ * registered trademarks of Embarcadero Technologies, Inc. and are protected by the laws of the United States and other countries. All other trademarks are property of their respective owners.
  * Java, JavaBean, JDK, Sun, Sun Microsystems, and the Sun Logo are trademarks
  * or registered trademarks of Sun Microsystems, Inc. in the U.S. and other
  * countries.
@@ -883,15 +888,15 @@ end;
 (**
  * \page credits Tools used to develop OpenCTF
  *
- * OpenCTF was developed and tested with Turbo Delphi(tm) 2006 Professional using the following open-source tools:
+ * OpenCTF was developed and tested using the following open-source tools:
  *
- * \li Apache Ant http://ant.apache.org/ Pure Java build tool, simpler and easier to use than GNU Make.
- * \li doxygen http://www.doxygen.org/ A documentation system for C++, C, Java and IDL.4
- * \li DUnit http://dunit.sourceforge.net/ An Xtreme testing framework for Delphi programs.
- * \li Innosetup (c) Jordan Russel http://www.innosetup.com/ Inno Setup is a free installer for Windows programs.
- * \li pas2dox http://sourceforge.net/projects/pas2dox/ Pas2Dox is a pre-processor addon for the Doxygen documentation generator.
- * \li Subversion http://subversion.tigris.org/ An open-source revision control system.
- * \li TortoiseSVN http://tortoisesvn.tigris.org/ Enables Subversion commands directly in Windows explorer.
+ * \li <a target="_blank" src="http://ant.apache.org/">Apache Ant</a> Pure Java build tool, simpler and easier to use than GNU Make.
+ * \li <a target="_blank" src="http://www.doxygen.org/">doxygen</a> A documentation system for C++, C, Java and IDL.4
+ * \li <a target="_blank" src="http://dunit.sourceforge.net/">DUnit</a> An Xtreme testing framework for Delphi programs.
+ * \li <a target="_blank" src="http://www.innosetup.com/">Innosetup (c) Jordan Russel</a> Inno Setup is a free installer for Windows programs.
+ * \li <a target="_blank" src="http://sourceforge.net/projects/pas2dox/">pas2dox</a> Pas2Dox is a pre-processor addon for the Doxygen documentation generator.
+ * \li <a target="_blank" src="http://subversion.tigris.org/">Subversion</a> An open-source revision control system.
+ * \li <a target="_blank" src="http://tortoisesvn.tigris.org/">TortoiseSVN</a> Enables Subversion commands directly in Windows explorer.
  *)
 
 initialization
