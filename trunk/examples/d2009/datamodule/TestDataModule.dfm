@@ -1,7 +1,5 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 322
-  Top = 351
   Height = 183
   Width = 457
   object BoundDataSource1: TDataSource
@@ -11,7 +9,6 @@ object DataModule1: TDataModule1
   end
   object Database1: TDatabase
     AliasName = 'DBDEMOS'
-    Connected = True
     DatabaseName = 'EMPLOYEE.GDB'
     SessionName = 'Default'
     Left = 32

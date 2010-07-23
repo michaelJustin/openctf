@@ -25,7 +25,7 @@
 			<DCC_UsePackage>rtl;vclx;vcl;dbrtl;vcldb;dbxcds;dbexpress;dsnap;bdertl;vclactnband;xmlrtl;vclie;inet;inetdbbde;inetdbxpress;vcldbx;Jcl;JclVcl;JvCoreD10R;JvSystemD10R;JvStdCtrlsD10R;JvDBD10R;JvDlgsD10R;dclBTVisualFTPD2006;IndyProtocols;IndySystem;IndyCore</DCC_UsePackage>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
 			<DCC_Platform>x86</DCC_Platform>
-			<DCC_UnitSearchPath>..\..\..\source;..\..\..\source\tests;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_UnitSearchPath>..\..\..\source;..\..\..\source\tests;C:\Delphi\dunit-9.4\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
 			<DCC_K>false</DCC_K>
 			<DCC_N>true</DCC_N>
 			<DCC_S>false</DCC_S>

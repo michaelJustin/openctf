@@ -15,12 +15,7 @@
 		 <property name="source" value="${source}"/>
          <fileset dir="examples/d2009">
            <include name="*/build.xml" />
-           <exclude name="rave/build.xml" />
-					 <exclude name="dbx/build.xml" />
-					 <exclude name="ibo/build.xml" />
-					 <exclude name="iwdb/build.xml" />
-					 <exclude name="quickreport4/build.xml" />
-				 </fileset>
+		 </fileset>
        </subant>
      </sequential>
   </macrodef>
