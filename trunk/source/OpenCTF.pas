@@ -1,6 +1,6 @@
 (*
     OpenCTF - Component Test Framework
-    Copyright (c) 2007-2010  Michael Justin
+    Copyright (c) 2007-2011 Michael Justin
 
     This program is free software; you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
@@ -827,14 +827,14 @@ end;
 (** \mainpage OpenCTF Documentation
  *
  * \section intro Introduction
- * OpenCTF is a test framework add-on for Borland(tm) Delphi(tm) which performs
+ * OpenCTF is a test framework add-on for Embarcadero Delphi&reg; which performs
  * automatic checks of all components in Forms (or DataModules).
+ *
  * It provides an easy way to build automatic quality checks for large projects
  * where many components have to pass repeated tests.
+ *
  * Adding OpenCTF tests to a DUnit test suite requires only a few lines of code.
  * Writing your own custom component tests needs only a few seconds.
- *
- * \image html oslogo.gif
  *
  * OpenCTF is based on the DUnit open source test framework and extends it
  * by specialized test classes and helper functions.
@@ -843,18 +843,18 @@ end;
  *
  * \li \ref howto
  *
- * OpenCTF (c) 2007-2010 betasoft Michael Justin http://www.mikejustin.com/
+ * OpenCTF (c) 2007-2011 Habarisoft Michael Justin http://www.habarisoft.com/
  *
  * \ref credits
  *
  * \section warranty Limited Warranty
- * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS. BETASOFT DISCLAIMS ALL
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS. HABARISOFT DISCLAIMS ALL
  * WARRANTIES RELATING TO THIS SOFTWARE, WHETHER EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR
- * A PARTICULAR PURPOSE. NEITHER BETASOFT NOR ANYONE ELSE WHO HAS BEEN INVOLVED
+ * A PARTICULAR PURPOSE. NEITHER HABARISOFT NOR ANYONE ELSE WHO HAS BEEN INVOLVED
  * IN THE CREATION, PRODUCTION, OR DELIVERY OF THIS SOFTWARE SHALL BE LIABLE
  * FOR ANY INDIRECT, CONSEQUENTIAL, OR INCIDENTAL DAMAGES ARISING OUT OF THE
- * USE OR INABILITY TO USE SUCH SOFTWARE, EVEN IF BETASOFT HAS BEEN ADVISED OF
+ * USE OR INABILITY TO USE SUCH SOFTWARE, EVEN IF HABARISOFT HAS BEEN ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGES OR CLAIMS. THE PERSON USING THE SOFTWARE
  * BEARS ALL RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE.
  *
@@ -863,7 +863,9 @@ end;
  * trademarks of their respective owners.
  * Embarcadero, the Embarcadero Technologies logos and all other Embarcadero
  * Technologies product or service names are trademarks, servicemarks, and/or
- * registered trademarks of Embarcadero Technologies, Inc. and are protected by the laws of the United States and other countries. All other trademarks are property of their respective owners.
+ * registered trademarks of Embarcadero Technologies, Inc. and are protected
+ * by the laws of the United States and other countries. All other trademarks
+ * are property of their respective owners.
  * Java, JavaBean, JDK, Sun, Sun Microsystems, and the Sun Logo are trademarks
  * or registered trademarks of Sun Microsystems, Inc. in the U.S. and other
  * countries.
