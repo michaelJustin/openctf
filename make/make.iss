@@ -2,11 +2,11 @@
 AppName=OpenCTF
 AppVerName=OpenCTF 1.4
 DefaultDirName={sd}\OpenCTF-1.4
-AppCopyright=Copyright © 2008 betasoft Michael Justin
-AppPublisher=betasoft Michael Justin
-AppPublisherURL=http://www.mikejustin.com/
-AppSupportURL=http://www.mikejustin.com/
-AppUpdatesURL=http://www.mikejustin.com/
+AppCopyright=Copyright © 2008 Habarisoft Michael Justin
+AppPublisher=Habarisoft Michael Justin
+AppPublisherURL=http://www.habarisoft.com/
+AppSupportURL=http://www.habarisoft.com/
+AppUpdatesURL=http://www.habarisoft.com/
 DefaultGroupName=OpenCTF
 AllowNoIcons=yes
 Uninstallable=yes
