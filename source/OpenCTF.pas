@@ -32,7 +32,7 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.4.1';
+  CTF_VER = '1.4.2';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
