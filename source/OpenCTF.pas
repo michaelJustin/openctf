@@ -437,6 +437,7 @@ uses
   Controls, Forms, Variants, SysUtils;
 
 const
+  // include DUnit version information - for TComponentTestSuite.Create
   {$I versioninfo.inc}
 
 procedure Add(const Handler: IComponentHandler);
