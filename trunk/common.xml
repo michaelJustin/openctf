@@ -30,6 +30,8 @@
 			<arg value="-O${path}" />
 			<arg value="-I${path}" />
 			<arg value="-Q"/>
+			<arg value="-B"/>
+			
 			<!-- arg value="-no-config"/ -->
 
 			<fileset dir=".">
@@ -38,9 +40,5 @@
 				</patternset>
 			</fileset>
 		</apply>
-
-		<!-- echo message="compiled" / -->
 	</target>
-
-
 </project>
