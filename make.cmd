@@ -5,6 +5,6 @@ pause
 
 :call make\make.log
 
-call target\openctf\docs\html\OpenCTF.chm
+call target\openctf\docs\html\index.html
 
 :pause
