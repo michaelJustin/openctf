@@ -18,10 +18,6 @@
 
     *)
 
-(**
- * \file OpenCTF.pas
- * \brief The Open Component Test Framework main unit.
- *)
 unit OpenCTF;
 
 interface
