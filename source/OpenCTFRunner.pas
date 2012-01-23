@@ -18,10 +18,6 @@
 
     *)
 	
-(**
- * \file OpenCTFRunner.pas
- * \brief Helper methods.
- *)
 unit OpenCTFRunner;
 
 interface
