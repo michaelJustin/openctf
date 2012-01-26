@@ -1,0 +1,44 @@
+<project name="OpenCTF-common">
+
+  <echo message="${ant.file}" />
+
+	<target name="clean">
+    <echo message="Ant File: ${ant.file}" /> 
+    <delete>
+      <fileset dir="." includes="*.dcu"/>
+    </delete>
+    <delete>
+      <fileset dir="../../../source" includes="*.dcu"/>
+    </delete>
+    <delete>
+      <fileset dir="../../../source/tests" includes="*.dcu"/>
+		</delete>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Compile using DUnit                                                 -->
+	<!-- =================================================================== -->
+
+	<target name="compile" depends="clean">
+
+	    <property name="path" value = "${source};${dunit}/src" />
+		
+		<!-- echo message="${path}" / -->
+		
+		<apply executable="${d2009}\bin\dcc32" output="../../../build-d2009.log" failonerror="true">
+			<arg value="-U${path}" />
+			<arg value="-O${path}" />
+			<arg value="-I${path}" />
+			<arg value="-Q"/>
+			<arg value="-B"/>
+			
+			<!-- arg value="-no-config"/ -->
+
+			<fileset dir=".">
+				<patternset>
+					<include name="*.dpr"/>
+				</patternset>
+			</fileset>
+		</apply>
+	</target>
+</project>
