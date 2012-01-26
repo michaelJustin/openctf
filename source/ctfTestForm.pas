@@ -93,7 +93,7 @@ begin
   inherited;
   
   if Form.ClassParent.ClassName = TForm.ClassName then
-    Fail(Format(SInvalidFormParent, [Form.Name, Form.ClassParent.ClassName]));
+    Fail(Format(SInvalidFormParent, [Form.ClassName, Form.ClassParent.ClassName]));
 
 end;
 
