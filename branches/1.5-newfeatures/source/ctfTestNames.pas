@@ -29,7 +29,6 @@ uses
 type
   TComponentNameTestHandler = class(TComponentHandler)
   protected
-    function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
   end;
 
@@ -41,46 +40,29 @@ type
 implementation
 
 uses
-  ctfUtils,
-  StdCtrls;
+  ctfUtils;
 
 resourcestring
   SIllegalName = 'Avoid default names for components (e.g. Button1: TButton)';
 
 { TComponentNameTestHandler }
 
-function TComponentNameTestHandler.Accepts(const Component: TComponent):
-  Boolean;
-var
-  CheckIt: Boolean;
-begin
-  CheckIt :=  // Component.UnitName = 'StdCtrls';
-    not (Component is TLabel);
-
-  // include only components which still have default name
-  Result := CheckIt and HasDefaultName(Component);
-end;
-
 procedure TComponentNameTestHandler.AddTests;
 begin
   inherited;
+
   AddTest(TComponentNameTest.Create(CurrentComponent));
 end;
 
 { TComponentNameTest }
 
 procedure TComponentNameTest.RunTest;
-
 begin
   inherited;
 
-  // double-check first - maybe the component name has changed (?)
   if HasDefaultName(Component) then
     Fail(SIllegalName);
 end;
-
-initialization
-  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent, 'Component name tests'));
 
 end.
 

@@ -72,7 +72,7 @@ type
     (**
      * \brief Adds all component tests for the component to the test suite.
      *
-     * \li If you write a new component handler, you have to provide an
+     * \li If you write a new component handler, you can provide an
      * implementation of this method.
      *
      * Example:
@@ -86,7 +86,7 @@ type
      * \endcode
      *
      *)
-    procedure AddTests; virtual; abstract;
+    procedure AddTests; virtual;
 
     (**
      * \brief Adds tests for the form to the test suite.
@@ -242,31 +242,6 @@ type
      *
      *)
     procedure Add(const Handler: IComponentHandler);
-
-  end;
-
-  (**
-   * \class TFormTest
-   * \brief The base class for all unit test classes for a given form.
-   *)
-  TFormTest = class(TAbstractTest)
-  private
-    FForm: TComponent;
-
-  protected
-    (**
-     * \property Form
-     * \brief the Form to be tested.
-     *)
-    property Form: TComponent read FForm;
-
-  public
-    (**
-     * \brief Creates a TFormTest instance.
-     * \param Form the form to be tested.
-     * \param Testname optional test name.
-     *)
-    constructor Create(Form: TComponent; const Testname: string = '');
 
   end;
 
@@ -582,14 +557,6 @@ begin
   end;
 end;
 
-{ TFormTest }
-
-constructor TFormTest.Create(Form: TComponent; const Testname: string);
-begin
-  inherited Create(Form.Name + ' (' + Form.ClassName + ') ' + Testname);
-  FForm := Form;
-end;
-
 { TComponentTest }
 
 constructor TComponentTest.Create(Component: TComponent; const Testname: string
@@ -650,6 +617,7 @@ constructor TComponentHandler.Create(const ComponentClass: TClass; const
   Suitename: string = '');
 begin
   inherited Create;
+
   Assert(Assigned(ComponentClass));
 
   FComponentClass := ComponentClass;
@@ -713,6 +681,11 @@ end;
 procedure TComponentHandler.AddTest(const Test: ITest);
 begin
   CurrentSuite.AddTest(Test);
+end;
+
+procedure TComponentHandler.AddTests;
+begin
+  // default implementation does not add sub tests
 end;
 
 procedure TComponentHandler.CheckEvents(const Events: array of string);

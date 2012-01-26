@@ -50,6 +50,7 @@ uses
 procedure TTabSheetHandler.AddTests;
 begin
   inherited;
+
   CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));
 end;
 
@@ -58,11 +59,9 @@ end;
 procedure TTabSheetTest.RunTest;
 begin
   inherited;
+
   if not TTabSheet(Component).TabVisible then
     Fail('TabSheet is invisible, should be hidden at run time');
 end;
-
-initialization
-  OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
 
 end.

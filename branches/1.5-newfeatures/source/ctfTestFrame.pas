@@ -23,7 +23,8 @@ unit ctfTestFrame;
 interface
 
 uses
-  OpenCTF, TestFrameWork, Classes;
+  OpenCTF,
+  TestFrameWork, Classes;
 
 type
   TFrameTestHandler = class(TComponentHandler)
@@ -31,7 +32,7 @@ type
     procedure AddTests; override;
   end;
 
-  TFrameTest = class(TFormTest)
+  TFrameTest = class(TComponentTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
@@ -58,11 +59,8 @@ end;
 procedure TFrameTest.RunTest;
 begin
   inherited;
-  if HasDefaultName(Form) then
+  if HasDefaultName(Component) then
     Fail(SIllegalName);
 end;
-
-initialization
-  OpenCTF.Add(TFrameTestHandler.Create(TFrame, 'Frame tests'));
 
 end.
