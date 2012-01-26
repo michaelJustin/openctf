@@ -28,7 +28,7 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.4.3';
+  CTF_VER = '1.5.0';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -420,6 +420,7 @@ procedure RegisterForms; overload;
 
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
+
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
 var

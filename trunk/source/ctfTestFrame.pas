@@ -21,7 +21,9 @@
 unit ctfTestFrame;
 
 interface
-uses OpenCTF, TestFrameWork, Classes;
+
+uses
+  OpenCTF, TestFrameWork, Classes;
 
 type
   TFrameTestHandler = class(TComponentHandler)
@@ -36,7 +38,8 @@ type
 
 implementation
 
-uses ctfUtils, Forms;
+uses
+  Forms;
 
 resourcestring
   SIllegalName = 'Avoid default names for frames (e.g. Frame21: TFrame2)';
