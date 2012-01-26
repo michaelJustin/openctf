@@ -3,19 +3,18 @@ unit Unit3;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  SysUtils, Classes;
 
 type
-  TForm3 = class(TForm)
+  TDataModule3 = class(TDataModule)
   private
-    { Private-Deklarationen }
+    { Private declarations }
   public
-    { Public-Deklarationen }
+    { Public declarations }
   end;
 
 var
-  Form3: TForm3;
+  DataModule3: TDataModule3;
 
 implementation
 

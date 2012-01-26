@@ -29,14 +29,9 @@ uses
 type
   TComponentNameTestHandler = class(TComponentHandler)
   protected
-    procedure AddTests; override;
+    procedure AddFormTests; override;
   end;
 
-  TComponentNameTest = class(TComponentTest)
-  protected
-    procedure RunTest(testResult: TTestResult); override;
-  end;
-  
 implementation
 
 uses
@@ -45,23 +40,36 @@ uses
 resourcestring
   SIllegalName = 'Avoid default names for components (e.g. Button1: TButton)';
 
+type
+  TComponentNameTest = class(TComponentTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
 { TComponentNameTestHandler }
 
-procedure TComponentNameTestHandler.AddTests;
+procedure TComponentNameTestHandler.AddFormTests;
 begin
   inherited;
 
-  AddTest(TComponentNameTest.Create(CurrentComponent));
+  AddTest(TComponentNameTest.Create(Form, 'Check component names'));
 end;
 
 { TComponentNameTest }
 
 procedure TComponentNameTest.RunTest;
+var
+  I: Integer;
 begin
   inherited;
 
-  if HasDefaultName(Component) then
-    Fail(SIllegalName);
+  for I := 0 to Component.ComponentCount - 1 do
+  begin
+    if HasDefaultName(Component.Components[I]) then
+    begin
+      Fail(Component.Components[I].Name + ' - ' + SIllegalName);
+    end;
+  end;
 end;
 
 end.

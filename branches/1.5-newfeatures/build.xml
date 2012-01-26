@@ -1,4 +1,4 @@
-<project name="OpenCTF" default="zip" basedir=".">
+<project name="OpenCTF" default="compile" basedir=".">
 
   <!-- =================================================================== -->
   <loadproperties srcFile="build.properties" />

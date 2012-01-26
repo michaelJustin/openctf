@@ -27,11 +27,23 @@ uses
   TestFrameWork, Classes;
 
 type
+  (**
+   * \class TFrameTestHandler
+   *
+   * A handler for ...
+   *
+   *)
   TFrameTestHandler = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
+  (**
+   * \class TFrameTest
+   *
+   * A test for ...
+   *
+   *)
   TFrameTest = class(TComponentTest)
   protected
     procedure RunTest(testResult: TTestResult); override;

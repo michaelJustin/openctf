@@ -26,12 +26,23 @@ uses
   OpenCTF, TestFrameWork, Classes;
 
 type
+  (**
+   * \class TTComponentHandler
+   *
+   * A handler for ...
+   *)
   TTComponentHandler = class(TComponentHandler)
   protected
     procedure AddFormTests; override;
     function Handles(const Form: TComponent): Boolean; override;
   end;
 
+  (**
+   * \class TBasicFormTest
+   *
+   * A test for ...
+   *
+   *)
   TBasicFormTest = class(TComponentTest)
   protected
     procedure RunTest(testResult: TTestResult); override;

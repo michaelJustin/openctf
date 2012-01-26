@@ -55,9 +55,6 @@
 			<DCCReference Include="Unit2.pas">
 				<Form>Form2</Form>
 			</DCCReference>
-			<DCCReference Include="Unit3.pas">
-				<Form>Form3</Form>
-			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

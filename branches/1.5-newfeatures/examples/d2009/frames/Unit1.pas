@@ -8,8 +8,9 @@ uses
 
 type
   TForm1 = class(TForm)
-    Button1: TButton;
     Frame21: TFrame2;
+    Frame22: TFrame2;
+    Frame23: TFrame2;
   private
     { Private-Deklarationen }
   public

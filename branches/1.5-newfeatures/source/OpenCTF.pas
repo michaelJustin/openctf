@@ -249,8 +249,6 @@ type
    * \class TComponentTest
    * \brief The base class for all unit test classes for a given component.
    * Subclasses of this class implement component-specific tests.
-   * Two subclasses (TRequiredEventsTest and TRequiredPropertiesTest) are
-   * already included in the OpenCTF core.
    *
    * \sa TRequiredEventsTest
    * \sa TRequiredPropertiesTest
@@ -659,8 +657,10 @@ var
   I: Integer;
 begin
   CurrentSuite := TTestSuite.Create(FSuiteName);
+
   // add form tests
   AddFormTests;
+
   // add component tests
   for I := 0 to Form.ComponentCount - 1 do
   begin
@@ -724,6 +724,7 @@ constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
     CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
+
   HandlerManager.AddSuites(Self, Form);
 end;
 
