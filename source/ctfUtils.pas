@@ -14,8 +14,8 @@ uses
 
 function HasDefaultName(const Component: TComponent): Boolean;
 var
-  NumericPart: AnsiString;
-  ClazzName: AnsiString;
+  NumericPart: string;
+  ClazzName: string;
   ClazzNameLength: Integer;
   IsNumeric: Boolean;
 begin
