@@ -52,18 +52,15 @@ type
 implementation
 
 uses
-  ctfUtils,
   Forms;
-
-resourcestring
-  SIllegalName = 'Avoid default names for frames (e.g. Frame21: TFrame2)';
 
 { TFrameTestHandler }
 
 procedure TFrameTestHandler.AddTests;
 begin
   inherited;
-  AddTest(TFrameTest.Create(CurrentComponent, 'TestDefaultName'));
+
+  // AddTest(TFrameTest.Create(CurrentComponent, 'TestDefaultName'));
 end;
 
 { TFrameTest }
@@ -71,8 +68,7 @@ end;
 procedure TFrameTest.RunTest;
 begin
   inherited;
-  if HasDefaultName(Component) then
-    Fail(SIllegalName);
+
 end;
 
 end.

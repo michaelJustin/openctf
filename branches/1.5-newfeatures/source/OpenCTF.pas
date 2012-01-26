@@ -24,7 +24,8 @@ interface
 
 uses
   CTFInterfaces,
-  TestFramework, TypInfo, Contnrs, Classes;
+  TestFramework,
+  Generics.Collections, TypInfo, Contnrs, Classes;
 
 const
   CTF_NAME = 'OpenCTF';
@@ -434,22 +435,20 @@ end;
 
 procedure RegisterForms(const Forms: array of TComponent); overload;
 var
-  I: Integer;
+  AForm: TComponent;
 begin
-  for I := 0 to Length(Forms) - 1 do
-    RegisterForm(Forms[I]);
+  for AForm in Forms do
+    RegisterForm(AForm);
 end;
 
 procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
   overload;
 var
-  I: Integer;
   AClass: TComponentClass;
   AForm: TComponent;
 begin
-  for I := 0 to Length(FormClasses) - 1 do
+  for AClass in FormClasses do
   begin
-    AClass := FormClasses[I];
     Application.CreateForm(AClass, AForm);
     RegisterForm(AForm);
   end;
@@ -560,8 +559,8 @@ end;
 constructor TComponentTest.Create(Component: TComponent; const Testname: string
   = '');
 begin
-  inherited Create(Component.Name + ' (' + Component.ClassName + ') '
-    + Testname);
+  // inherited Create(Component.Name + ' (' + Component.ClassName + ') ' + Testname
+  inherited Create(Testname);
   FComponent := Component;
 end;
 
@@ -588,6 +587,7 @@ procedure THandlerManager.AddSuites(const Suite: ITestSuite; const
   Form: TComponent);
 var
   I: Integer;
+  J: Integer;
   Handler: IComponentHandler;
   HandlerSuite: ITestSuite;
 begin
@@ -603,7 +603,12 @@ begin
       HandlerSuite := Handler.GetSuite;
       if HandlerSuite.CountTestCases > 0 then
       begin
-        Suite.AddSuite(HandlerSuite);
+        // Suite.AddSuite(HandlerSuite);
+
+        for J := 0 to HandlerSuite.CountTestCases - 1 do
+        begin
+          Suite.AddTest(HandlerSuite.Tests[J] as ITest);
+        end;
       end;
     end;
   end;

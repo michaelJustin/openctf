@@ -52,7 +52,7 @@ procedure TComponentNameTestHandler.AddFormTests;
 begin
   inherited;
 
-  AddTest(TComponentNameTest.Create(Form, 'Check component names'));
+  AddTest(TComponentNameTest.Create(Form, 'default component name'));
 end;
 
 { TComponentNameTest }
@@ -60,6 +60,7 @@ end;
 procedure TComponentNameTest.RunTest;
 var
   I: Integer;
+  S: string;
 begin
   inherited;
 
@@ -67,9 +68,12 @@ begin
   begin
     if HasDefaultName(Component.Components[I]) then
     begin
-      Fail(Component.Components[I].Name + ' - ' + SIllegalName);
+      S := S + (Component.Components[I].Name) + #13#10;
     end;
   end;
+
+  if S <> '' then
+    Fail(SIllegalName + #13#10 + S);
 end;
 
 end.

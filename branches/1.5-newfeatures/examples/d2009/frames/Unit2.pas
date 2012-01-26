@@ -8,8 +8,6 @@ uses
 
 type
   TFrame2 = class(TFrame)
-    Label1: TLabel;
-    Panel1: TPanel;
   private
     { Private-Deklarationen }
   public

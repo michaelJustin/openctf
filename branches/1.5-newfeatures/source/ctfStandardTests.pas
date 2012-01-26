@@ -14,7 +14,7 @@ implementation
 uses
   OpenCTF,
   Controls, // TImageList
-  Forms, // TFrame
+  // Forms, // TFrame
   ComCtrls, // TTabSheet
   Classes;
 
@@ -24,7 +24,7 @@ initialization
 
   OpenCTF.Add(TComponentNameTestHandler.Create(TComponent, 'Component name tests'));
 
-  OpenCTF.Add(TFrameTestHandler.Create(TFrame, 'Frame tests'));
+  // OpenCTF.Add(TFrameTestHandler.Create(TFrame, 'Frame tests'));
 
   OpenCTF.Add(TImageListHandler.Create(TImageList, 'TImageList tests'));
 
