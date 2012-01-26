@@ -49,6 +49,8 @@ type
 
     function GetSuite: ITestSuite;
 
+    function HandlerClass: TClass;
+
     // properties
     property Form: TComponent read GetForm write SetForm;
 

@@ -189,6 +189,7 @@ type
      *)
     function GetSuite: ITestSuite;
 
+    function HandlerClass: TClass;
   end;
 
   (**
@@ -431,14 +432,22 @@ procedure Add(const Handler: IComponentHandler);
 implementation
 
 uses
-  Controls, Forms, Variants, SysUtils;
+  Controls, Forms,
+  Variants, SysUtils,
+  Windows;
 
 const
   // include DUnit version information - for TComponentTestSuite.Create
   {$I versioninfo.inc}
 
+procedure Log(const Msg: string);
+begin
+  OutputDebugString(PWideChar('OpenCTF ' + Msg));
+end;
+
 procedure Add(const Handler: IComponentHandler);
 begin
+  Log('add: ' + Handler.HandlerClass.ClassName);
   HandlerManager.Add(Handler);
 end;
 
@@ -628,7 +637,9 @@ begin
       // Get the Test Suite
       HandlerSuite := Handler.GetSuite;
       if HandlerSuite.CountTestCases > 0 then
+      begin
         Suite.AddSuite(HandlerSuite);
+      end;
     end;
   end;
 end;
@@ -729,12 +740,17 @@ begin
     Properties, False));
 end;
 
+function TComponentHandler.HandlerClass: TClass;
+begin
+  Result := ClassType;
+end;
+
 { TComponentTestSuite }
 
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
-    CTF_NAME_VER + '/ DUnit ' + {versioninfo.inc}ReleaseStr + ']');
+    CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
