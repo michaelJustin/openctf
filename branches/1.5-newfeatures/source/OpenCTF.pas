@@ -605,7 +605,7 @@ begin
       begin
         // Suite.AddSuite(HandlerSuite);
 
-        for J := 0 to HandlerSuite.CountTestCases - 1 do
+        for J := 0 to HandlerSuite.Tests.Count - 1 do
         begin
           Suite.AddTest(HandlerSuite.Tests[J] as ITest);
         end;
