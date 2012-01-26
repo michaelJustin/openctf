@@ -1,8 +1,8 @@
 object Frame2: TFrame2
   Left = 0
   Top = 0
-  Width = 320
-  Height = 290
+  Width = 541
+  Height = 388
   TabOrder = 0
   TabStop = True
   object Label1: TLabel

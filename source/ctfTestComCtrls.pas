@@ -18,9 +18,10 @@
 
     *)
 
-// tests for components in unit "Controls"
 
-unit ctfTestControls;
+// tests for components in unit "ComCtrls"
+
+unit ctfTestComCtrls;
 
 interface
 
@@ -29,12 +30,12 @@ uses
   TestFrameWork, Classes;
 
 type
-  TImageListHandler = class(TComponentHandler)
+  TTabSheetHandler = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
-  TImageListTest = class(TComponentTest)
+  TTabSheetTest = class(TComponentTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
@@ -42,28 +43,26 @@ type
 implementation
 
 uses
-  Controls,
-  SysUtils;
+  ComCtrls;
 
-{ TImageListHandler }
+{ TTabSheetHandler }
 
-procedure TImageListHandler.AddTests;
+procedure TTabSheetHandler.AddTests;
 begin
   inherited;
-  CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
+  CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));
 end;
 
-{ TImageListTest }
+{ TTabSheetTest }
 
-procedure TImageListTest.RunTest;
+procedure TTabSheetTest.RunTest;
 begin
   inherited;
-  if TImageList(Component).Count=0 then
-    Fail('ImageList is empty');
+  if not TTabSheet(Component).TabVisible then
+    Fail('TabSheet is invisible, should be hidden at run time');
 end;
 
 initialization
-  OpenCTF.Add(TImageListHandler.Create(TImageList, 'ImageList tests'));
+  OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
 
 end.
-

@@ -39,6 +39,7 @@ type
 implementation
 
 uses
+  ctfUtils,
   Forms;
 
 resourcestring
@@ -62,6 +63,6 @@ begin
 end;
 
 initialization
-  OpenCTF.Add(TFrameTestHandler.Create(TFrame));
+  OpenCTF.Add(TFrameTestHandler.Create(TFrame, 'Frame tests'));
 
 end.

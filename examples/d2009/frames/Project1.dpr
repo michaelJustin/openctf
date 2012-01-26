@@ -1,11 +1,9 @@
 program Project1;
-{$APPTYPE CONSOLE}
+
 uses
   OpenCTF,
   OpenCTFRunner,
-  ctfTestFrame,
-  ctfTestNames,
-  ctfTestControls,
+  ctfStandardTests,
   Unit1 in 'Unit1.pas' {Form1},
   Unit2 in 'Unit2.pas' {Frame2: TFrame};
 
