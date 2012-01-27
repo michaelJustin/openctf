@@ -203,8 +203,10 @@ type
    * main unit (OpenCTF.pas).
    *
    *)
-  THandlerManager = class(TObject)
+  THandlerManager = class
   private
+    AllComponents: TObjectList<TComponent>;
+
     HandlerList: TInterfaceList;
 
     (**
@@ -225,6 +227,14 @@ type
      * Destroy
      *)
     destructor Destroy; override;
+
+    (**
+     * Add a form.
+     *
+     * This procedure will also add all components to the AllComponents list.
+     *
+     *)
+    procedure AddForm(const Form: TComponent);
 
     (**
      * \brief Add a component handler.
@@ -299,7 +309,7 @@ type
    * \class TRequiredEventsTest
    * \brief Tests the existence of an event handler.
    *)
-  TRequiredEventsTest = class(TComponentTest)
+ { TRequiredEventsTest = class(TComponentTest)
   private
     FCheckAssigned: Boolean;
     FEvents: TStrings;
@@ -357,6 +367,7 @@ type
     destructor Destroy; override;
 
   end;
+  }
 
   (**
    * \brief Create a OpenCTF test suite for the given form and register it with DUnit.
@@ -421,17 +432,17 @@ begin
   OutputDebugString(PWideChar('OpenCTF ' + Msg));
 end;
 
-procedure Add(const Handler: IComponentHandler);
-begin
-  Log('add: ' + Handler.HandlerClass.ClassName);
-  HandlerManager.Add(Handler);
-end;
 
+// add form to AllComponents -------------------------------------------------
 procedure RegisterForm(const Form: TComponent);
 begin
   Assert(Assigned(Form));
+
   Assert((Form is TDataModule) or (Form is TForm) or (Form is TFrame),
     'Only subclasses of TForm, TFrame or TDataModule can be used');
+
+  HandlerManager.AddForm(Form);
+
   TestFramework.RegisterTest(TComponentTestSuite.Create(Form));
 end;
 
@@ -451,7 +462,6 @@ var
 begin
   for AClass in FormClasses do
   begin
-    // Application.CreateForm(AClass, AForm);
     AForm := AClass.Create(nil);
     RegisterForm(AForm);
   end;
@@ -470,6 +480,13 @@ begin
 
     RegisterForm(Application.Components[I]);
   end;
+end;
+
+// ---------------------
+procedure Add(const Handler: IComponentHandler);
+begin
+  Log('add: ' + Handler.HandlerClass.ClassName);
+  HandlerManager.Add(Handler);
 end;
 
 function HasDefaultName(const Component: TComponent): Boolean;
@@ -510,6 +527,7 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
+{$WARNINGS OFF}
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
 var
@@ -584,6 +602,8 @@ begin
   end;
 end;
 
+{$WARNINGS ON}
+
 { TComponentTest }
 
 constructor TComponentTest.Create(Component: TComponent; const Testname: string
@@ -599,18 +619,36 @@ end;
 constructor THandlerManager.Create;
 begin
   inherited;
+
+  AllComponents := TObjectList<TComponent>.Create;
+
   HandlerList := TInterfaceList.Create;
 end;
 
 destructor THandlerManager.Destroy;
 begin
   HandlerList.Free;
+
+  AllComponents.Free;
+
   inherited;
 end;
 
 procedure THandlerManager.Add(const Handler: IComponentHandler);
 begin
   HandlerList.Add(Handler);
+end;
+
+procedure THandlerManager.AddForm(const Form: TComponent);
+var
+  E: TComponentEnumerator;
+  C: TComponent;
+begin
+  E := Form.GetEnumerator;
+  Log(Form.ClassName);
+  while E.MoveNext do
+    AllComponents.Add(E.Current);
+  Log(IntToStr(AllComponents.Count) + ' components');
 end;
 
 procedure THandlerManager.AddSuites(const Suite: ITestSuite; const
@@ -725,27 +763,27 @@ end;
 
 procedure TComponentHandler.CheckEvents(const Events: array of string);
 begin
-  CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events));
+  // CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events));
 end;
 
 procedure TComponentHandler.CheckUnassignedEvents(const Events: array of
   string);
 begin
-  CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events,
-    False));
+  // CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events,
+  //  False));
 end;
 
 procedure TComponentHandler.CheckProperties(const Properties: array of string);
 begin
-  CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
-    Properties));
+  // CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
+  //  Properties));
 end;
 
 procedure TComponentHandler.CheckUnassignedProperties(const Properties: array of
   string);
 begin
-  CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
-    Properties, False));
+  // CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
+  //  Properties, False));
 end;
 
 function TComponentHandler.HandlerClass: TClass;
@@ -763,6 +801,7 @@ begin
   HandlerManager.AddSuites(Self, Form);
 end;
 
+(*
 { TRequiredEventsTest }
 
 constructor TRequiredEventsTest.Create(Component: TComponent;
@@ -845,6 +884,7 @@ begin
     end;
   end;
 end;
+    *)
 
 (** \mainpage OpenCTF Documentation
  *

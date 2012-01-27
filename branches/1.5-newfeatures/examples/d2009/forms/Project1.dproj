@@ -20,6 +20,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
 			<DCC_UsePackage>rtl;vclx;vcl;dbrtl;vcldb;dbxcds;dbexpress;dsnap;bdertl;vclactnband;xmlrtl;vclie;inet;inetdbbde;inetdbxpress;vcldbx;Jcl;JclVcl;JvCoreD10R;JvSystemD10R;JvStdCtrlsD10R;JvDBD10R;JvDlgsD10R;dclBTVisualFTPD2006;IndyProtocols;IndySystem;IndyCore</DCC_UsePackage>
 			<DCC_UNSAFE_TYPE>true</DCC_UNSAFE_TYPE>
