@@ -398,6 +398,8 @@ function GetStringProperty(const Instance: TComponent; PropName: string):
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
+function HasDefaultName(const Component: TComponent): Boolean;
+
 var
   HandlerManager: THandlerManager;
 
@@ -449,7 +451,8 @@ var
 begin
   for AClass in FormClasses do
   begin
-    Application.CreateForm(AClass, AForm);
+    // Application.CreateForm(AClass, AForm);
+    AForm := AClass.Create(nil);
     RegisterForm(AForm);
   end;
 end;
@@ -467,6 +470,33 @@ begin
 
     RegisterForm(Application.Components[I]);
   end;
+end;
+
+function HasDefaultName(const Component: TComponent): Boolean;
+var
+  NumericPart: string;
+  ClazzName: string;
+  ClazzNameLength: Integer;
+  IsNumeric: Boolean;
+  Tmp: Integer;
+begin
+  IsNumeric := False;
+
+  ClazzName := Copy(Component.ClassName, 2, Length(Component.ClassName) - 1);
+
+  if Pos(ClazzName, Component.Name) = 1 then
+  begin
+    ClazzNameLength := Length(ClazzName);
+
+    if Length(Component.Name) > ClazzNameLength then
+    begin
+      NumericPart := Copy(Component.Name, ClazzNameLength + 1,
+        Length(Component.Name) - ClazzNameLength);
+      if NumericPart <> '' then
+        IsNumeric := TryStrToInt(NumericPart, Tmp)
+    end;
+  end;
+  Result := IsNumeric;
 end;
 
 function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
