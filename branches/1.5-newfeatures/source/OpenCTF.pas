@@ -296,7 +296,7 @@ type
 
   end;
 
-  (**
+ { (**
    * \class TComponentTestSuite
    *
    * \brief This class creates the complete test suite for a given form or
@@ -313,8 +313,9 @@ type
      * \brief Creates a TComponentTestSuite instance.
      * \param Form the form (or datamodule) to be tested.
      *)
-    constructor Create(const Form: TComponent);
+    // constructor Create(const Form: TComponent);
   end;
+ }
 
   (**
    * \class TRequiredEventsTest
@@ -380,7 +381,7 @@ type
   end;
   }
 
-  (**
+ { (**
    * \brief Create a OpenCTF test suite for the given form and register it with DUnit.
    *
    * \code
@@ -400,6 +401,7 @@ procedure RegisterForm(const Form: TComponent);
  * \sa RegisterForm
  *)
 procedure RegisterForms(const Forms: array of TComponent); overload;
+ }
 
 (**
  * Create an instance of all form classes in the list,
@@ -409,11 +411,13 @@ procedure RegisterForms(const Forms: array of TComponent); overload;
 procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
   overload;
 
+  {
 (**
  * \brief For each form which has been created using Application.CreateForm,
  * create a OpenCTF test suite and register it with DUnit
  *)
 procedure RegisterForms; overload;
+  }
 
 procedure BuildTests;
 
@@ -457,6 +461,7 @@ begin
   HandlerManager.AddForm(Form);
 end;
 
+(*
 procedure RegisterForms(const Forms: array of TComponent); overload;
 var
   AForm: TComponent;
@@ -464,6 +469,7 @@ begin
   for AForm in Forms do
     RegisterForm(AForm);
 end;
+*)
 
 procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
   overload;
@@ -477,7 +483,7 @@ begin
     RegisterForm(AForm);
   end;
 end;
-
+           (*
 procedure RegisterForms; overload;
 var
   I: Integer;
@@ -492,6 +498,7 @@ begin
     RegisterForm(Application.Components[I]);
   end;
 end;
+*)
 
 // collect all suites -------------------------------------------------------
 procedure BuildTests;
@@ -764,11 +771,7 @@ end;
 
 procedure THandlerManager.BuildTests;
 var
-  I: Integer;
-  J: Integer;
-  C: TComponent;
   Handler: TComponentHandler;
-  HandlerSuite: ITestSuite;
   Form: TComponent;
 begin
   Assert(Forms.Count > 0, 'no forms found');
@@ -794,13 +797,13 @@ begin
 end;
 
 { TComponentTestSuite }
-
+      (*
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
     CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
 end;
-
+        *)
 (*
 { TRequiredEventsTest }
 
