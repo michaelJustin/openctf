@@ -37,17 +37,16 @@ type
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
-    // other methods
     function Accepts(const Component: TComponent): Boolean;
 
     function Handles(const Form: TComponent): Boolean;
 
     procedure AddTests;
 
-    function HasProperty(const Component: TComponent; const PropName: string;
-      const AKinds: TTypeKinds = []): Boolean;
+    //function HasProperty(const Component: TComponent; const PropName: string;
+    //  const AKinds: TTypeKinds = []): Boolean;
 
-    function GetSuite: ITestSuite;
+    // function GetSuite: ITestSuite;
 
     function HandlerClass: TClass;
 

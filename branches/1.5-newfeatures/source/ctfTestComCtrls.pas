@@ -51,7 +51,7 @@ procedure TTabSheetHandler.AddTests;
 begin
   inherited;
 
-  CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));
+  // CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));
 end;
 
 { TTabSheetTest }

@@ -46,13 +46,16 @@ type
     FComponent: TComponent;
     FComponentClass: TClass;
     FSuiteName: string;
+
+    CurrentSuite: ITestSuite;
+
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
   protected
-    CurrentSuite: ITestSuite;
     CurrentComponent: TComponent;
 
+    function Suite: ITestSuite;
     (**
      * \brief This methods decides if the passed component should be included in the
      * test suite. The default implementation checks if the component class
@@ -162,8 +165,10 @@ type
     (**
      * \brief Checks for the existence of a property.
      *)
-    function HasProperty(const Component: TComponent; const PropName: string;
+    (*
+      function HasProperty(const Component: TComponent; const PropName: string;
       const AKinds: TTypeKinds = []): Boolean;
+    *)
 
     (**
      * \property Form
@@ -174,6 +179,7 @@ type
   public
     (**
      * \brief Creates a handler instance.
+     *
      * This constructor will create a handler instance which will by default
      * generate a test for every component in the form (or datamodule) which
      * is a subtype of the given component class.
@@ -188,7 +194,7 @@ type
     (**
      * \brief Get the test suite.
      *)
-    function GetSuite: ITestSuite;
+    // function GetSuite: ITestSuite;
 
     function HandlerClass: TClass;
   end;
@@ -205,9 +211,9 @@ type
    *)
   THandlerManager = class
   private
-    AllComponents: TObjectList<TComponent>;
+    Forms: TObjectList<TComponent>;
 
-    HandlerList: TInterfaceList;
+    Handlers: TObjectList<TComponentHandler>;
 
     (**
      * \constructor Create
@@ -220,7 +226,7 @@ type
      * \param Form the form or datamodule which will be tested
      * \sa TComponentTestSuite#Create
      *)
-    procedure AddSuites(const Suite: ITestSuite; const Form: TComponent);
+    // procedure AddSuites(const Suite: ITestSuite; const Form: TComponent);
 
   public
     (**
@@ -235,6 +241,11 @@ type
      *
      *)
     procedure AddForm(const Form: TComponent);
+
+    (**
+     * Now iterate forms and tests to genereate the suites
+     *)
+    procedure BuildTests;
 
     (**
      * \brief Add a component handler.
@@ -252,7 +263,7 @@ type
      * \endcode
      *
      *)
-    procedure Add(const Handler: IComponentHandler);
+    procedure Add(const Handler: TComponentHandler);
 
   end;
 
@@ -404,17 +415,20 @@ procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
  *)
 procedure RegisterForms; overload;
 
-function GetStringProperty(const Instance: TComponent; PropName: string):
+procedure BuildTests;
+
+(* function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
+*)
 
 function HasDefaultName(const Component: TComponent): Boolean;
 
 var
   HandlerManager: THandlerManager;
 
-procedure Add(const Handler: IComponentHandler);
+procedure Add(const Handler: TComponentHandler);
 
 implementation
 
@@ -432,7 +446,6 @@ begin
   OutputDebugString(PWideChar('OpenCTF ' + Msg));
 end;
 
-
 // add form to AllComponents -------------------------------------------------
 procedure RegisterForm(const Form: TComponent);
 begin
@@ -442,8 +455,6 @@ begin
     'Only subclasses of TForm, TFrame or TDataModule can be used');
 
   HandlerManager.AddForm(Form);
-
-  TestFramework.RegisterTest(TComponentTestSuite.Create(Form));
 end;
 
 procedure RegisterForms(const Forms: array of TComponent); overload;
@@ -482,8 +493,14 @@ begin
   end;
 end;
 
+// collect all suites -------------------------------------------------------
+procedure BuildTests;
+begin
+  HandlerManager.BuildTests;
+end;
+
 // ---------------------
-procedure Add(const Handler: IComponentHandler);
+procedure Add(const Handler: TComponentHandler);
 begin
   Log('add: ' + Handler.HandlerClass.ClassName);
   HandlerManager.Add(Handler);
@@ -516,6 +533,7 @@ begin
   Result := IsNumeric;
 end;
 
+(*
 function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
 var
   PropInfo: PPropInfo;
@@ -526,6 +544,7 @@ begin
   else
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
+
 
 {$WARNINGS OFF}
 function GetStringProperty(const Instance: TComponent; PropName: string):
@@ -601,86 +620,9 @@ begin
     end;
   end;
 end;
+ *)
 
 {$WARNINGS ON}
-
-{ TComponentTest }
-
-constructor TComponentTest.Create(Component: TComponent; const Testname: string
-  = '');
-begin
-  // inherited Create(Component.Name + ' (' + Component.ClassName + ') ' + Testname
-  inherited Create(Testname);
-  FComponent := Component;
-end;
-
-{ THandlerManager }
-
-constructor THandlerManager.Create;
-begin
-  inherited;
-
-  AllComponents := TObjectList<TComponent>.Create;
-
-  HandlerList := TInterfaceList.Create;
-end;
-
-destructor THandlerManager.Destroy;
-begin
-  HandlerList.Free;
-
-  AllComponents.Free;
-
-  inherited;
-end;
-
-procedure THandlerManager.Add(const Handler: IComponentHandler);
-begin
-  HandlerList.Add(Handler);
-end;
-
-procedure THandlerManager.AddForm(const Form: TComponent);
-var
-  E: TComponentEnumerator;
-  C: TComponent;
-begin
-  E := Form.GetEnumerator;
-  Log(Form.ClassName);
-  while E.MoveNext do
-    AllComponents.Add(E.Current);
-  Log(IntToStr(AllComponents.Count) + ' components');
-end;
-
-procedure THandlerManager.AddSuites(const Suite: ITestSuite; const
-  Form: TComponent);
-var
-  I: Integer;
-  J: Integer;
-  Handler: IComponentHandler;
-  HandlerSuite: ITestSuite;
-begin
-  for I := 0 to HandlerList.Count - 1 do
-  begin
-    Handler := IComponentHandler(HandlerList[I]);
-    // check the form class
-    if Handler.Handles(Form) then
-    begin
-      // Assign the form / datamodule
-      Handler.Form := Form;
-      // Get the Test Suite
-      HandlerSuite := Handler.GetSuite;
-      if HandlerSuite.CountTestCases > 0 then
-      begin
-        // Suite.AddSuite(HandlerSuite);
-
-        for J := 0 to HandlerSuite.Tests.Count - 1 do
-        begin
-          Suite.AddTest(HandlerSuite.Tests[J] as ITest);
-        end;
-      end;
-    end;
-  end;
-end;
 
 { TComponentHandler }
 
@@ -696,7 +638,9 @@ begin
   if Suitename = '' then
     FSuiteName := ClassName
   else
-    FSuiteName := Suitename
+    FSuiteName := Suitename;
+
+  CurrentSuite := TTestSuite.Create(FSuiteName);
 end;
 
 function TComponentHandler.GetForm: TComponent;
@@ -709,6 +653,11 @@ begin
   FComponent := Value;
 end;
 
+function TComponentHandler.Suite: ITestSuite;
+begin
+  Result := CurrentSuite;
+end;
+
 function TComponentHandler.Handles(const Form: TComponent): Boolean;
 begin
   Result := True;
@@ -719,32 +668,13 @@ begin
   Result := Component is FComponentClass;
 end;
 
+(*
 function TComponentHandler.HasProperty(const Component: TComponent; const
   PropName: string; const AKinds: TTypeKinds = []): Boolean;
 begin
   Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
-
-function TComponentHandler.GetSuite: ITestSuite;
-var
-  I: Integer;
-begin
-  CurrentSuite := TTestSuite.Create(FSuiteName);
-
-  // add form tests
-  AddFormTests;
-
-  // add component tests
-  for I := 0 to Form.ComponentCount - 1 do
-  begin
-    CurrentComponent := Form.Components[I];
-    if Accepts(CurrentComponent) then
-    begin
-      AddTests;
-    end;
-  end;
-  Result := CurrentSuite;
-end;
+*)
 
 procedure TComponentHandler.AddFormTests;
 begin
@@ -791,14 +721,84 @@ begin
   Result := ClassType;
 end;
 
+{ TComponentTest }
+
+constructor TComponentTest.Create(Component: TComponent; const Testname: string
+  = '');
+begin
+  // inherited Create(Component.Name + ' (' + Component.ClassName + ') ' + Testname
+  inherited Create(Testname);
+
+  FComponent := Component;
+end;
+
+{ THandlerManager }
+
+constructor THandlerManager.Create;
+begin
+  inherited;
+
+  Forms := TObjectList<TComponent>.Create;
+
+  Handlers := TObjectList<TComponentHandler>.Create;
+end;
+
+destructor THandlerManager.Destroy;
+begin
+  Handlers.Free;
+
+  Forms.Free;
+
+  inherited;
+end;
+
+procedure THandlerManager.Add(const Handler: TComponentHandler);
+begin
+  Handlers.Add(Handler);
+end;
+
+procedure THandlerManager.AddForm(const Form: TComponent);
+begin
+  Forms.Add(Form);
+end;
+
+procedure THandlerManager.BuildTests;
+var
+  I: Integer;
+  J: Integer;
+  C: TComponent;
+  Handler: TComponentHandler;
+  HandlerSuite: ITestSuite;
+  Form: TComponent;
+begin
+  Assert(Forms.Count > 0, 'no forms found');
+
+  // pass each form to every handler
+  // to fill the test suite
+  for Form in Forms do
+  begin
+    for Handler in Handlers do
+    begin
+      Log(Format('Form %s/Handler %s', [Form.Name, Handler.ClassName]));
+      Handler.Accepts(Form);
+    end;
+  end;
+
+  // get and add all tests of all handlers
+  for Handler in Handlers do
+    begin
+      // TestFramework.RegisterTest('', Handler.Suite);
+      // iterate over all tests which have been created in the handler,
+      // and add them
+    end;
+end;
+
 { TComponentTestSuite }
 
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
     CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
-
-  HandlerManager.AddSuites(Self, Form);
 end;
 
 (*

@@ -50,7 +50,8 @@ uses
 procedure TImageListHandler.AddTests;
 begin
   inherited;
-  CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
+
+  // CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
 end;
 
 { TImageListTest }

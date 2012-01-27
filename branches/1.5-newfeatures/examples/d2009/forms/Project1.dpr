@@ -12,6 +12,7 @@ uses
 begin
   // Register Form classes
   OpenCTF.RegisterFormClasses([TForm1, TForm2]);
+
   // run the tests
   OpenCTFRunner.Run;
 end.
