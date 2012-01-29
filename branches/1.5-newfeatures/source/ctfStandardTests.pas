@@ -94,14 +94,6 @@ type
     procedure RunTest(testResult: TTestResult); override;
 
   public
-    (**
-     * \brief Creates a TRequiredPropertiesTest instance.
-     * \param Component the component to be tested.
-     * \param PropertyNames array of the names of properties
-     * \param CheckAssigned if true, the test fails if at least one property
-     * is unassigned; if false, the test fails if at least one property
-     * is assigned
-     *)
     constructor Create(Component: TComponent; Props: TRequiredPropMap);
 
     destructor Destroy; override;
@@ -114,37 +106,7 @@ begin
   inherited Create(Component);
 
   FCheckAssigned := True;
-
   FProperties := Props;
-
-  (* FProperties := TRequiredPropMap.Create([doOwnsValues]);
-
-  // Menus: check for Action
-  SL := TStringlist.Create;
-  SL.Add('Action');
-  FProperties.Add('Menus', SL);
-
-  // DBControls: check for DataSource / DataField
-  SL := TStringlist.Create;
-  SL.Add('DataField');
-  SL.Add('DataSource');
-  FProperties.Add('DBCtrls', SL);
-
-  // DBClient: check for ProviderName
-  SL := TStringlist.Create;
-  SL.Add('ProviderName');
-  FProperties.Add('DBClient', SL);
-
-  // SqlExpr: check for Connection
-  SL := TStringlist.Create;
-  SL.Add('SQLConnection');
-  FProperties.Add('SqlExpr', SL);
-
-  // Provider: check for DataSet
-  SL := TStringlist.Create;
-  SL.Add('DataSet');
-  FProperties.Add('Provider', SL); *)
-
 end;
 
 destructor TRequiredPropertiesTest.Destroy;
@@ -225,14 +187,6 @@ type
     procedure RunTest(testResult: TTestResult); override;
 
   public
-    (**
-     * \brief Creates a TRequiredEventsTest instance.
-     * \param Component the component to be tested.
-     * \param EventNames array of the names of events
-     * \param CheckAssigned if true, the test fails if at least one event
-     * handler is missing (unassigned);
-     * if false, the test fails if at least one event handler is assigned
-     *)
     constructor Create(Component: TComponent; Required: TRequiredEvtMap);
 
     destructor Destroy; override;
