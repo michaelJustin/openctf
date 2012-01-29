@@ -63,7 +63,7 @@ procedure TTComponentHandler.AddFormTests;
 begin
   inherited;
 
-  AddTest(TBasicFormTest.Create(Form, 'empty form'));
+  AddTest(TBasicFormTest.Create(Form, Format('%s empty form', Form.Name));
 end;
 
 function TTComponentHandler.Handles(const Form: TComponent): Boolean;

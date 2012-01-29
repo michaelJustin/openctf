@@ -24,15 +24,17 @@ interface
 
 uses
   TestFramework,
+  Generics.Collections,
   TypInfo, Contnrs, Classes;
 
 type
    (**
    * \interface IComponentHandler
+   *
    * The interface which defines the methods and properties
    * of a 'Component Handler' class.
    *)
-  IComponentHandler = interface
+(*  IComponentHandler = interface
     // Setter/Getter
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
@@ -53,6 +55,16 @@ type
     // properties
     property Form: TComponent read GetForm write SetForm;
 
+  end; *)
+
+  ITestCollector = interface
+    ['{FC7DCEDB-5B37-42F7-8E40-8D7B352890CE}']
+
+    procedure AddForm(const Form: TComponent);
+
+    procedure Build;
+
+    function Tests: TObjectList<TAbstractTest>;
   end;
 
 implementation

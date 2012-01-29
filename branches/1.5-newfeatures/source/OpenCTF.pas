@@ -41,7 +41,7 @@ type
    * be tested, it can be overriden to change the default behaviour.
    *
    *)
-  TComponentHandler = class(TInterfacedObject, IComponentHandler)
+  {TComponentHandler = class(TInterfacedObject, IComponentHandler)
   private
     FComponent: TComponent;
     FComponentClass: TClass;
@@ -198,6 +198,23 @@ type
 
     function HandlerClass: TClass;
   end;
+   }
+
+  TTestCollector = class(TInterfacedObject, ITestCollector)
+  private
+    FTests: TObjectList<TAbstractTest>;
+  protected
+    Forms: TObjectList<TComponent>;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    procedure AddForm(const Form: TComponent);
+
+    procedure Build; virtual;
+
+    function Tests: TObjectList<TAbstractTest>;
+  end;
 
   (**
    * \class THandlerManager
@@ -213,7 +230,7 @@ type
   private
     Forms: TObjectList<TComponent>;
 
-    Handlers: TObjectList<TComponentHandler>;
+    Handlers: TObjectList<TTestCollector>;
 
     (**
      * \constructor Create
@@ -263,13 +280,15 @@ type
      * \endcode
      *
      *)
-    procedure Add(const Handler: TComponentHandler);
+    procedure Add(const Handler: TTestCollector);
 
   end;
 
   (**
    * \class TComponentTest
-   * \brief The base class for all unit test classes for a given component.
+   *
+   * Base class for all unit test classes for a given component.
+   *
    * Subclasses of this class implement component-specific tests.
    *
    * \sa TRequiredEventsTest
@@ -296,128 +315,128 @@ type
 
   end;
 
- { (**
-   * \class TComponentTestSuite
-   *
-   * \brief This class creates the complete test suite for a given form or
-   * datamodule.
-   *
-   * It is used internally by the procedures RegisterForm and RegisterForms.
-   *
-   * \sa RegisterForm
-   * \sa RegisterForms
-   *)
-  TComponentTestSuite = class(TTestSuite)
-  private
-    (**
-     * \brief Creates a TComponentTestSuite instance.
-     * \param Form the form (or datamodule) to be tested.
-     *)
-    // constructor Create(const Form: TComponent);
-  end;
- }
-
-  (**
-   * \class TRequiredEventsTest
-   * \brief Tests the existence of an event handler.
-   *)
- { TRequiredEventsTest = class(TComponentTest)
-  private
-    FCheckAssigned: Boolean;
-    FEvents: TStrings;
-
-  protected
-    (**
-     * \brief Run the test.
-     *)
-    procedure RunTest(testResult: TTestResult); override;
-
-  public
-    (**
-     * \brief Creates a TRequiredEventsTest instance.
-     * \param Component the component to be tested.
-     * \param EventNames array of the names of events
-     * \param CheckAssigned if true, the test fails if at least one event
-     * handler is missing (unassigned);
-     * if false, the test fails if at least one event handler is assigned
-     *)
-    constructor Create(Component: TComponent; const EventNames: array of string;
-      const CheckAssigned: Boolean = True);
-
-    destructor Destroy; override;
-
-  end;
-
-  (**
-   * \class TRequiredPropertiesTest
-   * \brief Tests the existence of a property.
-   *)
-  TRequiredPropertiesTest = class(TComponentTest)
-  private
-    FCheckAssigned: Boolean;
-    FProperties: TStrings;
-
-  protected
-    (**
-     * \brief Run the test.
-     *)
-    procedure RunTest(testResult: TTestResult); override;
-
-  public
-    (**
-     * \brief Creates a TRequiredPropertiesTest instance.
-     * \param Component the component to be tested.
-     * \param PropertyNames array of the names of properties
-     * \param CheckAssigned if true, the test fails if at least one property
-     * is unassigned; if false, the test fails if at least one property
-     * is assigned
-     *)
-    constructor Create(Component: TComponent;
-      const PropertyNames: array of string; const CheckAssigned: Boolean =
-      True);
-
-    destructor Destroy; override;
-
-  end;
+  { (**
+    * \class TComponentTestSuite
+    *
+    * \brief This class creates the complete test suite for a given form or
+    * datamodule.
+    *
+    * It is used internally by the procedures RegisterForm and RegisterForms.
+    *
+    * \sa RegisterForm
+    * \sa RegisterForms
+    *)
+   TComponentTestSuite = class(TTestSuite)
+   private
+     (**
+      * \brief Creates a TComponentTestSuite instance.
+      * \param Form the form (or datamodule) to be tested.
+      *)
+     // constructor Create(const Form: TComponent);
+   end;
   }
 
- { (**
-   * \brief Create a OpenCTF test suite for the given form and register it with DUnit.
-   *
-   * \code
-   * RegisterForm(Form1);
-   * \endcode
-   *
-   * This is a shortcut for this DUnit procedure call:
-   *
-   * \code
-   * TestFramework.RegisterTest(OpenCTF.TComponentTestSuite.Create(Form1));
-   * \endcode
-   *)
-procedure RegisterForm(const Form: TComponent);
+   (**
+    * \class TRequiredEventsTest
+    * \brief Tests the existence of an event handler.
+    *)
+  { TRequiredEventsTest = class(TComponentTest)
+   private
+     FCheckAssigned: Boolean;
+     FEvents: TStrings;
 
-(**
- * \brief For each form, create a OpenCTF test suite and register it with DUnit
- * \sa RegisterForm
- *)
-procedure RegisterForms(const Forms: array of TComponent); overload;
- }
+   protected
+     (**
+      * \brief Run the test.
+      *)
+     procedure RunTest(testResult: TTestResult); override;
 
-(**
- * Create an instance of all form classes in the list,
- * create a OpenCTF test suite and register it with DUnit.
- * \param FormClasses Array of Form classes
- *)
+   public
+     (**
+      * \brief Creates a TRequiredEventsTest instance.
+      * \param Component the component to be tested.
+      * \param EventNames array of the names of events
+      * \param CheckAssigned if true, the test fails if at least one event
+      * handler is missing (unassigned);
+      * if false, the test fails if at least one event handler is assigned
+      *)
+     constructor Create(Component: TComponent; const EventNames: array of string;
+       const CheckAssigned: Boolean = True);
+
+     destructor Destroy; override;
+
+   end;
+
+   (**
+    * \class TRequiredPropertiesTest
+    * \brief Tests the existence of a property.
+    *)
+   TRequiredPropertiesTest = class(TComponentTest)
+   private
+     FCheckAssigned: Boolean;
+     FProperties: TStrings;
+
+   protected
+     (**
+      * \brief Run the test.
+      *)
+     procedure RunTest(testResult: TTestResult); override;
+
+   public
+     (**
+      * \brief Creates a TRequiredPropertiesTest instance.
+      * \param Component the component to be tested.
+      * \param PropertyNames array of the names of properties
+      * \param CheckAssigned if true, the test fails if at least one property
+      * is unassigned; if false, the test fails if at least one property
+      * is assigned
+      *)
+     constructor Create(Component: TComponent;
+       const PropertyNames: array of string; const CheckAssigned: Boolean =
+       True);
+
+     destructor Destroy; override;
+
+   end;
+   }
+
+  { (**
+    * \brief Create a OpenCTF test suite for the given form and register it with DUnit.
+    *
+    * \code
+    * RegisterForm(Form1);
+    * \endcode
+    *
+    * This is a shortcut for this DUnit procedure call:
+    *
+    * \code
+    * TestFramework.RegisterTest(OpenCTF.TComponentTestSuite.Create(Form1));
+    * \endcode
+    *)
+ procedure RegisterForm(const Form: TComponent);
+
+ (**
+  * \brief For each form, create a OpenCTF test suite and register it with DUnit
+  * \sa RegisterForm
+  *)
+ procedure RegisterForms(const Forms: array of TComponent); overload;
+  }
+
+ (**
+  * Create an instance of all form classes in the list,
+  * create a OpenCTF test suite and register it with DUnit.
+  * \param FormClasses Array of Form classes
+  *)
 procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
-  overload;
+overload;
 
-  {
+{
 (**
- * \brief For each form which has been created using Application.CreateForm,
- * create a OpenCTF test suite and register it with DUnit
- *)
+* \brief For each form which has been created using Application.CreateForm,
+* create a OpenCTF test suite and register it with DUnit
+*)
 procedure RegisterForms; overload;
-  }
+}
 
 procedure BuildTests;
 
@@ -432,7 +451,7 @@ function HasDefaultName(const Component: TComponent): Boolean;
 var
   HandlerManager: THandlerManager;
 
-procedure Add(const Handler: TComponentHandler);
+procedure Add(const Handler: TTestCollector);
 
 implementation
 
@@ -441,9 +460,10 @@ uses
   Variants, SysUtils,
   Windows;
 
+(*
 const
-  // include DUnit version information - for TComponentTestSuite.Create
-  {$I versioninfo.inc}
+// include DUnit version information - for TComponentTestSuite.Create
+{$I versioninfo.inc} *)
 
 procedure Log(const Msg: string);
 begin
@@ -451,6 +471,7 @@ begin
 end;
 
 // add form to AllComponents -------------------------------------------------
+
 procedure RegisterForm(const Form: TComponent);
 begin
   Assert(Assigned(Form));
@@ -483,33 +504,35 @@ begin
     RegisterForm(AForm);
   end;
 end;
-           (*
+(*
 procedure RegisterForms; overload;
 var
-  I: Integer;
+I: Integer;
 begin
-  for I := 0 to Application.ComponentCount - 1 do
-  begin
-    // skip the default HintWindow class
-    if Application.Components[I].ClassNameIs('THintWindow')
-      and (Application.Components[I].ClassParent = Controls.TCustomControl) then
-      Continue;
+for I := 0 to Application.ComponentCount - 1 do
+begin
+// skip the default HintWindow class
+if Application.Components[I].ClassNameIs('THintWindow')
+and (Application.Components[I].ClassParent = Controls.TCustomControl) then
+Continue;
 
-    RegisterForm(Application.Components[I]);
-  end;
+RegisterForm(Application.Components[I]);
+end;
 end;
 *)
 
 // collect all suites -------------------------------------------------------
+
 procedure BuildTests;
 begin
   HandlerManager.BuildTests;
 end;
 
 // ---------------------
-procedure Add(const Handler: TComponentHandler);
+
+procedure Add(const Handler: TTestCollector);
 begin
-  Log('add: ' + Handler.HandlerClass.ClassName);
+  // Log('add: ' + Handler.HandlerClass.ClassName);
   HandlerManager.Add(Handler);
 end;
 
@@ -551,7 +574,6 @@ begin
   else
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
-
 
 {$WARNINGS OFF}
 function GetStringProperty(const Instance: TComponent; PropName: string):
@@ -631,6 +653,7 @@ end;
 
 {$WARNINGS ON}
 
+(*
 { TComponentHandler }
 
 constructor TComponentHandler.Create(const ComponentClass: TClass; const
@@ -674,7 +697,7 @@ function TComponentHandler.Accepts(const Component: TComponent): Boolean;
 begin
   Result := Component is FComponentClass;
 end;
-
+*)
 (*
 function TComponentHandler.HasProperty(const Component: TComponent; const
   PropName: string; const AKinds: TTypeKinds = []): Boolean;
@@ -682,7 +705,7 @@ begin
   Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
 *)
-
+(*
 procedure TComponentHandler.AddFormTests;
 begin
   // empty default implementation
@@ -727,7 +750,7 @@ function TComponentHandler.HandlerClass: TClass;
 begin
   Result := ClassType;
 end;
-
+     *)
 { TComponentTest }
 
 constructor TComponentTest.Create(Component: TComponent; const Testname: string
@@ -747,7 +770,7 @@ begin
 
   Forms := TObjectList<TComponent>.Create;
 
-  Handlers := TObjectList<TComponentHandler>.Create;
+  Handlers := TObjectList<TTestCollector>.Create;
 end;
 
 destructor THandlerManager.Destroy;
@@ -759,7 +782,7 @@ begin
   inherited;
 end;
 
-procedure THandlerManager.Add(const Handler: TComponentHandler);
+procedure THandlerManager.Add(const Handler: TTestCollector);
 begin
   Handlers.Add(Handler);
 end;
@@ -771,29 +794,41 @@ end;
 
 procedure THandlerManager.BuildTests;
 var
-  Handler: TComponentHandler;
+  Collector: TTestCollector;
   Form: TComponent;
+  ID: string;
+  I: TAbstractTest;
 begin
   Assert(Forms.Count > 0, 'no forms found');
 
   // pass each form to every handler
-  // to fill the test suite
-  for Form in Forms do
+
+  for Collector in Handlers do
   begin
-    for Handler in Handlers do
+
+    for Form in Forms do
     begin
-      Log(Format('Form %s/Handler %s', [Form.Name, Handler.ClassName]));
-      Handler.Accepts(Form);
+      Assert((Form is TCustomForm) or (Form is TDataModule) or (Form is
+        TCustomFrame));
+      ID := Format('Form %s Handler %s', [Form.Name, Collector.ClassName]);
+      Log(ID);
+
+      begin
+        Collector.AddForm(Form);
+      end;
+
     end;
+
+    // all forms added to this collector, now build tests
+    Collector.Build;
   end;
 
-  // get and add all tests of all handlers
-  for Handler in Handlers do
-    begin
-      // TestFramework.RegisterTest('', Handler.Suite);
-      // iterate over all tests which have been created in the handler,
-      // and add them
-    end;
+  // add all tests
+  for Collector in Handlers do
+  begin
+    for I in Collector.Tests do
+      TestFramework.RegisterTest(Collector.ClassName, I as ITest);
+  end;
 end;
 
 { TComponentTestSuite }
@@ -908,7 +943,7 @@ end;
  *
  * \li \ref howto
  *
- * OpenCTF (c) 2007-2011 Habarisoft Michael Justin http://www.habarisoft.com/
+ * OpenCTF (c) 2007-2012 Habarisoft Michael Justin http://www.habarisoft.com/
  *
  * \ref credits
  *
@@ -966,6 +1001,39 @@ end;
  * \li <a target="_blank" src="http://subversion.tigris.org/">Subversion</a> An open-source revision control system.
  * \li <a target="_blank" src="http://tortoisesvn.tigris.org/">TortoiseSVN</a> Enables Subversion commands directly in Windows explorer.
  *)
+
+{ TTestCollector }
+
+procedure TTestCollector.AddForm(const Form: TComponent);
+begin
+  Forms.Add(Form);
+end;
+
+procedure TTestCollector.Build;
+begin
+  //
+end;
+
+constructor TTestCollector.Create;
+begin
+  FTests := TObjectList<TAbstractTest>.Create();
+
+  Forms := TObjectList<TComponent>.Create;
+end;
+
+destructor TTestCollector.Destroy;
+begin
+  // FTests.Free;
+
+  // Forms.Free;
+
+  inherited;
+end;
+
+function TTestCollector.Tests: TObjectList<TAbstractTest>;
+begin
+  Result := FTests;
+end;
 
 initialization
   HandlerManager := THandlerManager.Create;
