@@ -102,20 +102,22 @@ type
      * is unassigned; if false, the test fails if at least one property
      * is assigned
      *)
-    constructor Create(Component: TComponent);
+    constructor Create(Component: TComponent; Props: TRequiredPropMap);
 
     destructor Destroy; override;
 
   end;
 
-constructor TRequiredPropertiesTest.Create(Component: TComponent);
-var
-  SL: TStrings;
+constructor TRequiredPropertiesTest.Create(Component: TComponent; Props: TRequiredPropMap);
+
 begin
   inherited Create(Component);
 
   FCheckAssigned := True;
-  FProperties := TRequiredPropMap.Create([doOwnsValues]);
+
+  FProperties := Props;
+
+  (* FProperties := TRequiredPropMap.Create([doOwnsValues]);
 
   // Menus: check for Action
   SL := TStringlist.Create;
@@ -141,7 +143,8 @@ begin
   // Provider: check for DataSet
   SL := TStringlist.Create;
   SL.Add('DataSet');
-  FProperties.Add('Provider', SL);
+  FProperties.Add('Provider', SL); *)
+
 end;
 
 destructor TRequiredPropertiesTest.Destroy;
@@ -230,7 +233,7 @@ type
      * handler is missing (unassigned);
      * if false, the test fails if at least one event handler is assigned
      *)
-    constructor Create(Component: TComponent);
+    constructor Create(Component: TComponent; Required: TRequiredEvtMap);
 
     destructor Destroy; override;
 
@@ -238,25 +241,13 @@ type
 
   { TRequiredEventsTest }
 
-constructor TRequiredEventsTest.Create(Component: TComponent);
-var
-  SL: TStrings;
+constructor TRequiredEventsTest.Create(Component: TComponent; Required: TRequiredEvtMap);
 begin
   inherited Create(Component);
 
   FCheckAssigned := True;
-  FEvents := TRequiredEvtMap.Create([doOwnsValues]);
 
-  // ActnLst: check for Action.Execute
-  SL := TStringlist.Create;
-  SL.Add('OnExecute');
-  FEvents.Add('ActnList', SL);
-
-  // DBClient: check for OnPostError OnReconcileError
-  SL := TStringlist.Create;
-  SL.Add('OnPostError');
-  SL.Add('OnReconcileError');
-  FEvents.Add('DBClient', SL);
+  FEvents := Required;
 end;
 
 destructor TRequiredEventsTest.Destroy;
@@ -318,6 +309,58 @@ begin
     Fail('Missing properties:' + #13#10 + S);
 end;
 
+function RequiredProperties: TRequiredPropMap;
+var
+  SL: TStrings;
+begin
+  Result := TRequiredPropMap.Create([doOwnsValues]);
+
+  // Menus: check for Action
+  SL := TStringlist.Create;
+  SL.Add('Action');
+  Result.Add('Menus', SL);
+
+  // DBControls: check for DataSource / DataField
+  SL := TStringlist.Create;
+  SL.Add('DataField');
+  SL.Add('DataSource');
+  Result.Add('DBCtrls', SL);
+
+  // DBClient: check for ProviderName
+  SL := TStringlist.Create;
+  SL.Add('ProviderName');
+  Result.Add('DBClient', SL);
+
+  // SqlExpr: check for Connection
+  SL := TStringlist.Create;
+  SL.Add('SQLConnection');
+  Result.Add('SqlExpr', SL);
+
+  // Provider: check for DataSet
+  SL := TStringlist.Create;
+  SL.Add('DataSet');
+  Result.Add('Provider', SL);
+end;
+
+
+function RequiredEvents: TRequiredEvtMap;
+var
+  SL: TStrings;
+begin
+  Result := TRequiredEvtMap.Create([doOwnsValues]);
+
+  // ActnLst: check for Action.Execute
+  SL := TStringlist.Create;
+  SL.Add('OnExecute');
+  Result.Add('ActnList', SL);
+
+  // DBClient: check for OnPostError OnReconcileError
+  SL := TStringlist.Create;
+  SL.Add('OnPostError');
+  SL.Add('OnReconcileError');
+  Result.Add('DBClient', SL);
+end;
+
 { TExampleCollector }
 
 procedure TExampleCollector.Build;
@@ -328,8 +371,8 @@ begin
   begin
     Tests.Add(TEmptyFormTest.Create(F));
     Tests.Add(TComponentNameTest.Create(F));
-    Tests.Add(TRequiredPropertiesTest.Create(F));
-    Tests.Add(TRequiredEventsTest.Create(F));
+    Tests.Add(TRequiredPropertiesTest.Create(F, RequiredProperties));
+    Tests.Add(TRequiredEventsTest.Create(F, RequiredEvents));
   end;
 end;
 
