@@ -767,8 +767,7 @@ end;
 
 constructor TComponentTest.Create(Component: TComponent);
 begin
-  // inherited Create(Component.Name + ' (' + Component.ClassName + ') ' + Testname
-  inherited Create(Component.Name + ' ' + Self.ClassName);
+  inherited Create(Self.ClassName + '/' + Component.Name);
 
   FComponent := Component;
 end;
@@ -836,7 +835,7 @@ begin
 
   if True then
   begin
-    // GROUP BY FORM / FRAME NAME
+    // GROUP BY FORM NAME
     for Collector in Handlers do
     begin
       for CT in Collector.Tests do
@@ -1044,16 +1043,16 @@ end;
 
 constructor TTestCollector.Create;
 begin
-  FTests := TComponentTests.Create();
+  FTests := TComponentTests.Create(False);
 
-  Forms := TObjectList<TComponent>.Create;
+  Forms := TObjectList<TComponent>.Create(False);
 end;
 
 destructor TTestCollector.Destroy;
 begin
-  // FTests.Free;
+  FTests.Free;
 
-  // Forms.Free;
+  Forms.Free;
 
   inherited;
 end;

@@ -15,4 +15,6 @@ begin
   OpenCTF.BuildTests;
   // run the tests
   OpenCTFRunner.Run;
+
+  ReportMemoryLeaksOnShutdown := True;
 end.
