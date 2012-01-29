@@ -23,7 +23,6 @@ unit OpenCTF;
 interface
 
 uses
-  CTFInterfaces,
   TestFramework,
   Generics.Collections, TypInfo, Contnrs, Classes;
 

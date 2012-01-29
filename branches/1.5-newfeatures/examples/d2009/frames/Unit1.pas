@@ -11,14 +11,13 @@ type
     Frame21: TFrame2;
     Frame22: TFrame2;
     Frame23: TFrame2;
+    Label1: TLabel;
+    Button1: TButton;
   private
     { Private-Deklarationen }
   public
     { Public-Deklarationen }
   end;
-
-var
-  Form1: TForm1;
 
 implementation
 

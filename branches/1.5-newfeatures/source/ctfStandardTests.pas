@@ -11,7 +11,6 @@ interface
 
 uses
   OpenCTF,
-  CTFInterfaces,
   Classes;
 
 type
@@ -56,14 +55,16 @@ procedure TComponentNameTest.RunTest;
 var
   I: Integer;
   S: string;
+  C: TComponent;
 begin
   inherited;
 
   for I := 0 to Component.ComponentCount - 1 do
   begin
-    if HasDefaultName(Component.Components[I]) then
+    C := Component.Components[I];
+    if HasDefaultName(C) then
     begin
-      S := S + (Component.Components[I].Name) + #13#10;
+      S := S + (C.Name + '(' + C.ClassName + ')') + #13#10;
     end;
   end;
 
