@@ -276,14 +276,6 @@ type
      *)
     constructor Create;
 
-    (**
-     * \brief Iterate over test handler list and add test suites to main suite
-     * \param Suite the TComponentTestSuite instance.
-     * \param Form the form or datamodule which will be tested
-     * \sa TComponentTestSuite#Create
-     *)
-    // procedure AddSuites(const Suite: ITestSuite; const Form: TComponent);
-
   public
     (**
      * Destroy
@@ -323,65 +315,6 @@ type
 
   end;
 
-   (**
-    * \class TRequiredEventsTest
-    * \brief Tests the existence of an event handler.
-    *)
-  { TRequiredEventsTest = class(TComponentTest)
-   private
-     FCheckAssigned: Boolean;
-     FEvents: TStrings;
-
-   protected
-     (**
-      * \brief Run the test.
-      *)
-     procedure RunTest(testResult: TTestResult); override;
-
-   public
-     (**
-      * \brief Creates a TRequiredEventsTest instance.
-      * \param Component the component to be tested.
-      * \param EventNames array of the names of events
-      * \param CheckAssigned if true, the test fails if at least one event
-      * handler is missing (unassigned);
-      * if false, the test fails if at least one event handler is assigned
-      *)
-     constructor Create(Component: TComponent; const EventNames: array of string;
-       const CheckAssigned: Boolean = True);
-
-     destructor Destroy; override;
-
-   end;
-
-   (**
-    * \class TRequiredPropertiesTest
-    * \brief Tests the existence of a property.
-    *)
-
-   }
-
-  { (**
-    * \brief Create a OpenCTF test suite for the given form and register it with DUnit.
-    *
-    * \code
-    * RegisterForm(Form1);
-    * \endcode
-    *
-    * This is a shortcut for this DUnit procedure call:
-    *
-    * \code
-    * TestFramework.RegisterTest(OpenCTF.TComponentTestSuite.Create(Form1));
-    * \endcode
-    *)
- procedure RegisterForm(const Form: TComponent);
-
- (**
-  * \brief For each form, create a OpenCTF test suite and register it with DUnit
-  * \sa RegisterForm
-  *)
- procedure RegisterForms(const Forms: array of TComponent); overload;
-  }
 
  (**
   * Create an instance of all form classes in the list,
@@ -401,14 +334,12 @@ procedure RegisterForms; overload;
 
 procedure BuildTests;
 
-(* function GetStringProperty(const Instance: TComponent; PropName: string):
-  string;
-*)
-
 function HasProperty(const Component: TComponent; const
   PropName: string; const AKinds: TTypeKinds = []): Boolean;
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
+
+function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
 
 function HasDefaultName(const Component: TComponent): Boolean;
 
@@ -446,16 +377,6 @@ begin
   HandlerManager.AddForm(Form);
 end;
 
-(*
-procedure RegisterForms(const Forms: array of TComponent); overload;
-var
-  AForm: TComponent;
-begin
-  for AForm in Forms do
-    RegisterForm(AForm);
-end;
-*)
-
 procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
   overload;
 var
@@ -468,22 +389,6 @@ begin
     RegisterForm(AForm);
   end;
 end;
-(*
-procedure RegisterForms; overload;
-var
-I: Integer;
-begin
-for I := 0 to Application.ComponentCount - 1 do
-begin
-// skip the default HintWindow class
-if Application.Components[I].ClassNameIs('THintWindow')
-and (Application.Components[I].ClassParent = Controls.TCustomControl) then
-Continue;
-
-RegisterForm(Application.Components[I]);
-end;
-end;
-*)
 
 // collect all suites -------------------------------------------------------
 
@@ -527,7 +432,6 @@ begin
   Result := IsNumeric;
 end;
 
-(*
 function HasEventHandler(Instance: TObject; const PropName: string): Boolean;
 var
   PropInfo: PPropInfo;
@@ -540,26 +444,6 @@ begin
 end;
 
 {$WARNINGS OFF}
-function GetStringProperty(const Instance: TComponent; PropName: string):
-  string;
-var
-  PropInfo: PPropInfo;
-begin
-  Result := '';
-  // get the prop info
-  PropInfo := GetPropInfo(Instance, PropName);
-  if PropInfo = nil then
-    // raise Exception.Create('Not found: ' + PropName)
-  else
-  begin
-    // return the right type
-    case PropInfo.PropType^.Kind of
-      tkString, tkLString:
-        Result := GetStrProp(Instance, PropInfo);
-    end;
-  end;
-end;
-*)
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
@@ -600,13 +484,13 @@ begin
         Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
       tkString, tkLString:
         Result := GetStrProp(Instance, PropInfo) <> '';
-      tkWString:
+      tkWString, tkUString:
         Result := GetWideStrProp(Instance, PropInfo) <> '';
       tkVariant:
         Result := GetVariantProp(Instance, PropInfo) <> Null;
       tkInt64:
         Result := GetInt64Prop(Instance, PropInfo) <> 0;
-      tkDynArray:
+      tkArray, tkDynArray:
         Result := GetOrdProp(Instance, PropInfo) <> 0;
     else
       raise EPropertyConvertError.Create(string('Invalid property type ' +
@@ -624,45 +508,6 @@ begin
   Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
 
-
-(*
-function TComponentHandler.HasProperty(const Component: TComponent; const
-  PropName: string; const AKinds: TTypeKinds = []): Boolean;
-begin
-  Result := Assigned(GetPropInfo(Component, PropName, AKinds));
-end;
-
-
-procedure TComponentHandler.CheckEvents(const Events: array of string);
-begin
-  // CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events));
-end;
-
-procedure TComponentHandler.CheckUnassignedEvents(const Events: array of
-  string);
-begin
-  // CurrentSuite.AddTest(TRequiredEventsTest.Create(CurrentComponent, Events,
-  //  False));
-end;
-
-procedure TComponentHandler.CheckProperties(const Properties: array of string);
-begin
-  // CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
-  //  Properties));
-end;
-
-procedure TComponentHandler.CheckUnassignedProperties(const Properties: array of
-  string);
-begin
-  // CurrentSuite.AddTest(TRequiredPropertiesTest.Create(CurrentComponent,
-  //  Properties, False));
-end;
-
-function TComponentHandler.HandlerClass: TClass;
-begin
-  Result := ClassType;
-end;
-     *)
 { TComponentTest }
 
 constructor TComponentTest.Create(Component: TComponent);
@@ -766,51 +611,6 @@ begin
     CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
 end;
         *)
-(*
-{ TRequiredEventsTest }
-
-constructor TRequiredEventsTest.Create(Component: TComponent;
-  const EventNames: array of string; const CheckAssigned: Boolean = True);
-var
-  I: Integer;
-begin
-  FCheckAssigned := CheckAssigned;
-  FEvents := TStringlist.Create;
-  for I := 0 to Length(EventNames) - 1 do
-    FEvents.Add(EventNames[I]);
-
-  inherited Create(Component, 'Events: ' + FEvents.CommaText);
-end;
-
-destructor TRequiredEventsTest.Destroy;
-begin
-  FEvents.Clear;
-  FEvents.Free;
-
-  inherited;
-end;
-
-procedure TRequiredEventsTest.RunTest(testResult: TTestResult);
-var
-  I: Integer;
-begin
-  inherited;
-
-  for I := 0 to FEvents.Count - 1 do
-  begin
-    if FCheckAssigned <> HasEventHandler(Component, FEvents[I]) then
-    begin
-      if FCheckAssigned then
-        Fail(Component.Name + '.' + FEvents[I] + ' is not assigned.')
-      else
-        Fail(Component.Name + '.' + FEvents[I] + ' is assigned.');
-      Break;
-    end;
-  end;
-end;
-
-
-    *)
 
 (** \mainpage OpenCTF Documentation
  *

@@ -68,17 +68,43 @@ object Form1: TForm1
     Caption = 'DB Controls'
     TabOrder = 4
     object DBText1: TDBText
-      Left = 10
+      Left = 8
       Top = 40
       Width = 65
       Height = 17
     end
+    object DBTextOk: TDBText
+      Left = 8
+      Top = 72
+      Width = 65
+      Height = 17
+      DataField = 'FIELDNAME'
+      DataSource = DataSource1
+    end
     object DBEdit1: TDBEdit
       Left = 81
-      Top = 36
+      Top = 37
       Width = 121
       Height = 21
       TabOrder = 0
     end
+    object DBEdit2: TDBEdit
+      Left = 81
+      Top = 69
+      Width = 121
+      Height = 21
+      DataField = 'FIELDNAME'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+  end
+  object DataSource1: TDataSource
+    Left = 312
+    Top = 296
+  end
+  object DataSourceOk: TDataSource
+    DataSet = DataModule1.ClientDataSetOk
+    Left = 312
+    Top = 344
   end
 end

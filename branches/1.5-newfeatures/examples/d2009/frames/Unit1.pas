@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Unit2, Mask, DBCtrls;
+  Dialogs, StdCtrls, Unit2, Mask, DBCtrls, DB;
 
 type
   TForm1 = class(TForm)
@@ -16,6 +16,10 @@ type
     GroupBox1: TGroupBox;
     DBText1: TDBText;
     DBEdit1: TDBEdit;
+    DataSource1: TDataSource;
+    DBTextOk: TDBText;
+    DBEdit2: TDBEdit;
+    DataSourceOk: TDataSource;
   private
     { Private-Deklarationen }
   public
@@ -23,6 +27,9 @@ type
   end;
 
 implementation
+
+uses
+  Unit3;
 
 {$R *.dfm}
 
