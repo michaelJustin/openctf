@@ -1,21 +1,21 @@
 object Form1: TForm1
   Left = 82
   Top = 128
-  Width = 347
-  Height = 259
   Caption = 'Form1'
+  ClientHeight = 203
+  ClientWidth = 331
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = MainMenuOk
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object MainMenu1: TMainMenu
-    Left = 96
+  object MainMenuOk: TMainMenu
+    Left = 112
     Top = 16
     object a1: TMenuItem
       Caption = 'a'
@@ -24,25 +24,25 @@ object Form1: TForm1
         OnClick = b1Click
       end
       object g1: TMenuItem
-        Action = Action1
+        Action = ActionNotOk1
       end
       object x1: TMenuItem
         Caption = 'x'
       end
     end
   end
-  object ActionList1: TActionList
+  object MainActionList: TActionList
     Left = 32
     Top = 16
-    object Action1: TAction
+    object ActionNotOk1: TAction
       Caption = 'Action1'
     end
-    object Action2: TAction
-      Caption = 'Action2'
-      OnExecute = Action2Execute
+    object ActionOk: TAction
+      Caption = 'ActionOk'
+      OnExecute = ActionOkExecute
     end
-    object Action3: TAction
-      Caption = 'Action3'
+    object ActionNotOk2: TAction
+      Caption = 'ActionNotOk2'
     end
   end
 end

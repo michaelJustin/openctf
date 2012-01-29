@@ -2,18 +2,23 @@ program Project1;
 
 uses
   OpenCTF,
-  OpenCTFRunner,
   ctfStandardTests,
+  GUITestRunner,
   Unit1 in 'Unit1.pas' {Form1},
   Unit2 in 'Unit2.pas' {Form2};
 
 {$R *.res}
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
+
   // Register Form classes
-  OpenCTF.RegisterFormClasses([TForm1, TForm2]);
+  RegisterFormClasses([TForm1, TForm2]);
+
+  // Build DUnit tests
+  BuildTests;
 
   // run the tests
-  OpenCTFRunner.Run;
+  RunRegisteredTests;
 end.
 

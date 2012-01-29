@@ -8,17 +8,17 @@ uses
 
 type
   TForm1 = class(TForm)
-    MainMenu1: TMainMenu;
+    MainMenuOk: TMainMenu;
     a1: TMenuItem;
     b1: TMenuItem;
     g1: TMenuItem;
-    ActionList1: TActionList;
-    Action1: TAction;
-    Action2: TAction;
-    Action3: TAction;
+    MainActionList: TActionList;
+    ActionNotOk1: TAction;
+    ActionOk: TAction;
+    ActionNotOk2: TAction;
     x1: TMenuItem;
     procedure b1Click(Sender: TObject);
-    procedure Action2Execute(Sender: TObject);
+    procedure ActionOkExecute(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -32,7 +32,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.Action2Execute(Sender: TObject);
+procedure TForm1.ActionOkExecute(Sender: TObject);
 begin
   // assigned.
 end;

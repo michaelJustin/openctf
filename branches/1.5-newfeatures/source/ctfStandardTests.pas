@@ -117,6 +117,11 @@ begin
   FCheckAssigned := True;
   FProperties := TRequiredPropMap.Create([doOwnsValues]);
 
+  // Menus: check for Action
+  SL := TStringlist.Create;
+  SL.Add('Action');
+  FProperties.Add('Menus', SL);
+
   // DBControls: check for DataSource / DataField
   SL := TStringlist.Create;
   SL.Add('DataField');
@@ -241,6 +246,11 @@ begin
 
   FCheckAssigned := True;
   FEvents := TRequiredEvtMap.Create([doOwnsValues]);
+
+  // ActnLst: check for Action.Execute
+  SL := TStringlist.Create;
+  SL.Add('OnExecute');
+  FEvents.Add('ActnList', SL);
 
   // DBClient: check for OnPostError OnReconcileError
   SL := TStringlist.Create;

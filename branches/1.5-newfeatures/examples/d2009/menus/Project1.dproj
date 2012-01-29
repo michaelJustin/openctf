@@ -49,9 +49,6 @@
 			<DelphiCompile Include="Project1.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="TestForm.pas">
-				<Form>Form1</Form>
-			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
