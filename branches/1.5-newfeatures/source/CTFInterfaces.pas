@@ -27,47 +27,9 @@ uses
   Generics.Collections,
   TypInfo, Contnrs, Classes;
 
-type
-   (**
-   * \interface IComponentHandler
-   *
-   * The interface which defines the methods and properties
-   * of a 'Component Handler' class.
-   *)
-(*  IComponentHandler = interface
-    // Setter/Getter
-    procedure SetForm(const Value: TComponent);
-    function GetForm: TComponent;
-
-    function Accepts(const Component: TComponent): Boolean;
-
-    function Handles(const Form: TComponent): Boolean;
-
-    procedure AddTests;
-
-    //function HasProperty(const Component: TComponent; const PropName: string;
-    //  const AKinds: TTypeKinds = []): Boolean;
-
-    // function GetSuite: ITestSuite;
-
-    function HandlerClass: TClass;
-
-    // properties
-    property Form: TComponent read GetForm write SetForm;
-
-  end; *)
-
-  ITestCollector = interface
-    ['{FC7DCEDB-5B37-42F7-8E40-8D7B352890CE}']
-
-    procedure AddForm(const Form: TComponent);
-
-    procedure Build;
-
-    function Tests: TObjectList<TAbstractTest>;
-  end;
-
 implementation
+
+
 
 end.
 

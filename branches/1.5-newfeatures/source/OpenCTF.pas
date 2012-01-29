@@ -200,9 +200,52 @@ type
   end;
    }
 
+ (**
+   * \class TComponentTest
+   *
+   * Base class for all unit test classes for a given component.
+   *
+   * Subclasses of this class implement component-specific tests.
+   *
+   * \sa TRequiredEventsTest
+   * \sa TRequiredPropertiesTest
+   *)
+  TComponentTest = class(TAbstractTest)
+  private
+    FComponent: TComponent;
+
+  protected
+    (**
+     * \property Component
+     * \brief the component to be tested.
+     *)
+    property Component: TComponent read FComponent;
+
+  public
+    (**
+     * \brief Creates a TComponentTest instance.
+     * \param Component the component to be tested.
+     * \param Testname optional test name.
+     *)
+    constructor Create(Component: TComponent);
+
+  end;
+
+  TComponentTests = TObjectList<TComponentTest>;
+
+  ITestCollector = interface
+    ['{FC7DCEDB-5B37-42F7-8E40-8D7B352890CE}']
+
+    procedure AddForm(const Form: TComponent);
+
+    procedure Build;
+
+    function Tests: TComponentTests;
+  end;
+
   TTestCollector = class(TInterfacedObject, ITestCollector)
   private
-    FTests: TObjectList<TAbstractTest>;
+    FTests: TComponentTests;
   protected
     Forms: TObjectList<TComponent>;
   public
@@ -213,7 +256,7 @@ type
 
     procedure Build; virtual;
 
-    function Tests: TObjectList<TAbstractTest>;
+    function Tests: TComponentTests;
   end;
 
   (**
@@ -281,37 +324,6 @@ type
      *
      *)
     procedure Add(const Handler: TTestCollector);
-
-  end;
-
-  (**
-   * \class TComponentTest
-   *
-   * Base class for all unit test classes for a given component.
-   *
-   * Subclasses of this class implement component-specific tests.
-   *
-   * \sa TRequiredEventsTest
-   * \sa TRequiredPropertiesTest
-   *)
-  TComponentTest = class(TAbstractTest)
-  private
-    FComponent: TComponent;
-
-  protected
-    (**
-     * \property Component
-     * \brief the component to be tested.
-     *)
-    property Component: TComponent read FComponent;
-
-  public
-    (**
-     * \brief Creates a TComponentTest instance.
-     * \param Component the component to be tested.
-     * \param Testname optional test name.
-     *)
-    constructor Create(Component: TComponent; const Testname: string = '');
 
   end;
 
@@ -753,11 +765,10 @@ end;
      *)
 { TComponentTest }
 
-constructor TComponentTest.Create(Component: TComponent; const Testname: string
-  = '');
+constructor TComponentTest.Create(Component: TComponent);
 begin
   // inherited Create(Component.Name + ' (' + Component.ClassName + ') ' + Testname
-  inherited Create(Testname);
+  inherited Create(Component.Name + ' ' + Self.ClassName);
 
   FComponent := Component;
 end;
@@ -797,7 +808,7 @@ var
   Collector: TTestCollector;
   Form: TComponent;
   ID: string;
-  I: TAbstractTest;
+  CT: TComponentTest;
 begin
   Assert(Forms.Count > 0, 'no forms found');
 
@@ -823,11 +834,28 @@ begin
     Collector.Build;
   end;
 
-  // add all tests
-  for Collector in Handlers do
+  if True then
   begin
-    for I in Collector.Tests do
-      TestFramework.RegisterTest(Collector.ClassName, I as ITest);
+    // GROUP BY FORM / FRAME NAME
+    for Collector in Handlers do
+    begin
+      for CT in Collector.Tests do
+        TestFramework.RegisterTest(CT.Component.Name, CT as ITest);
+    end;
+
+  end
+  else
+  begin
+    // GROUP BY TESTER CLASS NAME
+    for Collector in Handlers do
+    begin
+      for CT in Collector.Tests do
+      begin
+        TestFramework.RegisterTest(
+          CT.ClassName,
+          CT as ITest);
+      end;
+    end;
   end;
 end;
 
@@ -1016,7 +1044,7 @@ end;
 
 constructor TTestCollector.Create;
 begin
-  FTests := TObjectList<TAbstractTest>.Create();
+  FTests := TComponentTests.Create();
 
   Forms := TObjectList<TComponent>.Create;
 end;
@@ -1030,7 +1058,7 @@ begin
   inherited;
 end;
 
-function TTestCollector.Tests: TObjectList<TAbstractTest>;
+function TTestCollector.Tests: TComponentTests;
 begin
   Result := FTests;
 end;
