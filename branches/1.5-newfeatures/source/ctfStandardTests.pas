@@ -2,27 +2,26 @@ unit ctfStandardTests;
 
 interface
 
-  (*
-    the collector knows all forms
-    the collector is responsible for building tests
-    the collector is not responsible for building a test hierarchy
-
-    *)
+implementation
 
 uses
   OpenCTF,
-  Classes;
+  TestFrameWork,
+  SysUtils, Classes;
+
+// an example test collector implementation ----------------------------------
+(*
+  the collector knows all forms
+  the collector is responsible for building tests
+  the collector is not responsible for building a test hierarchy
+
+  *)
 
 type
   TExampleCollector = class(TTestCollector)
   public
-  procedure Build; override;
+    procedure Build; override;
   end;
-implementation
-
-uses
-  TestFrameWork,
-  SysUtils;
 
 // test for empty form -------------------------------------------------------
 
@@ -72,6 +71,94 @@ begin
     Fail(SIllegalName + #13#10 + S);
 end;
 
+// test for required properties ----------------------------------------------
+
+type
+  TRequiredPropertiesTest = class(TComponentTest)
+  private
+    FCheckAssigned: Boolean;
+    FProperties: TStrings;
+
+  protected
+    (**
+     * \brief Run the test.
+     *)
+    procedure RunTest(testResult: TTestResult); override;
+
+  public
+    (**
+     * \brief Creates a TRequiredPropertiesTest instance.
+     * \param Component the component to be tested.
+     * \param PropertyNames array of the names of properties
+     * \param CheckAssigned if true, the test fails if at least one property
+     * is unassigned; if false, the test fails if at least one property
+     * is assigned
+     *)
+    constructor Create(Component: TComponent;
+      const PropertyNames: array of string; const CheckAssigned: Boolean =
+      True);
+
+    destructor Destroy; override;
+
+  end;
+
+constructor TRequiredPropertiesTest.Create(Component: TComponent;
+  const PropertyNames: array of string; const CheckAssigned: Boolean = True);
+var
+  I: Integer;
+begin
+  inherited Create(Component);
+
+  FCheckAssigned := CheckAssigned;
+  FProperties := TStringlist.Create;
+
+  for I := 0 to Length(PropertyNames) - 1 do
+    FProperties.Add(PropertyNames[I]);
+end;
+
+destructor TRequiredPropertiesTest.Destroy;
+begin
+  FProperties.Clear;
+  FProperties.Free;
+
+  inherited;
+end;
+
+procedure TRequiredPropertiesTest.RunTest(testResult: TTestResult);
+var
+  I: Integer;
+  N: Integer;
+  C: TComponent;
+  S: string;
+  P: string;
+begin
+  inherited;
+
+  for N := 0 to Component.ComponentCount - 1 do
+  begin
+    C := Component.Components[N];
+
+    for I := 0 to FProperties.Count - 1 do
+    begin
+      P := FProperties[I];
+      if HasProperty(C, P) then
+      begin
+        if FCheckAssigned <> HasPropValue(C, P) then
+        begin
+          if FCheckAssigned then
+            S := S + (C.Name + '.' + P + ' is not assigned.') + #13#10
+          else
+            S := S + (C.Name + '.' + P + ' is assigned.') + #13#10;
+          Break;
+        end;
+      end;
+    end;
+  end;
+
+  if S <> '' then
+    Fail('Missing properties:' + #13#10 + S);
+end;
+
 { TExampleCollector }
 
 procedure TExampleCollector.Build;
@@ -82,14 +169,13 @@ begin
   begin
     Tests.Add(TEmptyFormTest.Create(F));
     Tests.Add(TComponentNameTest.Create(F));
+    Tests.Add(TRequiredPropertiesTest.Create(F, ['DataSource', 'DataField']));
   end;
 end;
 
 initialization
 
   OpenCTF.Add(TExampleCollector.Create);
-
-
 
 end.
 

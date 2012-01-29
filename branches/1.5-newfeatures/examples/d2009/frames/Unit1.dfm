@@ -60,4 +60,25 @@ object Form1: TForm1
     ParentDoubleBuffered = False
     TabOrder = 3
   end
+  object GroupBox1: TGroupBox
+    Left = 24
+    Top = 280
+    Width = 233
+    Height = 105
+    Caption = 'DB Controls'
+    TabOrder = 4
+    object DBText1: TDBText
+      Left = 10
+      Top = 40
+      Width = 65
+      Height = 17
+    end
+    object DBEdit1: TDBEdit
+      Left = 81
+      Top = 36
+      Width = 121
+      Height = 21
+      TabOrder = 0
+    end
+  end
 end

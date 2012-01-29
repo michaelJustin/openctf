@@ -205,9 +205,6 @@ type
    * Base class for all unit test classes for a given component.
    *
    * Subclasses of this class implement component-specific tests.
-   *
-   * \sa TRequiredEventsTest
-   * \sa TRequiredPropertiesTest
    *)
   TComponentTest = class(TAbstractTest)
   private
@@ -326,27 +323,6 @@ type
 
   end;
 
-  { (**
-    * \class TComponentTestSuite
-    *
-    * \brief This class creates the complete test suite for a given form or
-    * datamodule.
-    *
-    * It is used internally by the procedures RegisterForm and RegisterForms.
-    *
-    * \sa RegisterForm
-    * \sa RegisterForms
-    *)
-   TComponentTestSuite = class(TTestSuite)
-   private
-     (**
-      * \brief Creates a TComponentTestSuite instance.
-      * \param Form the form (or datamodule) to be tested.
-      *)
-     // constructor Create(const Form: TComponent);
-   end;
-  }
-
    (**
     * \class TRequiredEventsTest
     * \brief Tests the existence of an event handler.
@@ -382,33 +358,7 @@ type
     * \class TRequiredPropertiesTest
     * \brief Tests the existence of a property.
     *)
-   TRequiredPropertiesTest = class(TComponentTest)
-   private
-     FCheckAssigned: Boolean;
-     FProperties: TStrings;
 
-   protected
-     (**
-      * \brief Run the test.
-      *)
-     procedure RunTest(testResult: TTestResult); override;
-
-   public
-     (**
-      * \brief Creates a TRequiredPropertiesTest instance.
-      * \param Component the component to be tested.
-      * \param PropertyNames array of the names of properties
-      * \param CheckAssigned if true, the test fails if at least one property
-      * is unassigned; if false, the test fails if at least one property
-      * is assigned
-      *)
-     constructor Create(Component: TComponent;
-       const PropertyNames: array of string; const CheckAssigned: Boolean =
-       True);
-
-     destructor Destroy; override;
-
-   end;
    }
 
   { (**
@@ -453,9 +403,12 @@ procedure BuildTests;
 
 (* function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
+*)
+
+function HasProperty(const Component: TComponent; const
+  PropName: string; const AKinds: TTypeKinds = []): Boolean;
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
-*)
 
 function HasDefaultName(const Component: TComponent): Boolean;
 
@@ -606,6 +559,7 @@ begin
     end;
   end;
 end;
+*)
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
@@ -660,77 +614,24 @@ begin
     end;
   end;
 end;
- *)
+
 
 {$WARNINGS ON}
 
-(*
-{ TComponentHandler }
-
-constructor TComponentHandler.Create(const ComponentClass: TClass; const
-  Suitename: string = '');
+function HasProperty(const Component: TComponent; const
+  PropName: string; const AKinds: TTypeKinds = []): Boolean;
 begin
-  inherited Create;
-
-  Assert(Assigned(ComponentClass));
-
-  FComponentClass := ComponentClass;
-
-  if Suitename = '' then
-    FSuiteName := ClassName
-  else
-    FSuiteName := Suitename;
-
-  CurrentSuite := TTestSuite.Create(FSuiteName);
+  Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
 
-function TComponentHandler.GetForm: TComponent;
-begin
-  Result := FComponent;
-end;
 
-procedure TComponentHandler.SetForm(const Value: TComponent);
-begin
-  FComponent := Value;
-end;
-
-function TComponentHandler.Suite: ITestSuite;
-begin
-  Result := CurrentSuite;
-end;
-
-function TComponentHandler.Handles(const Form: TComponent): Boolean;
-begin
-  Result := True;
-end;
-
-function TComponentHandler.Accepts(const Component: TComponent): Boolean;
-begin
-  Result := Component is FComponentClass;
-end;
-*)
 (*
 function TComponentHandler.HasProperty(const Component: TComponent; const
   PropName: string; const AKinds: TTypeKinds = []): Boolean;
 begin
   Result := Assigned(GetPropInfo(Component, PropName, AKinds));
 end;
-*)
-(*
-procedure TComponentHandler.AddFormTests;
-begin
-  // empty default implementation
-end;
 
-procedure TComponentHandler.AddTest(const Test: ITest);
-begin
-  CurrentSuite.AddTest(Test);
-end;
-
-procedure TComponentHandler.AddTests;
-begin
-  // default implementation does not add sub tests
-end;
 
 procedure TComponentHandler.CheckEvents(const Events: array of string);
 begin
@@ -908,46 +809,7 @@ begin
   end;
 end;
 
-{ TRequiredPropertiesTest }
 
-constructor TRequiredPropertiesTest.Create(Component: TComponent;
-  const PropertyNames: array of string; const CheckAssigned: Boolean = True);
-var
-  I: Integer;
-begin
-  FCheckAssigned := CheckAssigned;
-  FProperties := TStringlist.Create;
-  for I := 0 to Length(PropertyNames) - 1 do
-    FProperties.Add(PropertyNames[I]);
-  inherited Create(Component, 'Properties: ' + FProperties.CommaText);
-end;
-
-destructor TRequiredPropertiesTest.Destroy;
-begin
-  FProperties.Clear;
-  FProperties.Free;
-
-  inherited;
-end;
-
-procedure TRequiredPropertiesTest.RunTest(testResult: TTestResult);
-var
-  I: Integer;
-begin
-  inherited;
-
-  for I := 0 to FProperties.Count - 1 do
-  begin
-    if FCheckAssigned <> HasPropValue(Component, FProperties[I]) then
-    begin
-      if FCheckAssigned then
-        Fail(Component.Name + '.' + FProperties[I] + ' is not assigned.')
-      else
-        Fail(Component.Name + '.' + FProperties[I] + ' is assigned.');
-      Break;
-    end;
-  end;
-end;
     *)
 
 (** \mainpage OpenCTF Documentation
