@@ -1,5 +1,5 @@
 
-call ant
+call ant zip
 
 pause
 
