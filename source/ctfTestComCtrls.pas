@@ -62,7 +62,4 @@ begin
     Fail('TabSheet is invisible, should be hidden at run time');
 end;
 
-initialization
-  OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
-
 end.

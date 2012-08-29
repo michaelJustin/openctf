@@ -43,7 +43,4 @@ begin
   CheckProperties(['DataSet']);
 end;
 
-initialization
-  OpenCTF.Add(TCustomProviderTestHandler.Create(TCustomProvider));
-
 end.

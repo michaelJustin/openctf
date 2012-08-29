@@ -57,6 +57,10 @@
 				<Form>Frame2</Form>
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
+			<DCCReference Include="..\..\..\source\ctfStandardTests.pas"/>
+			<DCCReference Include="..\..\..\source\ctfTestNames.pas"/>
+			<DCCReference Include="..\..\..\source\ctfTestControls.pas"/>
+			<DCCReference Include="..\..\..\source\ctfTestComCtrls.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

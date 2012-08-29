@@ -62,8 +62,5 @@ begin
     Fail('ImageList is empty');
 end;
 
-initialization
-  OpenCTF.Add(TImageListHandler.Create(TImageList, 'ImageList tests'));
-
 end.
 

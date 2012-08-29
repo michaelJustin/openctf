@@ -54,8 +54,5 @@ begin
   CheckProperties(['OnClick']);
 end;
 
-initialization
-  OpenCTF.Add(TMenuItemHandler.Create(TMenuItem));
-
 end.
 

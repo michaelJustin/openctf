@@ -62,7 +62,4 @@ begin
     Fail(SIllegalName);
 end;
 
-initialization
-  OpenCTF.Add(TFrameTestHandler.Create(TFrame, 'Frame tests'));
-
 end.

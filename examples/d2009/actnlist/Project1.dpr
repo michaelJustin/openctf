@@ -5,9 +5,7 @@ program Project1;
 uses
   OpenCTF,
   OpenCTFRunner,
-  ctfTestActnList,
-  ctfTestControls,
-  ctfTestMenus,
+  ctfStandardTests in '..\..\..\source\ctfStandardTests.pas',
   TestForm in 'TestForm.pas' {Form1};
 
 begin
@@ -15,5 +13,6 @@ begin
   OpenCTF.RegisterFormClasses([TForm1]);
   // run the tests
   OpenCTFRunner.Run;
+
 end.
 
