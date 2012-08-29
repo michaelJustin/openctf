@@ -97,8 +97,5 @@ begin
 
 end;
 
-initialization
-  OpenCTF.Add(TCustomActionListTestHandler.Create(TCustomActionList));
-
 end.
 

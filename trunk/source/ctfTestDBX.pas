@@ -33,17 +33,16 @@ type
   end;
 
 implementation
-uses SqlExpr;
 
-{ TIBXComponentTestHandler }
+uses
+  SqlExpr;
+
+{ TDBXComponentTestHandler }
 
 procedure TDBXComponentTestHandler.AddTests;
 begin
   inherited;
   CheckProperties(['SQLConnection']);
 end;
-
-initialization
-  OpenCTF.Add(TDBXComponentTestHandler.Create(TCustomSQLDataSet));
 
 end.

@@ -97,8 +97,4 @@ begin
     
 end;
 
-
-initialization
-  OpenCTF.Add(TTabOrderTestHandler.Create(TWinControl));
-
 end.

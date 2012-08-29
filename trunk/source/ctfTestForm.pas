@@ -97,7 +97,4 @@ begin
 
 end;
 
-initialization
-  OpenCTF.Add(TBasicFormTestHandler.Create(TComponent));
-
 end.

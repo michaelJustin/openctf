@@ -290,13 +290,6 @@ begin
   Result := Form is TCustomForm; // data aware components are only on forms
 end;
 
-initialization
-  OpenCTF.Add(TCustomConnectionTestHandler.Create(TCustomConnection));
-  OpenCTF.Add(TFieldTestHandler.Create(TField));
-  OpenCTF.Add(TDataSetTestHandler.Create(TDataSet));
-  OpenCTF.Add(TDataSourceTestHandler.Create(TDataSource));
-  OpenCTF.Add(TParamTestHandler.Create(TParam));
-  OpenCTF.Add(TDbAwareComponentTestHandler.Create(TComponent, 'DbAwareComponent Tests')); 
 
 end.
 

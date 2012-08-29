@@ -45,7 +45,7 @@ uses
   StdCtrls;
 
 resourcestring
-  SIllegalName = 'Avoid default names for components (e.g. Button1: TButton)';
+  SIllegalName = 'Avoid default names for components';
 
 { TComponentNameTestHandler }
 
@@ -78,9 +78,6 @@ begin
   if HasDefaultName(Component) then
     Fail(SIllegalName);
 end;
-
-initialization
-  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent, 'Component name tests'));
 
 end.
 
