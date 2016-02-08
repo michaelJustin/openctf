@@ -1,22 +1,20 @@
 (*
     OpenCTF - Component Test Framework
-    Copyright (c) 2007-2011 Michael Justin
+    Copyright (C) 2016 Michael Justin
 
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License as published by the
-    Free Software Foundation; either version 2 of the License, or (at your
-    option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-    or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-    for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
-    *)
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*)
 
 unit OpenCTF;
 
@@ -28,7 +26,7 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.5.0';
+  CTF_VER = '1.5.1';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -436,10 +434,6 @@ uses
   Variants, SysUtils,
   Windows;
 
-const
-  // include DUnit version information - for TComponentTestSuite.Create
-  {$I versioninfo.inc}
-
 procedure Log(const Msg: string);
 begin
   OutputDebugString(PWideChar('OpenCTF ' + Msg));
@@ -508,6 +502,8 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
+{$WARN UNSAFE_CODE OFF}
+
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
 var
@@ -527,6 +523,8 @@ begin
     end;
   end;
 end;
+
+{$WARN UNSAFE_CAST OFF}
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
@@ -581,6 +579,10 @@ begin
     end;
   end;
 end;
+
+{$WARN UNSAFE_CODE ON}
+
+{$WARN UNSAFE_CAST ON}
 
 { TFormTest }
 
@@ -750,7 +752,7 @@ end;
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
-    CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
+    CTF_NAME_VER + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
