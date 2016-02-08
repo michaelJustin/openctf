@@ -10,9 +10,6 @@
     <delete>
       <fileset dir="../../../source" includes="*.dcu"/>
     </delete>
-    <delete>
-      <fileset dir="../../../source/tests" includes="*.dcu"/>
-		</delete>
 	</target>
 
 	<!-- =================================================================== -->
@@ -21,11 +18,13 @@
 
 	<target name="compile" depends="clean">
 
-	    <property name="path" value = "${source};${dunit}/src" />
+	    <property name="path" value = "${source}" />
 		
-		<!-- echo message="${path}" / -->
+		<echo message="${d2009}" />
 		
-		<apply executable="${d2009}\bin\dcc32" output="../../../build-d2009.log" failonerror="true">
+		<echo message="${path}" />
+		
+		<apply executable="${d2009}\bin\dcc32" output="../../../../../build-d2009.log" failonerror="true">
 			<arg value="-U${path}" />
 			<arg value="-O${path}" />
 			<arg value="-I${path}" />
