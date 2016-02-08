@@ -28,7 +28,7 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.5.0';
+  CTF_VER = '1.5.1';
   CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
 
 type
@@ -436,10 +436,6 @@ uses
   Variants, SysUtils,
   Windows;
 
-const
-  // include DUnit version information - for TComponentTestSuite.Create
-  {$I versioninfo.inc}
-
 procedure Log(const Msg: string);
 begin
   OutputDebugString(PWideChar('OpenCTF ' + Msg));
@@ -508,6 +504,8 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
+{$WARN UNSAFE_CODE OFF}
+
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
 var
@@ -527,6 +525,8 @@ begin
     end;
   end;
 end;
+
+{$WARN UNSAFE_CAST OFF}
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
@@ -581,6 +581,10 @@ begin
     end;
   end;
 end;
+
+{$WARN UNSAFE_CODE ON}
+
+{$WARN UNSAFE_CAST ON}
 
 { TFormTest }
 
@@ -750,7 +754,7 @@ end;
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
-    CTF_NAME_VER + '/DUnit ' + {versioninfo.inc}ReleaseStr + ']');
+    CTF_NAME_VER + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
