@@ -13,7 +13,7 @@
          <property name="d2009" value="${d2009}"/>
 		 <property name="dunit" value="${dunit}"/>
 		 <property name="source" value="${source}"/>
-         <fileset dir="examples/d2009">
+         <fileset dir="${target_root}/examples/d2009">
            <include name="*/build.xml" />
 		 </fileset>
        </subant>
