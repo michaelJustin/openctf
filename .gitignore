@@ -64,3 +64,4 @@ __history/
 /build-d2009.log
 /warnings.log
 dunit.ini
+*.log

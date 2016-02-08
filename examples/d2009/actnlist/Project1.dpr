@@ -1,11 +1,7 @@
 program Project1;
 
-{$APPTYPE CONSOLE}
-
 uses
-  OpenCTF,
-  OpenCTFRunner,
-  ctfStandardTests in '..\..\..\source\ctfStandardTests.pas',
+  OpenCTF, OpenCTFRunner, ctfStandardTests,
   TestForm in 'TestForm.pas' {Form1};
 
 begin
