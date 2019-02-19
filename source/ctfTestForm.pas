@@ -36,10 +36,12 @@ type
     procedure RunTest(testResult: TTestResult); override;
   end;
 
+  (*
   TInvalidFormParentTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
+  *)
 
 implementation
 
@@ -48,7 +50,7 @@ uses ctfUtils, Forms, SysUtils;
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
-  SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
+  // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 
 { TBasicFormTestHandler }
 
@@ -58,9 +60,8 @@ begin
 
   AddTest(TBasicFormTest.Create(Form, 'TestEmptyForm'));
 
-  if Form is TCustomForm then
-    AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
-
+  //  if Form is TCustomForm then
+  //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
 end;
 
 procedure TBasicFormTestHandler.AddTests;
@@ -81,18 +82,18 @@ begin
 
   if Form.ComponentCount = 0 then
     Fail(SEmpty);
-    
 end;
 
 { TInvalidFormParentTest }
-
+(*
 procedure TInvalidFormParentTest.RunTest;
 begin
   inherited;
-  
+
   if Form.ClassParent.ClassName = TForm.ClassName then
     Fail(Format(SInvalidFormParent, [Form.ClassName, Form.ClassParent.ClassName]));
 
 end;
+*)
 
 end.

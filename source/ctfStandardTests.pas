@@ -39,7 +39,6 @@ uses
     ctfTestDBClient,
   SqlExpr,
     ctfTestDBX
-
   ;
 
 implementation
@@ -49,16 +48,15 @@ uses
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent, 'Component name tests'));
+  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent));
   OpenCTF.Add(TBasicFormTestHandler.Create(TComponent));
   OpenCTF.Add(TTabOrderTestHandler.Create(TWinControl));
-
 
   // Menus.pas
   OpenCTF.Add(TMenuItemHandler.Create(TMenuItem));
 
   // Controls.pas
-  OpenCTF.Add(TImageListHandler.Create(TImageList, 'ImageList tests'));
+  OpenCTF.Add(TImageListHandler.Create(TImageList));
 
   // ComCtrls.pas
   OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
@@ -72,7 +70,7 @@ initialization
   OpenCTF.Add(TDataSetTestHandler.Create(TDataSet));
   OpenCTF.Add(TDataSourceTestHandler.Create(TDataSource));
   OpenCTF.Add(TParamTestHandler.Create(TParam));
-  OpenCTF.Add(TDbAwareComponentTestHandler.Create(TComponent, 'DbAwareComponent Tests'));
+  OpenCTF.Add(TDbAwareComponentTestHandler.Create(TComponent));
 
   // Provider.pas
   OpenCTF.Add(TCustomProviderTestHandler.Create(TCustomProvider));

@@ -73,26 +73,22 @@ begin
   if Assigned(NextControl) then begin
     if NextControl.TabOrder > CurrControl.TabOrder then
     begin
-      if (NextControl.Left < CurrControl.Left) and (NextControl.Top < CurrControl.Top) then
+      (* if (NextControl.Left < CurrControl.Left) and (NextControl.Top < CurrControl.Top) then
       begin
         Fail('Tab order moves up+left to ' + NextControl.Name + ' (' + NextControl.ClassName + ')');
-      end;
+      end; *)
 
-      if (NextControl.Left = CurrControl.Left) and (NextControl.Top < CurrControl.Top) then
+      if (* (NextControl.Left = CurrControl.Left) and*) (NextControl.Top < CurrControl.Top) then
       begin
         Fail('Tab order moves up to ' + NextControl.Name + ' (' + NextControl.ClassName + ')');
       end;
 
-      if (NextControl.Left < CurrControl.Left) and (NextControl.Top = CurrControl.Top) then
+      if (NextControl.Left < CurrControl.Left) (* and (NextControl.Top = CurrControl.Top)*) then
       begin
         Fail('Tab order moves left to ' + NextControl.Name + ' (' + NextControl.ClassName + ')');
       end;
-      
     end;
   end;
-
-
-    
 end;
 
 end.

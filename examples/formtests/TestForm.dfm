@@ -1,76 +1,83 @@
 object Form1: TForm1
   Left = 367
   Top = 295
-  Width = 470
-  Height = 181
   Caption = 'Form1'
+  ClientHeight = 294
+  ClientWidth = 454
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = MainMenu
   OldCreateOrder = False
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Button1: TButton
-    Left = 88
-    Top = 16
+  object ButtonOne: TButton
+    Left = 102
+    Top = 136
     Width = 75
     Height = 25
-    Action = Action1
+    Action = ActionOne
     TabOrder = 0
   end
-  object PageControl1: TPageControl
-    Left = 288
-    Top = 32
-    Width = 153
+  object PageControlOne: TPageControl
+    Left = 8
+    Top = 205
+    Width = 438
     Height = 81
-    ActivePage = TabSheet1
+    ActivePage = TabSheetTwo
     MultiLine = True
-    TabIndex = 0
     TabOrder = 1
-    object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
+    object TabSheetTwo: TTabSheet
+      Caption = 'TabSheetTwo'
     end
-    object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
+    object TabSheetOne: TTabSheet
+      Caption = 'TabSheetOne'
       ImageIndex = 1
       TabVisible = False
     end
   end
-  object Button2: TButton
-    Left = 88
-    Top = 56
+  object ButtonTwo: TButton
+    Left = 21
+    Top = 136
     Width = 75
     Height = 25
     Hint = 'Hint'
-    Caption = 'Button2'
+    Caption = 'ButtonTwo'
     TabOrder = 2
   end
-  object ActionList1: TActionList
+  object Button3: TButton
+    Left = 183
+    Top = 128
+    Width = 75
+    Height = 25
+    Caption = 'Button3'
+    TabOrder = 3
+  end
+  object ActList: TActionList
     Left = 24
     Top = 16
-    object Action1: TAction
+    object ActionOne: TAction
       Caption = 'Action1'
       ImageIndex = 2
       ShortCut = 16451
-      OnExecute = Action1Execute
+      OnExecute = ActionOneExecute
     end
-    object Action2: TAction
+    object ActionTwo: TAction
       Caption = 'Action2'
       ShortCut = 16451
     end
   end
-  object ImageList1: TImageList
-    Left = 24
-    Top = 72
+  object ImageList: TImageList
+    Left = 152
+    Top = 16
   end
-  object MainMenu1: TMainMenu
-    Images = ImageList1
-    Left = 200
+  object MainMenu: TMainMenu
+    Images = ImageList
+    Left = 88
     Top = 16
     object File1: TMenuItem
       Caption = 'File'
@@ -100,13 +107,13 @@ object Form1: TForm1
     object Options1: TMenuItem
       Caption = 'Options'
       object Action11: TMenuItem
-        Action = Action1
+        Action = ActionOne
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object Action21: TMenuItem
-        Action = Action2
+        Action = ActionTwo
       end
     end
   end
