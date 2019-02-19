@@ -17,6 +17,7 @@ Required tools:
 
 - to run the build script, Apache Ant 1.7 or newer is required
 - doxygen and pas2dox are required to build the documentation (copy pas2dox.exe to the "make" folder)
+- to run the tests, DUnit 9.4 is required
 
 Apache Ant: 
 https://ant.apache.org
