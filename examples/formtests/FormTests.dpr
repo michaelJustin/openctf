@@ -1,8 +1,7 @@
 program FormTests;
 
 uses
-  OpenCTF, OpenCTFRunner,
-  ctfStandardTests,
+  OpenCTF, OpenCTFRunner, ctfStandardTests,
   TestForm in 'TestForm.pas' {Form1};
 
 begin
