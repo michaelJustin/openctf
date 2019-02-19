@@ -856,11 +856,11 @@ end;
  * Read about DUnit: http://dunit.sourceforge.net/ An Xtreme testing framework
  * for Delphi programs.
  *
- * \li OpenCTF SourceForge main page: http://sourceforge.net/projects/openctf/
+ * \li OpenCTF GitHub main page: https://github.com/michaelJustin/openctf
  *
  * \li \ref howto
  *
- * OpenCTF (c) 2007-2012 Habarisoft Michael Justin http://www.habarisoft.com/
+ * OpenCTF (c) Michael Justin http://www.habarisoft.com/
  *
  * \ref credits
  *
