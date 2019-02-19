@@ -37,9 +37,8 @@
 
   </target>
 
-
   <!-- =================================================================== -->
-  <!-- Copies   the source code                                            -->
+  <!-- Copies the source code                                              -->
   <!-- =================================================================== -->
   <target name="copy" depends="prepare">
 
@@ -83,9 +82,8 @@
 
   </target>
 
-
   <!-- =================================================================== -->
-  <!-- Tests    the source code                                            -->
+  <!-- Compiles the source code                                            -->
   <!-- =================================================================== -->
   <target name="compile" depends="copy">
 
@@ -105,23 +103,11 @@
   </target>
 
   <!-- =================================================================== -->
-  <!-- Packages the distribution with ZIP  - full version                  -->
+  <!-- Packages the distribution with ZIP                                  -->
   <!-- =================================================================== -->
   <target name="zip" depends="compile">
 
     <zip zipfile="${target}/${Name}-${version}-source.zip" basedir="${target}" includes="**" />
-
-    <apply executable="iscc" output="make/iscc.log">
-      <arg value="/O${target}"/>
-      <arg value="/F${Name}-${version}-installer"/>
-      <fileset dir="make">
-        <patternset>
-          <include name="make.iss"/>
-        </patternset>
-      </fileset>
-    </apply>
-
-    <zip zipfile="${target}/${Name}-${version}-installer.zip" basedir="${target}" includes="${Name}-${version}-installer.exe" />
 
   </target>
 
