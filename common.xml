@@ -8,7 +8,7 @@
       <fileset dir="." includes="*.dcu"/>
     </delete>
     <delete>
-      <fileset dir="../../../source" includes="*.dcu"/>
+      <fileset dir="../../source" includes="*.dcu"/>
     </delete>
 	</target>
 
