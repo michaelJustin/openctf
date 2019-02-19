@@ -856,11 +856,11 @@ end;
  * Read about DUnit: http://dunit.sourceforge.net/ An Xtreme testing framework
  * for Delphi programs.
  *
- * \li OpenCTF SourceForge main page: http://sourceforge.net/projects/openctf/
+ * \li OpenCTF GitHub main page: https://github.com/michaelJustin/openctf
  *
  * \li \ref howto
  *
- * OpenCTF (c) 2007-2012 Habarisoft Michael Justin http://www.habarisoft.com/
+ * OpenCTF (c) Michael Justin http://www.habarisoft.com/
  *
  * \ref credits
  *
@@ -913,10 +913,8 @@ end;
  * \li <a target="_blank" src="http://ant.apache.org/">Apache Ant</a> Pure Java build tool, simpler and easier to use than GNU Make.
  * \li <a target="_blank" src="http://www.doxygen.org/">doxygen</a> A documentation system for C++, C, Java and IDL.4
  * \li <a target="_blank" src="http://dunit.sourceforge.net/">DUnit</a> An Xtreme testing framework for Delphi programs.
- * \li <a target="_blank" src="http://www.innosetup.com/">Innosetup (c) Jordan Russel</a> Inno Setup is a free installer for Windows programs.
- * \li <a target="_blank" src="http://sourceforge.net/projects/pas2dox/">pas2dox</a> Pas2Dox is a pre-processor addon for the Doxygen documentation generator.
- * \li <a target="_blank" src="http://subversion.tigris.org/">Subversion</a> An open-source revision control system.
- * \li <a target="_blank" src="http://tortoisesvn.tigris.org/">TortoiseSVN</a> Enables Subversion commands directly in Windows explorer.
+ * \li <a target="_blank" src="http://sourceforge.net/projects/pas2dox/">pas2dox</a> Pas2Dox is a pre-processor addon for the Doxygen documentation generator. 
+ *
  *)
 
 initialization
