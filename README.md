@@ -22,7 +22,7 @@ Apache Ant:
 https://ant.apache.org
 
 Doxygen:
-https://doxygen.org
+http://www.doxygen.nl
 
 pas2dox:
 https://sourceforge.net/projects/pas2dox/
