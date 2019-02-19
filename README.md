@@ -24,5 +24,5 @@ https://ant.apache.org
 Doxygen:
 http://www.doxygen.nl
 
-pas2dox:
+pas2dox 0.41:
 https://sourceforge.net/projects/pas2dox/
