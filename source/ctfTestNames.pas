@@ -35,7 +35,7 @@ type
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
-  
+
 implementation
 
 uses
@@ -52,8 +52,7 @@ function TComponentNameTestHandler.Accepts(const Component: TComponent):
 var
   CheckIt: Boolean;
 begin
-  CheckIt :=  // Component.UnitName = 'StdCtrls';
-    not (Component is TLabel);
+  CheckIt := not (Component is TLabel); // exclude labels
 
   // include only components which still have default name
   Result := CheckIt and HasDefaultName(Component);
