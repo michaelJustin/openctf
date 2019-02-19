@@ -26,8 +26,8 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VER = '1.5.1';
-  CTF_NAME_VER = CTF_NAME + ' ' + CTF_VER;
+  CTF_VERSION = '1.6.0';
+  CTF_NAME_VERSION = CTF_NAME + ' ' + CTF_VERSION;
 
 type
   (**
@@ -752,7 +752,7 @@ end;
 constructor TComponentTestSuite.Create(const Form: TComponent);
 begin
   inherited Create(Form.Name + ' (' + Form.ClassName + ') tests' + ' [' +
-    CTF_NAME_VER + ']');
+    CTF_NAME_VERSION + ']');
   HandlerManager.AddSuites(Self, Form);
 end;
 
