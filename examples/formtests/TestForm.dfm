@@ -15,14 +15,6 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object ButtonOne: TButton
-    Left = 102
-    Top = 136
-    Width = 75
-    Height = 25
-    Action = ActionOne
-    TabOrder = 0
-  end
   object PageControlOne: TPageControl
     Left = 8
     Top = 205
@@ -30,7 +22,7 @@ object Form1: TForm1
     Height = 81
     ActivePage = TabSheetTwo
     MultiLine = True
-    TabOrder = 1
+    TabOrder = 0
     object TabSheetTwo: TTabSheet
       Caption = 'TabSheetTwo'
     end
@@ -40,22 +32,37 @@ object Form1: TForm1
       TabVisible = False
     end
   end
+  inline Frame11: TFrame1
+    Left = 0
+    Top = 0
+    Width = 454
+    Height = 80
+    Align = alTop
+    TabOrder = 1
+  end
+  object ButtonOne: TButton
+    Left = 102
+    Top = 135
+    Width = 75
+    Height = 25
+    TabOrder = 2
+  end
   object ButtonTwo: TButton
     Left = 21
-    Top = 136
+    Top = 135
     Width = 75
     Height = 25
     Hint = 'Hint'
     Caption = 'ButtonTwo'
-    TabOrder = 2
+    TabOrder = 3
   end
   object Button3: TButton
-    Left = 183
-    Top = 128
+    Left = 199
+    Top = 119
     Width = 75
     Height = 25
     Caption = 'Button3'
-    TabOrder = 3
+    TabOrder = 4
   end
   object ActList: TActionList
     Left = 24

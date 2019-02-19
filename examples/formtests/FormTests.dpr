@@ -1,12 +1,14 @@
 program FormTests;
 
 uses
-  OpenCTF, ctfStandardTests,
+  OpenCTF,
+  ctfStandardTests,
   GUITestRunner,
-  TestForm in 'TestForm.pas' {Form1};
+  TestForm in 'TestForm.pas' {Form1},
+  TestFrame in 'TestFrame.pas' {Frame1: TFrame};
 
 begin
-  OpenCTF.RegisterFormClasses([TForm1]);
+  OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
 
   RunRegisteredTests;
 end.

@@ -4,14 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ActnList, StdCtrls, ImgList, Menus, ComCtrls;
+  Dialogs, ActnList, StdCtrls, ImgList, Menus, ComCtrls, TestFrame;
 
 type
   TForm1 = class(TForm)
     ActList: TActionList;
     ActionOne: TAction;
     ActionTwo: TAction;
-    ButtonOne: TButton;
     ImageList: TImageList;
     MainMenu: TMainMenu;
     File1: TMenuItem;
@@ -28,6 +27,8 @@ type
     PageControlOne: TPageControl;
     TabSheetTwo: TTabSheet;
     TabSheetOne: TTabSheet;
+    Frame11: TFrame1;
+    ButtonOne: TButton;
     ButtonTwo: TButton;
     Button3: TButton;
     procedure ActionOneExecute(Sender: TObject);
