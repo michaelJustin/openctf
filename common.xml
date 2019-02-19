@@ -8,7 +8,7 @@
       <fileset dir="." includes="*.dcu"/>
     </delete>
     <delete>
-      <fileset dir="../../../source" includes="*.dcu"/>
+      <fileset dir="../../source" includes="*.dcu"/>
     </delete>
 	</target>
 
@@ -24,7 +24,7 @@
 		
 		<echo message="${path}" />
 		
-		<apply executable="${d2009}\bin\dcc32" output="../../../../../build-d2009.log" failonerror="true">
+		<apply executable="${d2009}\bin\dcc32" output="../../../../build-d2009.log" failonerror="true">
 			<arg value="-U${path}" />
 			<arg value="-O${path}" />
 			<arg value="-I${path}" />
