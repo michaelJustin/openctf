@@ -65,3 +65,5 @@ __history/
 /warnings.log
 dunit.ini
 *.log
+*.2007
+*.dproj
