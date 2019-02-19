@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 367
   Top = 295
   Caption = 'Form1'
-  ClientHeight = 294
+  ClientHeight = 390
   ClientWidth = 454
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -41,14 +41,15 @@ object Form1: TForm1
     TabOrder = 1
   end
   object ButtonOne: TButton
-    Left = 102
-    Top = 135
+    Left = 8
+    Top = 303
     Width = 75
     Height = 25
+    Action = ActionOne
     TabOrder = 2
   end
   object ButtonTwo: TButton
-    Left = 21
+    Left = 8
     Top = 135
     Width = 75
     Height = 25
@@ -57,10 +58,10 @@ object Form1: TForm1
     TabOrder = 3
   end
   object Button3: TButton
-    Left = 199
-    Top = 119
+    Left = 87
+    Top = 134
     Width = 75
-    Height = 25
+    Height = 26
     Caption = 'Button3'
     TabOrder = 4
   end
@@ -68,7 +69,7 @@ object Form1: TForm1
     Left = 24
     Top = 16
     object ActionOne: TAction
-      Caption = 'Action1'
+      Caption = 'ActionOne'
       ImageIndex = 2
       ShortCut = 16451
       OnExecute = ActionOneExecute
