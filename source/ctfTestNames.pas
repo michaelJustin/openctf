@@ -27,10 +27,7 @@ uses
 type
   TComponentNameTests = class(TComponentHandler)
   protected
-    function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
-  public
-    constructor Create;
   end;
 
   TComponentNameTest = class(TComponentTest)
@@ -41,32 +38,18 @@ type
 implementation
 
 uses
-  ctfUtils,
-  StdCtrls;
+  ctfUtils;
 
 resourcestring
   SIllegalName = 'Avoid default names for components';
 
 { TComponentNameTests }
 
-function TComponentNameTests.Accepts(const Component: TComponent):
-  Boolean;
-begin
-  Result := inherited Accepts(Component)
-            and not (Component is TLabel) // exclude labels
-            and HasDefaultName(Component);  // include only components which still have default name
-end;
-
 procedure TComponentNameTests.AddTests;
 begin
   inherited;
 
   AddTest(TComponentNameTest.Create(CurrentComponent));
-end;
-
-constructor TComponentNameTests.Create;
-begin
-  inherited Create(Classes.TComponent);
 end;
 
 { TComponentNameTest }

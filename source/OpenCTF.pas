@@ -184,7 +184,9 @@ type
      * \param Suitename optional test suite name
      *)
     constructor Create(const ComponentClass: TClass; const Suitename: string =
-      '');
+      ''); overload;
+
+    constructor Create; overload;
 
     function Exclude(ExcludedClass: TComponentClass): IComponentHandler;
 
@@ -669,6 +671,11 @@ begin
     FSuiteName := Suitename;
 
   FExcludedClasses := TClassList.Create;
+end;
+
+constructor TComponentHandler.Create;
+begin
+  Create(Classes.TComponent);
 end;
 
 function TComponentHandler.Exclude(ExcludedClass: TComponentClass): IComponentHandler;

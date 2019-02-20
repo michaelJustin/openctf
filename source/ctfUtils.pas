@@ -28,16 +28,16 @@ function HasDefaultName(const Component: TComponent): Boolean;
 implementation
 
 uses
-  SysUtils;
+  SysUtils, Forms;
 
 function HasDefaultName(const Component: TComponent): Boolean;
 var
   NumericPart: string;
   ClazzName: string;
   ClazzNameLength: Integer;
-  IsNumeric: Boolean;
+  Tmp: Integer;
 begin
-  IsNumeric := False;
+  Result := False;
 
   ClazzName := Copy(Component.ClassName, 2, Length(Component.ClassName) - 1);
 
@@ -51,19 +51,13 @@ begin
         Length(Component.Name) - ClazzNameLength);
 
       if NumericPart <> '' then
-      try
-        StrToInt(NumericPart);
-        IsNumeric := True;
-      except
-
-      end;
-
+        Result := TryStrToInt(NumericPart, Tmp)
+    end else if Length(Component.Name) = ClazzNameLength then
+    begin
+       Result := Component is TCustomForm;
     end;
-    
+
   end;
-
-  Result := IsNumeric;
-
 end;
 
 end.

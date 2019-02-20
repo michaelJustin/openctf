@@ -29,11 +29,14 @@ type
     procedure AddTests; override;
     procedure AddFormTests; override;
     function Handles(const Form: TComponent): Boolean; override;
-  public
-    constructor Create;
   end;
 
   TBasicFormTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
+  TBasicFormNameTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
@@ -52,7 +55,7 @@ uses
   Forms, SysUtils;
 
 resourcestring
-  // SIllegalName = 'Avoid default names for forms (e.g. Form1)';
+  SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
   // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 
@@ -64,6 +67,8 @@ begin
 
   AddTest(TBasicFormTest.Create(Form, 'TestEmptyForm'));
 
+  AddTest(TBasicFormNameTest.Create(Form, 'Test default name'));
+
   //  if Form is TCustomForm then
   //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
 end;
@@ -71,11 +76,6 @@ end;
 procedure TBasicFormTests.AddTests;
 begin
   inherited;
-end;
-
-constructor TBasicFormTests.Create;
-begin
-  inherited Create(Classes.TComponent);
 end;
 
 function TBasicFormTests.Handles(const Form: TComponent): Boolean;
@@ -104,5 +104,15 @@ begin
 
 end;
 *)
+
+{ TBasicFormNameTest }
+
+procedure TBasicFormNameTest.RunTest(testResult: TTestResult);
+begin
+  inherited;
+
+  if HasDefaultName(Form) then
+    Fail(SIllegalName);
+end;
 
 end.
