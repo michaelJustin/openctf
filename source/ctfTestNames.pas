@@ -51,13 +51,10 @@ resourcestring
 
 function TComponentNameTests.Accepts(const Component: TComponent):
   Boolean;
-var
-  CheckIt: Boolean;
 begin
-  CheckIt := not (Component is TLabel); // exclude labels
-
-  // include only components which still have default name
-  Result := CheckIt and HasDefaultName(Component);
+  Result := inherited Accepts(Component)
+            and not (Component is TLabel) // exclude labels
+            and HasDefaultName(Component);  // include only components which still have default name
 end;
 
 procedure TComponentNameTests.AddTests;
