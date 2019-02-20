@@ -571,7 +571,7 @@ begin
         Result := GetFloatProp(Instance, PropInfo) <> 0;
       tkMethod:
         Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
-      tkString, tkLString:
+      tkString, tkLString, tkUString:
         Result := GetStrProp(Instance, PropInfo) <> '';
       tkWString:
         Result := GetWideStrProp(Instance, PropInfo) <> '';

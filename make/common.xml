@@ -1,0 +1,29 @@
+<project name="OpenCTF-common">
+
+	<!-- =================================================================== -->
+	<!-- Compile                                                             -->
+	<!-- =================================================================== -->
+
+	<target name="compile">
+
+	    <property name="path" value="${source}" />
+		
+		<echo>Compiler: ${d2009}</echo>
+		
+		<echo>Sources : ${path}</echo>
+		
+		<apply executable="${d2009}\bin\dcc32" output="${user.dir}/build-d2009.log" failonerror="true">
+			<arg value="-U${path}" />
+			<arg value="-O${path}" />
+			<arg value="-I${path}" />
+			<arg value="-Q"/>
+			<arg value="-B"/>
+			<fileset dir=".">
+				<patternset>
+					<include name="*.dpr"/>
+				</patternset>
+			</fileset>
+		</apply>
+	</target>
+	
+</project>
