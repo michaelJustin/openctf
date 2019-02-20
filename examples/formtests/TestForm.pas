@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ActnList, StdCtrls, ImgList, Menus, ComCtrls, TestFrame;
+  Dialogs, ActnList, StdCtrls, ImgList, Menus, ComCtrls, TestFrame, ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -31,6 +31,8 @@ type
     ButtonOne: TButton;
     ButtonTwo: TButton;
     Button3: TButton;
+    Label1: TLabel;
+    Panel1: TPanel;
     procedure ActionOneExecute(Sender: TObject);
     procedure Quit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);

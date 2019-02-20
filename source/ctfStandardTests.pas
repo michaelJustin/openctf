@@ -21,34 +21,41 @@ unit ctfStandardTests;
 interface
 
 uses
-  Classes,
+  // Classes,
     ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder,
-  Controls,
+  // Controls,
     ctfTestControls,
-  Menus,
+  // Menus,
     ctfTestMenus,
-  ComCtrls,
+  // ComCtrls,
     ctfTestComCtrls,
-  ActnList,
+  // ActnList,
     ctfTestActnList,
-  DB,
+  // DB,
     ctfTestDB,
-  Provider,
+  // Provider,
     ctfTestProvider,
-  DBClient,
+  // DBClient,
     ctfTestDBClient,
-  SqlExpr,
+  // SqlExpr,
     ctfTestDBX
   ;
 
 implementation
 
 uses
-  OpenCTF;
+  OpenCTF,
+  StdCtrls, ExtCtrls, Forms, Classes,
+  DB, Provider, DBClient, SqlExpr;
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTests.Create);
+  OpenCTF.Add((TComponentNameTests.Create)
+    .Exclude(TLabel) // exclude TLabel from tests (allow default name)
+    .Exclude(TFrame) // and TFrame
+    .Exclude(TPanel) // and TPanel
+    );
+
   OpenCTF.Add(TBasicFormTests.Create);
 
   // Controls.pas
@@ -72,6 +79,7 @@ initialization
   OpenCTF.Add(TDataSetTests.Create(DB.TDataSet));
   OpenCTF.Add(TDataSourceTests.Create(DB.TDataSource));
   OpenCTF.Add(TParamTests.Create(DB.TParam));
+
   OpenCTF.Add(TDbAwareComponentTests.Create(Classes.TComponent));
 
   // Provider.pas

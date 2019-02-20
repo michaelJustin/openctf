@@ -30,6 +30,8 @@ const
   CTF_NAME_VERSION = CTF_NAME + ' ' + CTF_VERSION;
 
 type
+  TComponentClasses = array of TComponentClass;
+
   (**
    * \class TComponentHandler
    * \brief A test handler for a given type of components.
@@ -42,7 +44,9 @@ type
   private
     FComponent: TComponent;
     FComponentClass: TClass;
+    FExcludedClasses: TClassList;
     FSuiteName: string;
+
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
@@ -181,6 +185,8 @@ type
      *)
     constructor Create(const ComponentClass: TClass; const Suitename: string =
       '');
+
+    function Exclude(ExcludedClass: TComponentClass): IComponentHandler;
 
     (**
      * \brief Get the test suite.
@@ -652,6 +658,7 @@ constructor TComponentHandler.Create(const ComponentClass: TClass; const
   Suitename: string = '');
 begin
   inherited Create;
+
   Assert(Assigned(ComponentClass));
 
   FComponentClass := ComponentClass;
@@ -659,7 +666,16 @@ begin
   if Suitename = '' then
     FSuiteName := ClassName
   else
-    FSuiteName := Suitename
+    FSuiteName := Suitename;
+
+  FExcludedClasses := TClassList.Create;
+end;
+
+function TComponentHandler.Exclude(ExcludedClass: TComponentClass): IComponentHandler;
+begin
+  FExcludedClasses.Add(ExcludedClass);
+
+  Result := Self;
 end;
 
 function TComponentHandler.GetForm: TComponent;
@@ -679,7 +695,8 @@ end;
 
 function TComponentHandler.Accepts(const Component: TComponent): Boolean;
 begin
-  Result := Component is FComponentClass;
+  Result := (Component is FComponentClass)
+    and not (FExcludedClasses.IndexOf(Component.ClassType) <> -1);
 end;
 
 function TComponentHandler.HasProperty(const Component: TComponent; const

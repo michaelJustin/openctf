@@ -15,6 +15,13 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 24
+    Top = 88
+    Width = 32
+    Height = 13
+    Caption = 'Label1'
+  end
   object PageControlOne: TPageControl
     Left = 8
     Top = 205
@@ -64,6 +71,14 @@ object Form1: TForm1
     Height = 26
     Caption = 'Button3'
     TabOrder = 4
+  end
+  object Panel1: TPanel
+    Left = 8
+    Top = 341
+    Width = 185
+    Height = 41
+    Caption = 'Panel1'
+    TabOrder = 5
   end
   object ActList: TActionList
     Left = 24

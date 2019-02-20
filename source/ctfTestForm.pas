@@ -52,7 +52,7 @@ uses
   Forms, SysUtils;
 
 resourcestring
-  SIllegalName = 'Avoid default names for forms (e.g. Form1)';
+  // SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
   // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 

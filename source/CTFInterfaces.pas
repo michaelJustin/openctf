@@ -38,6 +38,8 @@ type
     // other methods
     function Accepts(const Component: TComponent): Boolean;
 
+    function Exclude(ExcludedClass: TComponentClass): IComponentHandler;
+
     function Handles(const Form: TComponent): Boolean;
 
     procedure AddTests;

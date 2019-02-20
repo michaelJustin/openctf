@@ -72,7 +72,6 @@ end;
 { TComponentNameTest }
 
 procedure TComponentNameTest.RunTest;
-
 begin
   inherited;
 
