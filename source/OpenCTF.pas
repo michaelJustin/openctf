@@ -425,8 +425,7 @@ procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
  *)
 procedure RegisterForms; overload;
 
-function GetStringProperty(const Instance: TComponent; PropName: string):
-  string;
+// function GetStringProperty(const Instance: TComponent; PropName: string): string;
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
@@ -510,7 +509,8 @@ begin
     Result := Assigned(GetMethodProp(Instance, PropInfo).Code);
 end;
 
-{$WARN UNSAFE_CODE OFF}
+(*
+{.$WARN UNSAFE_CODE OFF}
 
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
@@ -526,13 +526,14 @@ begin
   begin
     // return the right type
     case PropInfo.PropType^.Kind of
-      tkString, tkLString:
+      tkString, tkLString ...:
         Result := GetStrProp(Instance, PropInfo);
     end;
   end;
 end;
 
-{$WARN UNSAFE_CAST OFF}
+{.$WARN UNSAFE_CAST OFF}
+*)
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 var
@@ -588,9 +589,9 @@ begin
   end;
 end;
 
-{$WARN UNSAFE_CODE ON}
+{.$WARN UNSAFE_CODE ON}
 
-{$WARN UNSAFE_CAST ON}
+{.$WARN UNSAFE_CAST ON}
 
 { TFormTest }
 
