@@ -14,12 +14,7 @@ https://michaeljustin.github.io/openctf/
 
 ### Building docs and distribution binaries ###
 
-OpenCTF can be used without running the build script.
-
-The build scripts are only neccessary for OpenCTF developers.
-
-They may be used to compile and run the example test projects
-and to build the distribution package.
+OpenCTF can be used without running the build script. The build scripts are useful for OpenCTF developers. They generate the API documentation, compile the example projets, and build a source distribution package.
 
 ### Required tools for building API docs ###
 
