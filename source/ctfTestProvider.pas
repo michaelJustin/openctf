@@ -27,9 +27,14 @@ type
   TCustomProviderTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
+
+uses
+  Provider;
 
 { TCustomProviderTests }
 
@@ -39,6 +44,11 @@ begin
 
   // check if the Provider is connected to a dataset
   CheckProperties(['DataSet']);
+end;
+
+constructor TCustomProviderTests.Create;
+begin
+  inherited Create(Provider.TCustomProvider);
 end;
 
 end.

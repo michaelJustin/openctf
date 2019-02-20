@@ -27,6 +27,8 @@ type
   TDBXComponentTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
@@ -41,6 +43,11 @@ begin
   inherited;
 
   CheckProperties(['SQLConnection']);
+end;
+
+constructor TDBXComponentTests.Create;
+begin
+  inherited Create(SqlExpr.TCustomSQLDataSet);
 end;
 
 end.

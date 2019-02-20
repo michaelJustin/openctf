@@ -27,9 +27,14 @@ type
   TCustomClientDataSetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
+
+uses
+  DBClient;
 
 { TCustomClientDataSetTests }
 
@@ -41,6 +46,11 @@ begin
   CheckEvents(['OnReconcileError']);
   // check if the ProviderName property is assigned
   CheckProperties(['ProviderName']);
+end;
+
+constructor TCustomClientDataSetTests.Create;
+begin
+  inherited Create(DBClient.TCustomClientDataSet);
 end;
 
 end.

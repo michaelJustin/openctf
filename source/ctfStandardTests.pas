@@ -74,22 +74,22 @@ initialization
   OpenCTF.Add(TCustomActionListTests.Create);
 
   // DB.pas
-  OpenCTF.Add(TCustomConnectionTests.Create(DB.TCustomConnection));
-  OpenCTF.Add(TFieldTests.Create(DB.TField));
-  OpenCTF.Add(TDataSetTests.Create(DB.TDataSet));
-  OpenCTF.Add(TDataSourceTests.Create(DB.TDataSource));
-  OpenCTF.Add(TParamTests.Create(DB.TParam));
+  OpenCTF.Add(TCustomConnectionTests.Create);
+  OpenCTF.Add(TFieldTests.Create);
+  OpenCTF.Add(TDataSetTests.Create);
+  OpenCTF.Add(TDataSourceTests.Create);
+  OpenCTF.Add(TParamTests.Create);
 
-  OpenCTF.Add(TDbAwareComponentTests.Create(Classes.TComponent));
+  OpenCTF.Add(TDbAwareComponentTests.Create);
 
   // Provider.pas
-  OpenCTF.Add(TCustomProviderTests.Create(Provider.TCustomProvider));
+  OpenCTF.Add(TCustomProviderTests.Create);
 
   // DBClient.pas
-  OpenCTF.Add(TCustomClientDataSetTests.Create(DBClient.TCustomClientDataSet));
+  OpenCTF.Add(TCustomClientDataSetTests.Create);
 
   // SqlExpr.pas
-  OpenCTF.Add(TDBXComponentTests.Create(SqlExpr.TCustomSQLDataSet));
+  OpenCTF.Add(TDBXComponentTests.Create);
 
 end.
 
