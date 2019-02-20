@@ -25,9 +25,8 @@ uses
   TestFrameWork, Classes;
 
 type
-  TComponentNameTestHandler = class(TComponentHandler)
+  TComponentNameTests = class(TComponentHandler)
   protected
-    function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
   end;
 
@@ -35,40 +34,27 @@ type
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
-  
+
 implementation
 
 uses
-  ctfUtils,
-  StdCtrls;
+  ctfUtils;
 
 resourcestring
   SIllegalName = 'Avoid default names for components';
 
-{ TComponentNameTestHandler }
+{ TComponentNameTests }
 
-function TComponentNameTestHandler.Accepts(const Component: TComponent):
-  Boolean;
-var
-  CheckIt: Boolean;
-begin
-  CheckIt :=  // Component.UnitName = 'StdCtrls';
-    not (Component is TLabel);
-
-  // include only components which still have default name
-  Result := CheckIt and HasDefaultName(Component);
-end;
-
-procedure TComponentNameTestHandler.AddTests;
+procedure TComponentNameTests.AddTests;
 begin
   inherited;
+
   AddTest(TComponentNameTest.Create(CurrentComponent));
 end;
 
 { TComponentNameTest }
 
 procedure TComponentNameTest.RunTest;
-
 begin
   inherited;
 

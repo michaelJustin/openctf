@@ -25,9 +25,11 @@ uses
   TestFrameWork, Classes;
 
 type
-  TImageListHandler = class(TComponentHandler)
+  TImageListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TImageListTest = class(TComponentTest)
@@ -41,12 +43,17 @@ uses
   Controls,
   SysUtils;
 
-{ TImageListHandler }
+{ TImageListTests }
 
-procedure TImageListHandler.AddTests;
+procedure TImageListTests.AddTests;
 begin
   inherited;
   CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
+end;
+
+constructor TImageListTests.Create;
+begin
+  inherited Create(Controls.TImageList);
 end;
 
 { TImageListTest }

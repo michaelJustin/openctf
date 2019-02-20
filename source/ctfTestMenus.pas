@@ -25,18 +25,22 @@ uses
   TestFrameWork, Classes;
 
 type
-  TMenuItemHandler = class(TComponentHandler)
+  TMenuItemTests = class(TComponentHandler)
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
-uses Menus;
 
-{ TMenuItemHandler }
+uses
+  Menus;
 
-function TMenuItemHandler.Accepts(const Component: TComponent): Boolean;
+{ TMenuItemTests }
+
+function TMenuItemTests.Accepts(const Component: TComponent): Boolean;
 begin
   Result := inherited Accepts(Component);
 
@@ -46,10 +50,15 @@ begin
     
 end;
 
-procedure TMenuItemHandler.AddTests;
+procedure TMenuItemTests.AddTests;
 begin
   inherited;
   CheckProperties(['OnClick']);
+end;
+
+constructor TMenuItemTests.Create;
+begin
+  inherited Create(Menus.TMenuItem);
 end;
 
 end.

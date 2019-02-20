@@ -21,67 +21,75 @@ unit ctfStandardTests;
 interface
 
 uses
-  Classes,
+  // Classes,
     ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder,
-  Controls,
+  // Controls,
     ctfTestControls,
-  Menus,
+  // Menus,
     ctfTestMenus,
-  ComCtrls,
+  // ComCtrls,
     ctfTestComCtrls,
-  ActnList,
+  // ActnList,
     ctfTestActnList,
-  DB,
+  // DB,
     ctfTestDB,
-  Provider,
+  // Provider,
     ctfTestProvider,
-  DBClient,
+  // DBClient,
     ctfTestDBClient,
-  SqlExpr,
+  // SqlExpr,
     ctfTestDBX
-
   ;
 
 implementation
 
 uses
-  OpenCTF;
+  OpenCTF,
+  StdCtrls, ExtCtrls, Forms, Classes,
+  DB, Provider, DBClient, SqlExpr;
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent, 'Component name tests'));
-  OpenCTF.Add(TBasicFormTestHandler.Create(TComponent));
-  OpenCTF.Add(TTabOrderTestHandler.Create(TWinControl));
+  OpenCTF.Add((TComponentNameTests.Create)
+    .Exclude(TLabel) // exclude TLabel from tests (allow default name)
+    .Exclude(TFrame) // and TFrame
+    .Exclude(TPanel) // and TPanel
+    );
 
-
-  // Menus.pas
-  OpenCTF.Add(TMenuItemHandler.Create(TMenuItem));
+  OpenCTF.Add(TBasicFormTests.Create);
 
   // Controls.pas
-  OpenCTF.Add(TImageListHandler.Create(TImageList, 'ImageList tests'));
+  OpenCTF.Add(TTabOrderTests.Create);
+
+  // Menus.pas
+  OpenCTF.Add(TMenuItemTests.Create);
+
+  // Controls.pas
+  OpenCTF.Add(TImageListTests.Create);
 
   // ComCtrls.pas
-  OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
+  OpenCTF.Add(TTabSheetTests.Create);
 
-  // ActnLst.pas
-  OpenCTF.Add(TCustomActionListTestHandler.Create(TCustomActionList));
+  // ActnList.pas
+  OpenCTF.Add(TCustomActionListTests.Create);
 
   // DB.pas
-  OpenCTF.Add(TCustomConnectionTestHandler.Create(TCustomConnection));
-  OpenCTF.Add(TFieldTestHandler.Create(TField));
-  OpenCTF.Add(TDataSetTestHandler.Create(TDataSet));
-  OpenCTF.Add(TDataSourceTestHandler.Create(TDataSource));
-  OpenCTF.Add(TParamTestHandler.Create(TParam));
-  OpenCTF.Add(TDbAwareComponentTestHandler.Create(TComponent, 'DbAwareComponent Tests'));
+  OpenCTF.Add(TCustomConnectionTests.Create(DB.TCustomConnection));
+  OpenCTF.Add(TFieldTests.Create(DB.TField));
+  OpenCTF.Add(TDataSetTests.Create(DB.TDataSet));
+  OpenCTF.Add(TDataSourceTests.Create(DB.TDataSource));
+  OpenCTF.Add(TParamTests.Create(DB.TParam));
+
+  OpenCTF.Add(TDbAwareComponentTests.Create(Classes.TComponent));
 
   // Provider.pas
-  OpenCTF.Add(TCustomProviderTestHandler.Create(TCustomProvider));
+  OpenCTF.Add(TCustomProviderTests.Create(Provider.TCustomProvider));
 
   // DBClient.pas
-  OpenCTF.Add(TCustomClientDataSetTestHandler.Create(TCustomClientDataSet));
+  OpenCTF.Add(TCustomClientDataSetTests.Create(DBClient.TCustomClientDataSet));
 
   // SqlExpr.pas
-  OpenCTF.Add(TDBXComponentTestHandler.Create(TCustomSQLDataSet));
+  OpenCTF.Add(TDBXComponentTests.Create(SqlExpr.TCustomSQLDataSet));
 
 end.
 

@@ -24,7 +24,7 @@ uses
   OpenCTF, TestFrameWork, Classes;
 
 type
-  TFrameTestHandler = class(TComponentHandler)
+  TFrameTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -43,9 +43,9 @@ uses
 resourcestring
   SIllegalName = 'Avoid default names for frames (e.g. Frame21: TFrame2)';
 
-{ TFrameTestHandler }
+{ TFrameTests }
 
-procedure TFrameTestHandler.AddTests;
+procedure TFrameTests.AddTests;
 begin
   inherited;
   AddTest(TFrameTest.Create(CurrentComponent, 'TestDefaultName'));

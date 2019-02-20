@@ -24,9 +24,11 @@ uses
   TestFrameWork, ActnList, Classes;
 
 type
-  TCustomActionListTestHandler = class(TComponentHandler)
+  TCustomActionListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TContainedActionTest = class(TComponentTest)
@@ -39,9 +41,9 @@ implementation
 uses
   SysUtils;
 
-{ TCustomActionListTestHandler }
+{ TCustomActionListTests }
 
-procedure TCustomActionListTestHandler.AddTests;
+procedure TCustomActionListTests.AddTests;
 var
   I: Integer;
   TmpAction: TContainedAction;
@@ -66,7 +68,11 @@ begin
 
   if TmpSuite.CountTestCases > 0 then
     CurrentSuite.AddSuite(TmpSuite);
+end;
 
+constructor TCustomActionListTests.Create;
+begin
+  inherited Create(ActnList.TCustomActionList);
 end;
 
 { TContainedActionTest }

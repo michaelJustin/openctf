@@ -25,7 +25,7 @@ uses
   TestFrameWork, Classes;
 
 type
-  TDBXComponentTestHandler = class(TComponentHandler)
+  TDBXComponentTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -35,9 +35,9 @@ implementation
 uses
   SqlExpr;
 
-{ TDBXComponentTestHandler }
+{ TDBXComponentTests }
 
-procedure TDBXComponentTestHandler.AddTests;
+procedure TDBXComponentTests.AddTests;
 begin
   inherited;
   CheckProperties(['SQLConnection']);

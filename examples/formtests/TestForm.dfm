@@ -1,76 +1,121 @@
 object Form1: TForm1
   Left = 367
   Top = 295
-  Width = 470
-  Height = 181
   Caption = 'Form1'
+  ClientHeight = 390
+  ClientWidth = 459
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = MainMenu
   OldCreateOrder = False
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Button1: TButton
-    Left = 88
-    Top = 16
-    Width = 75
-    Height = 25
-    Action = Action1
-    TabOrder = 0
+  object Label1: TLabel
+    Left = 24
+    Top = 88
+    Width = 32
+    Height = 13
+    Caption = 'Label1'
   end
-  object PageControl1: TPageControl
-    Left = 288
-    Top = 32
-    Width = 153
+  object Label2: TLabel
+    Left = 294
+    Top = 119
+    Width = 157
+    Height = 13
+    Caption = 'Some components are there --->>'
+  end
+  object PageControlOne: TPageControl
+    Left = 8
+    Top = 205
+    Width = 438
     Height = 81
-    ActivePage = TabSheet1
+    ActivePage = TabSheetTwo
     MultiLine = True
-    TabIndex = 0
-    TabOrder = 1
-    object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
+    TabOrder = 0
+    object TabSheetTwo: TTabSheet
+      Caption = 'TabSheetTwo'
     end
-    object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
+    object TabSheetOne: TTabSheet
+      Caption = 'TabSheetOne'
       ImageIndex = 1
       TabVisible = False
     end
   end
-  object Button2: TButton
-    Left = 88
-    Top = 56
+  inline Frame11: TFrame1
+    Left = 0
+    Top = 0
+    Width = 459
+    Height = 80
+    Align = alTop
+    TabOrder = 1
+  end
+  object ButtonOne: TButton
+    Left = 8
+    Top = 303
+    Width = 75
+    Height = 25
+    Action = ActionOne
+    TabOrder = 2
+  end
+  object ButtonTwo: TButton
+    Left = 8
+    Top = 135
     Width = 75
     Height = 25
     Hint = 'Hint'
-    Caption = 'Button2'
-    TabOrder = 2
+    Caption = 'ButtonTwo'
+    TabOrder = 3
   end
-  object ActionList1: TActionList
+  object Button3: TButton
+    Left = 87
+    Top = 134
+    Width = 75
+    Height = 26
+    Caption = 'Button3'
+    TabOrder = 4
+  end
+  object Panel1: TPanel
+    Left = -40
+    Top = 357
+    Width = 185
+    Height = 41
+    Caption = 'Panel1'
+    TabOrder = 5
+  end
+  object Panel2: TPanel
+    Left = 500
+    Top = 119
+    Width = 185
+    Height = 41
+    Caption = 'Panel2'
+    TabOrder = 6
+  end
+  object ActList: TActionList
     Left = 24
     Top = 16
-    object Action1: TAction
-      Caption = 'Action1'
+    object ActionOne: TAction
+      Caption = 'ActionOne'
       ImageIndex = 2
       ShortCut = 16451
-      OnExecute = Action1Execute
+      OnExecute = ActionOneExecute
     end
-    object Action2: TAction
+    object ActionTwo: TAction
       Caption = 'Action2'
       ShortCut = 16451
     end
   end
-  object ImageList1: TImageList
-    Left = 24
-    Top = 72
+  object ImageList: TImageList
+    Left = 152
+    Top = 16
   end
-  object MainMenu1: TMainMenu
-    Images = ImageList1
-    Left = 200
+  object MainMenu: TMainMenu
+    Images = ImageList
+    Left = 88
     Top = 16
     object File1: TMenuItem
       Caption = 'File'
@@ -100,14 +145,18 @@ object Form1: TForm1
     object Options1: TMenuItem
       Caption = 'Options'
       object Action11: TMenuItem
-        Action = Action1
+        Action = ActionOne
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object Action21: TMenuItem
-        Action = Action2
+        Action = ActionTwo
       end
     end
+  end
+  object Timer1: TTimer
+    Left = 504
+    Top = 176
   end
 end

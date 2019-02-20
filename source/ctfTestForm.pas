@@ -24,75 +24,174 @@ uses
   OpenCTF, TestFrameWork, Classes;
 
 type
-  TBasicFormTestHandler = class(TComponentHandler)
+  TBasicFormTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
     procedure AddFormTests; override;
     function Handles(const Form: TComponent): Boolean; override;
   end;
 
-  TBasicFormTest = class(TFormTest)
+  TEmptyFormTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
 
+  TDefaultNameTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
+  TComponentPlacementTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
+  TInvisibleNonVisualComponentsTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
+  (*
   TInvalidFormParentTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
+  *)
 
 implementation
 
-uses ctfUtils, Forms, SysUtils;
+uses
+  ctfUtils,
+  Controls, Forms, SysUtils, Windows;
 
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
-  SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
+  // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 
-{ TBasicFormTestHandler }
+{ TBasicFormTests }
 
-procedure TBasicFormTestHandler.AddFormTests;
+procedure TBasicFormTests.AddFormTests;
 begin
   inherited;
 
-  AddTest(TBasicFormTest.Create(Form, 'TestEmptyForm'));
+  AddTest(TEmptyFormTest.Create(Form, TEmptyFormTest.ClassName)); // , 'TestEmptyForm'));
 
-  if Form is TCustomForm then
-    AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
+  AddTest(TDefaultNameTest.Create(Form, TDefaultNameTest.ClassName)); // , 'Test default name'));
 
+  AddTest(TComponentPlacementTest.Create(Form, TComponentPlacementTest.ClassName));
+
+  AddTest(TInvisibleNonVisualComponentsTest.Create(Form, TInvisibleNonVisualComponentsTest.ClassName));
+
+  //  if Form is TCustomForm then
+  //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
 end;
 
-procedure TBasicFormTestHandler.AddTests;
+procedure TBasicFormTests.AddTests;
 begin
   inherited;
 end;
 
-function TBasicFormTestHandler.Handles(const Form: TComponent): Boolean;
+function TBasicFormTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := (Form is TCustomForm) or (Form is TDataModule) or (Form is TCustomFrame);
 end;
 
 { TBasicFormTest }
 
-procedure TBasicFormTest.RunTest;
+procedure TEmptyFormTest.RunTest;
 begin
   inherited;
 
   if Form.ComponentCount = 0 then
     Fail(SEmpty);
-    
 end;
 
 { TInvalidFormParentTest }
-
+(*
 procedure TInvalidFormParentTest.RunTest;
 begin
   inherited;
-  
+
   if Form.ClassParent.ClassName = TForm.ClassName then
     Fail(Format(SInvalidFormParent, [Form.ClassName, Form.ClassParent.ClassName]));
 
+end;
+*)
+
+{ TBasicFormNameTest }
+
+procedure TDefaultNameTest.RunTest(testResult: TTestResult);
+begin
+  inherited;
+
+  if HasDefaultName(Form) then
+    Fail(SIllegalName);
+end;
+
+{ TComponentPlacementTest }
+
+procedure TComponentPlacementTest.RunTest(testResult: TTestResult);
+var
+  F: TScrollingWinControl;
+  I: Integer;
+  C: TWinControl;
+  S: string;
+begin
+  inherited;
+
+  S := '';
+
+  F := Form as TScrollingWinControl;
+
+  for I := 0 to Form.ComponentCount - 1 do begin
+    if Form.Components[I] is TWinControl then begin
+      C := Form.Components[I] as TWinControl;
+      if (C.Left < 0) or (C.Top < 0) then begin
+        S := S + C.Name + ' is outside of form (T/L) ';
+      end;
+      if (C.Left > F.Width) or (C.Top > F.Height) then begin
+        S := S + C.Name + ' is outside of form (B/R) ';
+      end;
+    end;
+  end;
+
+  if S <> '' then Fail (S);
+end;
+
+{ TInvisibleNonVisualComponentsTest }
+
+procedure TInvisibleNonVisualComponentsTest.RunTest(testResult: TTestResult);
+var
+  F: TScrollingWinControl;
+  C: TComponent;
+  I: Integer;
+  S: string;
+  // see https://stackoverflow.com/questions/10987628/how-to-access-design-position-on-non-visual-delphi-components
+  P: TSmallPoint;
+begin
+  inherited;
+
+  S := '';
+
+  if not (Form is TScrollingWinControl) then Exit;
+  // todo: implement for TDataModule which is not a TScrollingWinControl
+
+  F := Form as TScrollingWinControl;
+
+  S := '';
+  for I := 0 to Form.ComponentCount - 1 do begin
+    C := Form.Components[I];
+
+    if C is TWinControl then Continue;  // no non-visual
+
+    P := TSmallPoint(C.DesignInfo);
+    if (P.x < 0) or (P.y < 0) or (P.x > F.Width) or (P.y > F.Height) then begin
+      S := S + C.Name + ' is outside of form';
+    end;
+  end;
+
+  if S <> '' then Fail (S);
 end;
 
 end.

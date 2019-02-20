@@ -28,7 +28,7 @@ resourcestring
   SMissingParamValue = 'Missing parameter value for input parameter';
 
 type
-  TCustomConnectionTestHandler = class(TComponentHandler)
+  TCustomConnectionTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -38,7 +38,7 @@ type
     procedure RunTest(testResult: TTestResult); override;
   end;
 
-  TDataSetTestHandler = class(TComponentHandler)
+  TDataSetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -48,17 +48,17 @@ type
     procedure RunTest(testResult: TTestResult); override;
   end;
 
-  TDataSourceTestHandler = class(TComponentHandler)
+  TDataSourceTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
-  TFieldTestHandler = class(TComponentHandler)
+  TFieldTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
-  TParamTestHandler = class(TComponentHandler)
+  TParamTests = class(TComponentHandler)
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
@@ -79,7 +79,7 @@ type
     constructor Create(Component: TComponent; Param: TParam);
   end;
 
-  TDbAwareComponentTestHandler = class(TComponentHandler)
+  TDbAwareComponentTests = class(TComponentHandler)
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     function Handles(const Form: TComponent): Boolean; override;
@@ -91,9 +91,9 @@ implementation
 uses
   Forms, TypInfo, SysUtils;
 
-{ TDataSetTestHandler }
+{ TDataSetTests }
 
-procedure TDataSetTestHandler.AddTests;
+procedure TDataSetTests.AddTests;
 begin
   CurrentSuite.AddTest(TDataSetTest.Create(CurrentComponent));
 end;
@@ -145,25 +145,25 @@ begin
   end;
 end;
 
-{ TDataSourceTestHandler }
+{ TDataSourceTests }
 
-procedure TDataSourceTestHandler.AddTests;
+procedure TDataSourceTests.AddTests;
 begin
   CheckProperties(['DataSet']);
 end;
 
-{ TFieldTestHandler }
+{ TFieldTests }
 
-procedure TFieldTestHandler.AddTests;
+procedure TFieldTests.AddTests;
 begin
   with TField(CurrentComponent) do
   if Calculated then
     CurrentSuite.AddTest(TRequiredEventsTest.Create(DataSet, ['OnCalcFields']));
 end;
 
-{ TCustomConnectionTestHandler }
+{ TCustomConnectionTests }
 
-procedure TCustomConnectionTestHandler.AddTests;
+procedure TCustomConnectionTests.AddTests;
 begin
   CurrentSuite.AddTest(TCustomConnectionTest.Create(CurrentComponent));
 end;
@@ -220,9 +220,9 @@ begin
   end
 end;
 
-{ TParamTestHandler }
+{ TParamTests }
 
-function TParamTestHandler.Accepts(const Component: TComponent): Boolean;
+function TParamTests.Accepts(const Component: TComponent): Boolean;
 var
   Clazz: TClass;
 begin
@@ -236,7 +236,7 @@ begin
   end;
 end;
 
-procedure TParamTestHandler.AddTests;
+procedure TParamTests.AddTests;
 var
   I: Integer;
   Params: TParams;
@@ -261,9 +261,9 @@ begin
 
 end;
 
-{ TDbAwareComponentTestHandler }
+{ TDbAwareComponentTests }
 
-function TDbAwareComponentTestHandler.Accepts(const Component: TComponent):
+function TDbAwareComponentTests.Accepts(const Component: TComponent):
   Boolean;
 var
   HasDataSource, HasDataField: Boolean;
@@ -278,12 +278,12 @@ begin
   end;
 end;
 
-procedure TDbAwareComponentTestHandler.AddTests;
+procedure TDbAwareComponentTests.AddTests;
 begin
   CheckProperties(['DataSource', 'DataField']);
 end;
 
-function TDbAwareComponentTestHandler.Handles(const Form: TComponent): Boolean;
+function TDbAwareComponentTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := Form is TCustomForm; // data aware components are only on forms
 end;

@@ -25,16 +25,16 @@ uses
   TestFrameWork, DBClient, Classes;
 
 type
-  TCustomClientDataSetTestHandler = class(TComponentHandler)
+  TCustomClientDataSetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
 implementation
 
-{ TCustomClientDataSetTestHandler }
+{ TCustomClientDataSetTests }
 
-procedure TCustomClientDataSetTestHandler.AddTests;
+procedure TCustomClientDataSetTests.AddTests;
 begin
   inherited;
   // check if the OnReconcileError event handler is assigned

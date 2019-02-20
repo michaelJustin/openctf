@@ -26,10 +26,12 @@ uses
 
 const
   CTF_NAME = 'OpenCTF';
-  CTF_VERSION = '1.6.0';
+  CTF_VERSION = '1.7.0';
   CTF_NAME_VERSION = CTF_NAME + ' ' + CTF_VERSION;
 
 type
+  TComponentClasses = array of TComponentClass;
+
   (**
    * \class TComponentHandler
    * \brief A test handler for a given type of components.
@@ -42,7 +44,9 @@ type
   private
     FComponent: TComponent;
     FComponentClass: TClass;
+    FExcludedClasses: TClassList;
     FSuiteName: string;
+
     procedure SetForm(const Value: TComponent);
     function GetForm: TComponent;
 
@@ -180,7 +184,11 @@ type
      * \param Suitename optional test suite name
      *)
     constructor Create(const ComponentClass: TClass; const Suitename: string =
-      '');
+      ''); overload;
+
+    constructor Create; overload;
+
+    function Exclude(ExcludedClass: TComponentClass): IComponentHandler;
 
     (**
      * \brief Get the test suite.
@@ -652,6 +660,7 @@ constructor TComponentHandler.Create(const ComponentClass: TClass; const
   Suitename: string = '');
 begin
   inherited Create;
+
   Assert(Assigned(ComponentClass));
 
   FComponentClass := ComponentClass;
@@ -659,7 +668,21 @@ begin
   if Suitename = '' then
     FSuiteName := ClassName
   else
-    FSuiteName := Suitename
+    FSuiteName := Suitename;
+
+  FExcludedClasses := TClassList.Create;
+end;
+
+constructor TComponentHandler.Create;
+begin
+  Create(Classes.TComponent);
+end;
+
+function TComponentHandler.Exclude(ExcludedClass: TComponentClass): IComponentHandler;
+begin
+  FExcludedClasses.Add(ExcludedClass);
+
+  Result := Self;
 end;
 
 function TComponentHandler.GetForm: TComponent;
@@ -679,7 +702,8 @@ end;
 
 function TComponentHandler.Accepts(const Component: TComponent): Boolean;
 begin
-  Result := Component is FComponentClass;
+  Result := (Component is FComponentClass)
+    and not (FExcludedClasses.IndexOf(Component.ClassType) <> -1);
 end;
 
 function TComponentHandler.HasProperty(const Component: TComponent; const
@@ -901,8 +925,24 @@ end;
  *
  * \li OpenCTF, OpenCTFRunner and test units in the uses clause
  * \li Registration of form, frame or datamodule classes (e.g. OpenCTF.RegisterFormClasses([TDataModule1, TForm1, TForm2]);
- * \li Test execution with OpenCTFRunner.Run;
+ * \li Test execution with GUITestRunner.RunRegisteredTests or TextTestRunner.RunRegisteredTests;
+ * Example:
+ * \code
+ * program FormTests;
  *
+ * uses
+ *   OpenCTF,
+ *   ctfStandardTests,
+ *   GUITestRunner,
+ *   TestForm in 'TestForm.pas' {Form1},
+ *   TestFrame in 'TestFrame.pas' {Frame1: TFrame};
+ *
+ * begin
+ *   OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
+ *
+ *   RunRegisteredTests;
+ * end.
+ * \endcode
  *)
 
 (**
