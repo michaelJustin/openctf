@@ -20,8 +20,7 @@ unit ctfTestActnList;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, ActnList, Classes;
+  OpenCTF, TestFrameWork;
 
 type
   TCustomActionListTests = class(TComponentHandler)
@@ -39,7 +38,7 @@ type
 implementation
 
 uses
-  SysUtils;
+  ActnList, SysUtils, Classes;
 
 { TCustomActionListTests }
 
@@ -50,6 +49,7 @@ var
   TmpSuite: ITestSuite;
 begin
   inherited;
+
   TmpSuite := TTestSuite.Create(CurrentComponent.Name + ' actions');
 
   with TCustomActionList(CurrentComponent) do

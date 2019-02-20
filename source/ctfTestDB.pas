@@ -21,8 +21,7 @@ unit ctfTestDB;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, DB, Classes;
+  OpenCTF, TestFrameWork, DB, Classes;
 
 resourcestring
   SMissingParamValue = 'Missing parameter value for input parameter';
@@ -31,6 +30,8 @@ type
   TCustomConnectionTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TCustomConnectionTest = class(TComponentTest)
@@ -41,6 +42,8 @@ type
   TDataSetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TDataSetTest = class(TComponentTest)
@@ -51,17 +54,23 @@ type
   TDataSourceTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TFieldTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TParamTests = class(TComponentHandler)
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TParamTest = class(TAbstractTest)
@@ -84,6 +93,8 @@ type
     function Accepts(const Component: TComponent): Boolean; override;
     function Handles(const Form: TComponent): Boolean; override;
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
@@ -96,6 +107,11 @@ uses
 procedure TDataSetTests.AddTests;
 begin
   CurrentSuite.AddTest(TDataSetTest.Create(CurrentComponent));
+end;
+
+constructor TDataSetTests.Create;
+begin
+  inherited Create(DB.TDataSet);
 end;
 
 { TDataSetTest }
@@ -152,6 +168,11 @@ begin
   CheckProperties(['DataSet']);
 end;
 
+constructor TDataSourceTests.Create;
+begin
+  inherited Create(DB.TDataSource);
+end;
+
 { TFieldTests }
 
 procedure TFieldTests.AddTests;
@@ -161,6 +182,11 @@ begin
     CurrentSuite.AddTest(TRequiredEventsTest.Create(DataSet, ['OnCalcFields']));
 end;
 
+constructor TFieldTests.Create;
+begin
+  inherited Create(DB.TField);
+end;
+
 { TCustomConnectionTests }
 
 procedure TCustomConnectionTests.AddTests;
@@ -168,11 +194,17 @@ begin
   CurrentSuite.AddTest(TCustomConnectionTest.Create(CurrentComponent));
 end;
 
+constructor TCustomConnectionTests.Create;
+begin
+  inherited Create(DB.TCustomConnection);
+end;
+
 { TCustomConnectionTest }
 
 procedure TCustomConnectionTest.RunTest;
 begin
   inherited;
+
   with TCustomConnection(Component) do
   begin
     CheckFalse(Connected, 'Connected at design time');
@@ -184,6 +216,7 @@ end;
 constructor TParamTest.Create(Component: TComponent; Param: TParam);
 begin
   inherited Create(Param.Name);
+
   FComponent := Component;
   FParam := Param;
   Param.DataType
@@ -261,6 +294,11 @@ begin
 
 end;
 
+constructor TParamTests.Create;
+begin
+  inherited Create(DB.TParam);
+end;
+
 { TDbAwareComponentTests }
 
 function TDbAwareComponentTests.Accepts(const Component: TComponent):
@@ -283,11 +321,15 @@ begin
   CheckProperties(['DataSource', 'DataField']);
 end;
 
+constructor TDbAwareComponentTests.Create;
+begin
+  inherited Create(Classes.TComponent);
+end;
+
 function TDbAwareComponentTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := Form is TCustomForm; // data aware components are only on forms
 end;
-
 
 end.
 

@@ -21,8 +21,7 @@ unit ctfTestNames;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Classes;
+  OpenCTF, TestFrameWork;
 
 type
   TComponentNameTests = class(TComponentHandler)
