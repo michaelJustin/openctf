@@ -27,6 +27,8 @@ type
   TCustomActionListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TContainedActionTest = class(TComponentTest)
@@ -66,7 +68,11 @@ begin
 
   if TmpSuite.CountTestCases > 0 then
     CurrentSuite.AddSuite(TmpSuite);
+end;
 
+constructor TCustomActionListTests.Create;
+begin
+  inherited Create(ActnList.TCustomActionList);
 end;
 
 { TContainedActionTest }

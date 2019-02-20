@@ -29,6 +29,8 @@ type
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TComponentNameTest = class(TComponentTest)
@@ -61,7 +63,13 @@ end;
 procedure TComponentNameTests.AddTests;
 begin
   inherited;
+
   AddTest(TComponentNameTest.Create(CurrentComponent));
+end;
+
+constructor TComponentNameTests.Create;
+begin
+  inherited Create(Classes.TComponent);
 end;
 
 { TComponentNameTest }

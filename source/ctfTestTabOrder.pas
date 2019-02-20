@@ -29,6 +29,8 @@ type
   protected
     procedure AddTests; override;
     function Handles(const Form: TComponent): Boolean; override;
+  public
+    constructor Create;
   end;
 
   TTabOrderTest = class(TComponentTest)
@@ -50,6 +52,11 @@ procedure TTabOrderTests.AddTests;
 begin
   inherited;
   AddTest(TTabOrderTest.Create(CurrentComponent));
+end;
+
+constructor TTabOrderTests.Create;
+begin
+  inherited create(Controls.TWinControl);
 end;
 
 function TTabOrderTests.Handles(const Form: TComponent): Boolean;

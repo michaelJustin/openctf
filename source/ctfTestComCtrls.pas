@@ -28,6 +28,8 @@ type
   TTabSheetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TTabSheetTest = class(TComponentTest)
@@ -55,6 +57,11 @@ begin
   inherited;
   if not TTabSheet(Component).TabVisible then
     Fail('TabSheet is invisible, should be hidden at run time');
+end;
+
+constructor TTabSheetTests.Create;
+begin
+  inherited Create(ComCtrls.TTabSheet);
 end;
 
 end.

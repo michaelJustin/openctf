@@ -29,6 +29,8 @@ type
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
 implementation
@@ -52,6 +54,11 @@ procedure TMenuItemTests.AddTests;
 begin
   inherited;
   CheckProperties(['OnClick']);
+end;
+
+constructor TMenuItemTests.Create;
+begin
+  inherited Create(Menus.TMenuItem);
 end;
 
 end.

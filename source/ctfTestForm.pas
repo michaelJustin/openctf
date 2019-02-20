@@ -29,6 +29,8 @@ type
     procedure AddTests; override;
     procedure AddFormTests; override;
     function Handles(const Form: TComponent): Boolean; override;
+  public
+    constructor Create;
   end;
 
   TBasicFormTest = class(TFormTest)
@@ -69,6 +71,11 @@ end;
 procedure TBasicFormTests.AddTests;
 begin
   inherited;
+end;
+
+constructor TBasicFormTests.Create;
+begin
+  inherited Create(Classes.TComponent);
 end;
 
 function TBasicFormTests.Handles(const Form: TComponent): Boolean;

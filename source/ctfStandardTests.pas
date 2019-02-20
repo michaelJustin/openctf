@@ -48,23 +48,23 @@ uses
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTests.Create(Classes.TComponent));
-  OpenCTF.Add(TBasicFormTests.Create(Classes.TComponent));
+  OpenCTF.Add(TComponentNameTests.Create);
+  OpenCTF.Add(TBasicFormTests.Create);
 
   // Controls.pas
-  OpenCTF.Add(TTabOrderTests.Create(Controls.TWinControl));
+  OpenCTF.Add(TTabOrderTests.Create);
 
   // Menus.pas
-  OpenCTF.Add(TMenuItemTests.Create(Menus.TMenuItem));
+  OpenCTF.Add(TMenuItemTests.Create);
 
   // Controls.pas
-  OpenCTF.Add(TImageListTests.Create(Controls.TImageList));
+  OpenCTF.Add(TImageListTests.Create);
 
   // ComCtrls.pas
-  OpenCTF.Add(TTabSheetTests.Create(ComCtrls.TTabSheet));
+  OpenCTF.Add(TTabSheetTests.Create);
 
   // ActnList.pas
-  OpenCTF.Add(TCustomActionListTests.Create(ActnList.TCustomActionList));
+  OpenCTF.Add(TCustomActionListTests.Create);
 
   // DB.pas
   OpenCTF.Add(TCustomConnectionTests.Create(DB.TCustomConnection));

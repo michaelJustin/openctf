@@ -28,6 +28,8 @@ type
   TImageListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
+  public
+    constructor Create;
   end;
 
   TImageListTest = class(TComponentTest)
@@ -47,6 +49,11 @@ procedure TImageListTests.AddTests;
 begin
   inherited;
   CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
+end;
+
+constructor TImageListTests.Create;
+begin
+  inherited Create(Controls.TImageList);
 end;
 
 { TImageListTest }
