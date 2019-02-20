@@ -48,38 +48,40 @@ uses
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTests.Create(TComponent));
-  OpenCTF.Add(TBasicFormTests.Create(TComponent));
-  OpenCTF.Add(TTabOrderTests.Create(TWinControl));
-
-  // Menus.pas
-  OpenCTF.Add(TMenuItemTests.Create(TMenuItem));
+  OpenCTF.Add(TComponentNameTests.Create(Classes.TComponent));
+  OpenCTF.Add(TBasicFormTests.Create(Classes.TComponent));
 
   // Controls.pas
-  OpenCTF.Add(TImageListTests.Create(TImageList));
+  OpenCTF.Add(TTabOrderTests.Create(Controls.TWinControl));
+
+  // Menus.pas
+  OpenCTF.Add(TMenuItemTests.Create(Menus.TMenuItem));
+
+  // Controls.pas
+  OpenCTF.Add(TImageListTests.Create(Controls.TImageList));
 
   // ComCtrls.pas
-  OpenCTF.Add(TTabSheetTests.Create(TTabSheet));
+  OpenCTF.Add(TTabSheetTests.Create(ComCtrls.TTabSheet));
 
-  // ActnLst.pas
-  OpenCTF.Add(TCustomActionListTests.Create(TCustomActionList));
+  // ActnList.pas
+  OpenCTF.Add(TCustomActionListTests.Create(ActnList.TCustomActionList));
 
   // DB.pas
-  OpenCTF.Add(TCustomConnectionTests.Create(TCustomConnection));
-  OpenCTF.Add(TFieldTests.Create(TField));
-  OpenCTF.Add(TDataSetTests.Create(TDataSet));
-  OpenCTF.Add(TDataSourceTests.Create(TDataSource));
-  OpenCTF.Add(TParamTests.Create(TParam));
-  OpenCTF.Add(TDbAwareComponentTests.Create(TComponent));
+  OpenCTF.Add(TCustomConnectionTests.Create(DB.TCustomConnection));
+  OpenCTF.Add(TFieldTests.Create(DB.TField));
+  OpenCTF.Add(TDataSetTests.Create(DB.TDataSet));
+  OpenCTF.Add(TDataSourceTests.Create(DB.TDataSource));
+  OpenCTF.Add(TParamTests.Create(DB.TParam));
+  OpenCTF.Add(TDbAwareComponentTests.Create(Classes.TComponent));
 
   // Provider.pas
-  OpenCTF.Add(TCustomProviderTests.Create(TCustomProvider));
+  OpenCTF.Add(TCustomProviderTests.Create(Provider.TCustomProvider));
 
   // DBClient.pas
-  OpenCTF.Add(TCustomClientDataSetTests.Create(TCustomClientDataSet));
+  OpenCTF.Add(TCustomClientDataSetTests.Create(DBClient.TCustomClientDataSet));
 
   // SqlExpr.pas
-  OpenCTF.Add(TDBXComponentTests.Create(TCustomSQLDataSet));
+  OpenCTF.Add(TDBXComponentTests.Create(SqlExpr.TCustomSQLDataSet));
 
 end.
 
