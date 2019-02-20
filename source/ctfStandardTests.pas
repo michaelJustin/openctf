@@ -48,38 +48,38 @@ uses
 
 initialization
   // Classes.pas
-  OpenCTF.Add(TComponentNameTestHandler.Create(TComponent));
-  OpenCTF.Add(TBasicFormTestHandler.Create(TComponent));
-  OpenCTF.Add(TTabOrderTestHandler.Create(TWinControl));
+  OpenCTF.Add(TComponentNameTests.Create(TComponent));
+  OpenCTF.Add(TBasicFormTests.Create(TComponent));
+  OpenCTF.Add(TTabOrderTests.Create(TWinControl));
 
   // Menus.pas
-  OpenCTF.Add(TMenuItemHandler.Create(TMenuItem));
+  OpenCTF.Add(TMenuItemTests.Create(TMenuItem));
 
   // Controls.pas
-  OpenCTF.Add(TImageListHandler.Create(TImageList));
+  OpenCTF.Add(TImageListTests.Create(TImageList));
 
   // ComCtrls.pas
-  OpenCTF.Add(TTabSheetHandler.Create(TTabSheet));
+  OpenCTF.Add(TTabSheetTests.Create(TTabSheet));
 
   // ActnLst.pas
-  OpenCTF.Add(TCustomActionListTestHandler.Create(TCustomActionList));
+  OpenCTF.Add(TCustomActionListTests.Create(TCustomActionList));
 
   // DB.pas
-  OpenCTF.Add(TCustomConnectionTestHandler.Create(TCustomConnection));
-  OpenCTF.Add(TFieldTestHandler.Create(TField));
-  OpenCTF.Add(TDataSetTestHandler.Create(TDataSet));
-  OpenCTF.Add(TDataSourceTestHandler.Create(TDataSource));
-  OpenCTF.Add(TParamTestHandler.Create(TParam));
-  OpenCTF.Add(TDbAwareComponentTestHandler.Create(TComponent));
+  OpenCTF.Add(TCustomConnectionTests.Create(TCustomConnection));
+  OpenCTF.Add(TFieldTests.Create(TField));
+  OpenCTF.Add(TDataSetTests.Create(TDataSet));
+  OpenCTF.Add(TDataSourceTests.Create(TDataSource));
+  OpenCTF.Add(TParamTests.Create(TParam));
+  OpenCTF.Add(TDbAwareComponentTests.Create(TComponent));
 
   // Provider.pas
-  OpenCTF.Add(TCustomProviderTestHandler.Create(TCustomProvider));
+  OpenCTF.Add(TCustomProviderTests.Create(TCustomProvider));
 
   // DBClient.pas
-  OpenCTF.Add(TCustomClientDataSetTestHandler.Create(TCustomClientDataSet));
+  OpenCTF.Add(TCustomClientDataSetTests.Create(TCustomClientDataSet));
 
   // SqlExpr.pas
-  OpenCTF.Add(TDBXComponentTestHandler.Create(TCustomSQLDataSet));
+  OpenCTF.Add(TDBXComponentTests.Create(TCustomSQLDataSet));
 
 end.
 

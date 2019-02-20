@@ -19,10 +19,12 @@
 unit ctfTestGlobalization;
 
 interface
-uses OpenCTF, ActnMan, TestFrameWork, Classes;
+
+uses
+  OpenCTF, ActnMan, TestFrameWork, Classes;
 
 type
-  TCustomActionListTestHandler = class(TComponentHandler)
+  TCustomActionListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -33,11 +35,13 @@ type
   end;
 
 implementation
-uses ActnMenus, SysUtils;
 
-{ TCustomActionListTestHandler }
+uses
+  ActnMenus, SysUtils;
 
-procedure TCustomActionListTestHandler.AddTests;
+{ TCustomActionListTests }
+
+procedure TCustomActionListTests.AddTests;
 begin
   inherited;
 
@@ -69,7 +73,7 @@ begin
 end;
 
 initialization
-  OpenCTF.Add(TCustomActionListTestHandler.Create(TActionMainMenuBar));
+  OpenCTF.Add(TCustomActionListTests.Create(TActionMainMenuBar));
 
 end.
 

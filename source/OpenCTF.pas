@@ -901,8 +901,24 @@ end;
  *
  * \li OpenCTF, OpenCTFRunner and test units in the uses clause
  * \li Registration of form, frame or datamodule classes (e.g. OpenCTF.RegisterFormClasses([TDataModule1, TForm1, TForm2]);
- * \li Test execution with OpenCTFRunner.Run;
+ * \li Test execution with GUITestRunner.RunRegisteredTests or TextTestRunner.RunRegisteredTests;
+ * Example:
+ * \code
+ * program FormTests;
  *
+ * uses
+ *   OpenCTF,
+ *   ctfStandardTests,
+ *   GUITestRunner,
+ *   TestForm in 'TestForm.pas' {Form1},
+ *   TestFrame in 'TestFrame.pas' {Frame1: TFrame};
+ *
+ * begin
+ *   OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
+ *
+ *   RunRegisteredTests;
+ * end.
+ * \endcode
  *)
 
 (**

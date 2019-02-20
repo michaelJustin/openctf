@@ -24,7 +24,7 @@ uses
   OpenCTF, TestFrameWork, Classes;
 
 type
-  TBasicFormTestHandler = class(TComponentHandler)
+  TBasicFormTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
     procedure AddFormTests; override;
@@ -45,16 +45,18 @@ type
 
 implementation
 
-uses ctfUtils, Forms, SysUtils;
+uses
+  ctfUtils,
+  Forms, SysUtils;
 
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
   // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 
-{ TBasicFormTestHandler }
+{ TBasicFormTests }
 
-procedure TBasicFormTestHandler.AddFormTests;
+procedure TBasicFormTests.AddFormTests;
 begin
   inherited;
 
@@ -64,12 +66,12 @@ begin
   //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
 end;
 
-procedure TBasicFormTestHandler.AddTests;
+procedure TBasicFormTests.AddTests;
 begin
   inherited;
 end;
 
-function TBasicFormTestHandler.Handles(const Form: TComponent): Boolean;
+function TBasicFormTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := (Form is TCustomForm) or (Form is TDataModule) or (Form is TCustomFrame);
 end;

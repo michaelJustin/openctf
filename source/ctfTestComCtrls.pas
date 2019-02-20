@@ -25,7 +25,7 @@ uses
   TestFrameWork, Classes;
 
 type
-  TTabSheetHandler = class(TComponentHandler)
+  TTabSheetTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -42,7 +42,7 @@ uses
 
 { TTabSheetHandler }
 
-procedure TTabSheetHandler.AddTests;
+procedure TTabSheetTests.AddTests;
 begin
   inherited;
   CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));

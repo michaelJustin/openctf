@@ -25,7 +25,7 @@ uses
   TestFrameWork, Classes;
 
 type
-  TTabOrderTestHandler = class(TComponentHandler)
+  TTabOrderTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
     function Handles(const Form: TComponent): Boolean; override;
@@ -38,20 +38,21 @@ type
 
 implementation
 
-uses Controls, Forms;
+uses
+  Controls, Forms;
 
 type
  THackWinControl = class(TWinControl);
 
-{ TTabOrderTestHandler }
+{ TTabOrderTests }
 
-procedure TTabOrderTestHandler.AddTests;
+procedure TTabOrderTests.AddTests;
 begin
   inherited;
   AddTest(TTabOrderTest.Create(CurrentComponent));
 end;
 
-function TTabOrderTestHandler.Handles(const Form: TComponent): Boolean;
+function TTabOrderTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := (Form is TCustomForm) or (Form is TCustomFrame);
 end;

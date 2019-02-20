@@ -25,16 +25,16 @@ uses
   TestFrameWork, Provider, Classes;
 
 type
-  TCustomProviderTestHandler = class(TComponentHandler)
+  TCustomProviderTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
 
 implementation
 
-{ TCustomProviderTestHandler }
+{ TCustomProviderTests }
 
-procedure TCustomProviderTestHandler.AddTests;
+procedure TCustomProviderTests.AddTests;
 begin
   inherited;
   // check if the Provider is connected to a dataset

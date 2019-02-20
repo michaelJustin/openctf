@@ -25,7 +25,7 @@ uses
   TestFrameWork, Classes;
 
 type
-  TComponentNameTestHandler = class(TComponentHandler)
+  TComponentNameTests = class(TComponentHandler)
   protected
     function Accepts(const Component: TComponent): Boolean; override;
     procedure AddTests; override;
@@ -45,9 +45,9 @@ uses
 resourcestring
   SIllegalName = 'Avoid default names for components';
 
-{ TComponentNameTestHandler }
+{ TComponentNameTests }
 
-function TComponentNameTestHandler.Accepts(const Component: TComponent):
+function TComponentNameTests.Accepts(const Component: TComponent):
   Boolean;
 var
   CheckIt: Boolean;
@@ -58,7 +58,7 @@ begin
   Result := CheckIt and HasDefaultName(Component);
 end;
 
-procedure TComponentNameTestHandler.AddTests;
+procedure TComponentNameTests.AddTests;
 begin
   inherited;
   AddTest(TComponentNameTest.Create(CurrentComponent));

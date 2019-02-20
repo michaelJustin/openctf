@@ -24,7 +24,7 @@ uses
   TestFrameWork, ActnList, Classes;
 
 type
-  TCustomActionListTestHandler = class(TComponentHandler)
+  TCustomActionListTests = class(TComponentHandler)
   protected
     procedure AddTests; override;
   end;
@@ -39,9 +39,9 @@ implementation
 uses
   SysUtils;
 
-{ TCustomActionListTestHandler }
+{ TCustomActionListTests }
 
-procedure TCustomActionListTestHandler.AddTests;
+procedure TCustomActionListTests.AddTests;
 var
   I: Integer;
   TmpAction: TContainedAction;
