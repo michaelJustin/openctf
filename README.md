@@ -4,7 +4,7 @@ The OpenCTF component test framework helps to build automatic tests for all (vis
 
 Compiled and tested with Delphi 2009.
 
-## Requirements ##
+### Requirements ###
 
 A compatible version of Delphi and Unit is required to use the framework.
 
