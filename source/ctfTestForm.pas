@@ -31,12 +31,17 @@ type
     function Handles(const Form: TComponent): Boolean; override;
   end;
 
-  TBasicFormTest = class(TFormTest)
+  TEmptyFormTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
 
-  TBasicFormNameTest = class(TFormTest)
+  TDefaultNameTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
+  TComponentPlacementTest = class(TFormTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
@@ -52,7 +57,7 @@ implementation
 
 uses
   ctfUtils,
-  Forms, SysUtils;
+  Controls, Forms, SysUtils;
 
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
@@ -65,9 +70,11 @@ procedure TBasicFormTests.AddFormTests;
 begin
   inherited;
 
-  AddTest(TBasicFormTest.Create(Form, 'TestEmptyForm'));
+  AddTest(TEmptyFormTest.Create(Form, 'TestEmptyForm'));
 
-  AddTest(TBasicFormNameTest.Create(Form, 'Test default name'));
+  AddTest(TDefaultNameTest.Create(Form, 'Test default name'));
+
+  AddTest(TComponentPlacementTest.Create(Form));
 
   //  if Form is TCustomForm then
   //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
@@ -85,7 +92,7 @@ end;
 
 { TBasicFormTest }
 
-procedure TBasicFormTest.RunTest;
+procedure TEmptyFormTest.RunTest;
 begin
   inherited;
 
@@ -107,12 +114,42 @@ end;
 
 { TBasicFormNameTest }
 
-procedure TBasicFormNameTest.RunTest(testResult: TTestResult);
+procedure TDefaultNameTest.RunTest(testResult: TTestResult);
 begin
   inherited;
 
   if HasDefaultName(Form) then
     Fail(SIllegalName);
+end;
+
+{ TComponentPlacementTest }
+
+procedure TComponentPlacementTest.RunTest(testResult: TTestResult);
+var
+  F: TScrollingWinControl;
+  I: Integer;
+  C: TWinControl;
+  S: string;
+begin
+  inherited;
+
+  S := '';
+
+  F := Form as TScrollingWinControl;
+
+  for I := 0 to Form.ComponentCount - 1 do begin
+    if Form.Components[I] is TWinControl then begin
+      C := Form.Components[I] as TWinControl;
+      if (C.Left < 0) or (C.Top < 0) then begin
+        S := S + C.Name + ' is outside of form (T/L) ';
+      end;
+      if (C.Left > F.Width) or (C.Top > F.Height) then begin
+        S := S + C.Name + ' is outside of form (B/R) ';
+      end;
+    end;
+  end;
+
+  if S <> '' then Fail (S);
 end;
 
 end.

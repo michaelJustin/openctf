@@ -33,6 +33,7 @@ type
     Button3: TButton;
     Label1: TLabel;
     Panel1: TPanel;
+    Panel2: TPanel;
     procedure ActionOneExecute(Sender: TObject);
     procedure Quit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);

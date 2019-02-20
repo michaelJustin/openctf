@@ -73,12 +73,20 @@ object Form1: TForm1
     TabOrder = 4
   end
   object Panel1: TPanel
-    Left = 8
-    Top = 341
+    Left = -40
+    Top = 357
     Width = 185
     Height = 41
     Caption = 'Panel1'
     TabOrder = 5
+  end
+  object Panel2: TPanel
+    Left = 500
+    Top = 119
+    Width = 185
+    Height = 41
+    Caption = 'Panel2'
+    TabOrder = 6
   end
   object ActList: TActionList
     Left = 24
