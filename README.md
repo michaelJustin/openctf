@@ -4,7 +4,7 @@ The OpenCTF component test framework helps to build automatic tests for all (vis
 
 ### Example test project ###
 
-~~~~
+```pascal
 program FormTests;
 
 uses
@@ -19,7 +19,7 @@ begin
 
   RunRegisteredTests;
 end.
-~~~~
+```
 
 
 ### Requirements ###
