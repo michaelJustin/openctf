@@ -67,7 +67,6 @@ uses
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
   SEmpty = 'Empty form (or datamodule).';
-  // SInvalidFormParent = 'Invalid form parent class: %s should not inherit directly from %s.';
 
 { TBasicFormTests }
 
@@ -79,12 +78,11 @@ begin
 
   AddTest(TDefaultNameTest.Create(Form, TDefaultNameTest.ClassName)); // , 'Test default name'));
 
-  AddTest(TComponentPlacementTest.Create(Form, TComponentPlacementTest.ClassName));
-
-  AddTest(TInvisibleNonVisualComponentsTest.Create(Form, TInvisibleNonVisualComponentsTest.ClassName));
-
-  //  if Form is TCustomForm then
-  //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
+  if Form is TScrollingWinControl then
+  begin
+    AddTest(TComponentPlacementTest.Create(Form, TComponentPlacementTest.ClassName));
+    AddTest(TInvisibleNonVisualComponentsTest.Create(Form, TInvisibleNonVisualComponentsTest.ClassName));
+  end;
 end;
 
 procedure TBasicFormTests.AddTests;
@@ -107,18 +105,6 @@ begin
     Fail(SEmpty);
 end;
 
-{ TInvalidFormParentTest }
-(*
-procedure TInvalidFormParentTest.RunTest;
-begin
-  inherited;
-
-  if Form.ClassParent.ClassName = TForm.ClassName then
-    Fail(Format(SInvalidFormParent, [Form.ClassName, Form.ClassParent.ClassName]));
-
-end;
-*)
-
 { TBasicFormNameTest }
 
 procedure TDefaultNameTest.RunTest(testResult: TTestResult);
@@ -139,6 +125,8 @@ var
   S: string;
 begin
   inherited;
+
+  if not (Form is TScrollingWinControl) then Exit;
 
   S := '';
 
