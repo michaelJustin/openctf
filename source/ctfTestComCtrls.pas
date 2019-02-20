@@ -21,8 +21,7 @@ unit ctfTestComCtrls;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Classes;
+  OpenCTF, TestFrameWork;
 
 type
   TTabSheetTests = class(TComponentHandler)
@@ -47,6 +46,7 @@ uses
 procedure TTabSheetTests.AddTests;
 begin
   inherited;
+
   CurrentSuite.AddTest(TTabSheetTest.Create(CurrentComponent));
 end;
 
@@ -55,6 +55,7 @@ end;
 procedure TTabSheetTest.RunTest;
 begin
   inherited;
+
   if not TTabSheet(Component).TabVisible then
     Fail('TabSheet is invisible, should be hidden at run time');
 end;

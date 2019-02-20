@@ -21,8 +21,7 @@ unit ctfTestTabOrder;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Classes;
+  OpenCTF, TestFrameWork, Classes;
 
 type
   TTabOrderTests = class(TComponentHandler)
@@ -51,6 +50,7 @@ type
 procedure TTabOrderTests.AddTests;
 begin
   inherited;
+
   AddTest(TTabOrderTest.Create(CurrentComponent));
 end;
 
