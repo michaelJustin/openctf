@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 295
   Caption = 'Form1'
   ClientHeight = 390
-  ClientWidth = 454
+  ClientWidth = 459
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,6 +21,13 @@ object Form1: TForm1
     Width = 32
     Height = 13
     Caption = 'Label1'
+  end
+  object Label2: TLabel
+    Left = 294
+    Top = 119
+    Width = 157
+    Height = 13
+    Caption = 'Some components are there --->>'
   end
   object PageControlOne: TPageControl
     Left = 8
@@ -42,7 +49,7 @@ object Form1: TForm1
   inline Frame11: TFrame1
     Left = 0
     Top = 0
-    Width = 454
+    Width = 459
     Height = 80
     Align = alTop
     TabOrder = 1
@@ -147,5 +154,9 @@ object Form1: TForm1
         Action = ActionTwo
       end
     end
+  end
+  object Timer1: TTimer
+    Left = 504
+    Top = 176
   end
 end

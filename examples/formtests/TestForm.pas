@@ -34,6 +34,8 @@ type
     Label1: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
+    Timer1: TTimer;
+    Label2: TLabel;
     procedure ActionOneExecute(Sender: TObject);
     procedure Quit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);

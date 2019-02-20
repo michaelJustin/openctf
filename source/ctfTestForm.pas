@@ -46,6 +46,11 @@ type
     procedure RunTest(testResult: TTestResult); override;
   end;
 
+  TInvisibleNonVisualComponentsTest = class(TFormTest)
+  protected
+    procedure RunTest(testResult: TTestResult); override;
+  end;
+
   (*
   TInvalidFormParentTest = class(TFormTest)
   protected
@@ -57,7 +62,7 @@ implementation
 
 uses
   ctfUtils,
-  Controls, Forms, SysUtils;
+  Controls, Forms, SysUtils, Windows;
 
 resourcestring
   SIllegalName = 'Avoid default names for forms (e.g. Form1)';
@@ -70,11 +75,13 @@ procedure TBasicFormTests.AddFormTests;
 begin
   inherited;
 
-  AddTest(TEmptyFormTest.Create(Form, 'TestEmptyForm'));
+  AddTest(TEmptyFormTest.Create(Form, TEmptyFormTest.ClassName)); // , 'TestEmptyForm'));
 
-  AddTest(TDefaultNameTest.Create(Form, 'Test default name'));
+  AddTest(TDefaultNameTest.Create(Form, TDefaultNameTest.ClassName)); // , 'Test default name'));
 
-  AddTest(TComponentPlacementTest.Create(Form));
+  AddTest(TComponentPlacementTest.Create(Form, TComponentPlacementTest.ClassName));
+
+  AddTest(TInvisibleNonVisualComponentsTest.Create(Form, TInvisibleNonVisualComponentsTest.ClassName));
 
   //  if Form is TCustomForm then
   //  AddTest(TInvalidFormParentTest.Create(Form, 'TestFormParent'));
@@ -146,6 +153,41 @@ begin
       if (C.Left > F.Width) or (C.Top > F.Height) then begin
         S := S + C.Name + ' is outside of form (B/R) ';
       end;
+    end;
+  end;
+
+  if S <> '' then Fail (S);
+end;
+
+{ TInvisibleNonVisualComponentsTest }
+
+procedure TInvisibleNonVisualComponentsTest.RunTest(testResult: TTestResult);
+var
+  F: TScrollingWinControl;
+  C: TComponent;
+  I: Integer;
+  S: string;
+  // see https://stackoverflow.com/questions/10987628/how-to-access-design-position-on-non-visual-delphi-components
+  P: TSmallPoint;
+begin
+  inherited;
+
+  S := '';
+
+  if not (Form is TScrollingWinControl) then Exit;
+  // todo: implement for TDataModule which is not a TScrollingWinControl
+
+  F := Form as TScrollingWinControl;
+
+  S := '';
+  for I := 0 to Form.ComponentCount - 1 do begin
+    C := Form.Components[I];
+
+    if C is TWinControl then Continue;  // no non-visual
+
+    P := TSmallPoint(C.DesignInfo);
+    if (P.x < 0) or (P.y < 0) or (P.x > F.Width) or (P.y > F.Height) then begin
+      S := S + C.Name + ' is outside of form';
     end;
   end;
 
