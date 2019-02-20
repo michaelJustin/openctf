@@ -4,21 +4,22 @@ The OpenCTF component test framework helps to build automatic tests for all (vis
 
 ### Example test project ###
 
-    program FormTests;
+~~~~
+program FormTests;
 
-    uses
-      OpenCTF,
-      ctfStandardTests,
-      GUITestRunner,
-      TestForm in 'TestForm.pas' {Form1},
-      TestFrame in 'TestFrame.pas' {Frame1: TFrame};
+uses
+  OpenCTF,
+  ctfStandardTests,
+  GUITestRunner,
+  TestForm in 'TestForm.pas' {Form1},
+  TestFrame in 'TestFrame.pas' {Frame1: TFrame};
 
-    begin
-      OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
+begin
+  OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
 
-      RunRegisteredTests;
-    end.
-
+  RunRegisteredTests;
+end.
+~~~~
 
 
 ### Requirements ###
