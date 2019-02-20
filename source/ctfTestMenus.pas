@@ -22,7 +22,7 @@ interface
 
 uses
   OpenCTF,
-  TestFrameWork, Classes;
+  Classes;
 
 type
   TMenuItemTests = class(TComponentHandler)
@@ -53,6 +53,7 @@ end;
 procedure TMenuItemTests.AddTests;
 begin
   inherited;
+
   CheckProperties(['OnClick']);
 end;
 

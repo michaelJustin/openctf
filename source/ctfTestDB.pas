@@ -21,8 +21,7 @@ unit ctfTestDB;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, DB, Classes;
+  OpenCTF, TestFrameWork, DB, Classes;
 
 resourcestring
   SMissingParamValue = 'Missing parameter value for input parameter';
@@ -173,6 +172,7 @@ end;
 procedure TCustomConnectionTest.RunTest;
 begin
   inherited;
+
   with TCustomConnection(Component) do
   begin
     CheckFalse(Connected, 'Connected at design time');
@@ -184,6 +184,7 @@ end;
 constructor TParamTest.Create(Component: TComponent; Param: TParam);
 begin
   inherited Create(Param.Name);
+
   FComponent := Component;
   FParam := Param;
   Param.DataType
@@ -287,7 +288,6 @@ function TDbAwareComponentTests.Handles(const Form: TComponent): Boolean;
 begin
   Result := Form is TCustomForm; // data aware components are only on forms
 end;
-
 
 end.
 

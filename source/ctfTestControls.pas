@@ -21,8 +21,7 @@ unit ctfTestControls;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Classes;
+  OpenCTF, TestFrameWork;
 
 type
   TImageListTests = class(TComponentHandler)
@@ -48,6 +47,7 @@ uses
 procedure TImageListTests.AddTests;
 begin
   inherited;
+
   CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
 end;
 
@@ -61,6 +61,7 @@ end;
 procedure TImageListTest.RunTest;
 begin
   inherited;
+
   if TImageList(Component).Count=0 then
     Fail('ImageList is empty');
 end;

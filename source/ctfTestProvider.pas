@@ -21,8 +21,7 @@ unit ctfTestProvider;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Provider, Classes;
+  OpenCTF;
 
 type
   TCustomProviderTests = class(TComponentHandler)
@@ -37,6 +36,7 @@ implementation
 procedure TCustomProviderTests.AddTests;
 begin
   inherited;
+
   // check if the Provider is connected to a dataset
   CheckProperties(['DataSet']);
 end;

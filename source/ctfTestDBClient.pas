@@ -21,8 +21,7 @@ unit ctfTestDBClient;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, DBClient, Classes;
+  OpenCTF;
 
 type
   TCustomClientDataSetTests = class(TComponentHandler)
@@ -37,6 +36,7 @@ implementation
 procedure TCustomClientDataSetTests.AddTests;
 begin
   inherited;
+
   // check if the OnReconcileError event handler is assigned
   CheckEvents(['OnReconcileError']);
   // check if the ProviderName property is assigned

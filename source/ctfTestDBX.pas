@@ -21,8 +21,7 @@ unit ctfTestDBX;
 interface
 
 uses
-  OpenCTF,
-  TestFrameWork, Classes;
+  OpenCTF;
 
 type
   TDBXComponentTests = class(TComponentHandler)
@@ -40,6 +39,7 @@ uses
 procedure TDBXComponentTests.AddTests;
 begin
   inherited;
+
   CheckProperties(['SQLConnection']);
 end;
 
