@@ -4,12 +4,14 @@ The OpenCTF component test framework helps to build automatic tests for all (vis
 
 ### Example test project ###
 
+This example test project contains one form and one frame. 
+
 ```pascal
 program FormTests;
 
 uses
   OpenCTF,
-  ctfStandardTests,
+  ctfConfig, // configure OpenCTF with our test classes
   GUITestRunner,
   TestForm in 'TestForm.pas' {Form1},
   TestFrame in 'TestFrame.pas' {Frame1: TFrame};
