@@ -21,6 +21,56 @@ begin
 end.
 ```
 
+### Example: verify that a TImageList contains images
+
+#### Step 1: create a TComponentHandler who will add all our tests to the current test suite
+
+The framework uses customized TComponentHandler subclasses to build the component tests. 
+
+In this example, we want to test only TImageList components, so we override the constructor to specifiy the classes to be tested.
+
+```pascal
+TImageListTests = class(TComponentHandler)
+protected
+  procedure AddTests; override;
+public
+  constructor Create;
+end;
+  ...
+constructor TImageListTests.Create;
+begin
+  inherited Create(Controls.TImageList); // test only this class (and subclasses)
+end;
+
+procedure TImageListTests.AddTests;
+begin
+  inherited;
+
+  CurrentSuite.AddTest(TImageListMustContainImages.Create(CurrentComponent)); // see below
+end;
+  
+```
+
+#### Step 2: write the class which does the actual test 
+
+Our custom test class is derived from TComponentTest (which in turn is a DUnit TAbstractTest).
+So we can use all CheckEquals / CheckNotEquals / ...  methods of DUnit.
+For our example we only test that the number of images in the ImageList is not equal to zero.
+Note that the for every component on the form, one TComponentTest class instance will be created, and its Component property points to the component under test. 
+
+```pascal
+TImageListMustContainImages = class(TComponentTest)
+protected
+  procedure RunTest(testResult: TTestResult); override;
+end;
+
+procedure TImageListMustContainImages.RunTest;
+begin
+  inherited;
+
+  CheckNotEquals(0, (Component as TImageList).Count, 'ImageList is empty');
+end;
+```
 
 ### Requirements ###
 
