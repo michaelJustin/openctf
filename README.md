@@ -96,7 +96,7 @@ begin
 end.
 ```
 
-Step 4: move your custom setup to a ctfConfig unit (optional)
+#### Step 4: move your custom setup to a ctfConfig unit (optional)
 
 Instead of placing the configuration in the project source file (dpr), you can write a unit and include all tests (and required units) there.
 
@@ -117,7 +117,10 @@ begin
 end.
 ```
 
-Example for ctfConfig:
+#### Example for configuration unit ctfConfig
+
+The configuration example performs all setup in the initialization section. 
+This saves typing in the project source code, only add the ctfConfig unit and tests will be added to the framework.
 
 ```pascal
 unit ctfConfig;
