@@ -100,7 +100,7 @@ end.
 
 Compiled and tested with Delphi 2009.
 
-A compatible version of Delphi and Unit is required to use the framework.
+A compatible version of Delphi and DUnit is required to use the framework.
 
 ### API documentation (generated with doxygen and pas2dox) ###
 
