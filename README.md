@@ -142,6 +142,26 @@ initialization
 end.  
 ```
 
+### Excluding classes from tests
+
+In some cases there, tests may be skipped for some classes. For example, the strict rule that every component must have a non-default name ('Button1' and 'Button2') may be too strict. 
+
+The configuration allows to exclude some classes from a specific test. Here is the initialization section with additional excludes: 
+
+```pascal
+initialization
+  OpenCTF.Add(TBasicFormTests.Create);
+  OpenCTF.Add((TComponentNameTests.Create)
+    .Exclude(StdCtrls.TLabel) // exclude TLabel 
+    .Exclude(Forms.TFrame)    // exclude TFrame
+    .Exclude(ExtCtrls.TPanel) // exclude TPanel
+    );
+  OpenCTF.Add(TTabOrderTests.Create);
+  OpenCTF.Add(TMenuItemTests.Create);
+end.  
+```
+
+
 ### Requirements ###
 
 Compiled and tested with Delphi 2009.
