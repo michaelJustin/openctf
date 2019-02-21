@@ -114,7 +114,7 @@
   <!-- =================================================================== -->
   <target name="zip" depends="compile">
 
-    <zip zipfile="${user.dir}/${target}/${Name}-${version}-source.zip" basedir="${user.dir}/${target}" includes="**" />
+    <zip zipfile="${user.dir}/${target}/${ShortName}-${version}-source.zip" basedir="${user.dir}/${target}" includes="**" />
 
   </target>
 
