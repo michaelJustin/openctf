@@ -131,22 +131,18 @@ implementation
 
 uses
   OpenCTF,
-  ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder, ctfTestControls,
-  ctfTestMenus, ctfTestComCtrls, ctfTestActnList,
+  ctfTestForm, ctfTestNames, ctfTestTabOrder, ctfTestMenus,
   StdCtrls, ExtCtrls, Forms, Classes;
 
 initialization
+  OpenCTF.Add(TBasicFormTests.Create);
   OpenCTF.Add((TComponentNameTests.Create)
     .Exclude(StdCtrls.TLabel) // exclude TLabel from tests (allow default name)
     .Exclude(Forms.TFrame)    // exclude TFrame
     .Exclude(ExtCtrls.TPanel) // exclude TPanel
     );
-  OpenCTF.Add(TBasicFormTests.Create);
   OpenCTF.Add(TTabOrderTests.Create);
   OpenCTF.Add(TMenuItemTests.Create);
-  OpenCTF.Add(TImageListTests.Create);
-  OpenCTF.Add(TTabSheetTests.Create);
-  OpenCTF.Add(TCustomActionListTests.Create);
 end.  
 ```
 
