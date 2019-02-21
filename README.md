@@ -96,6 +96,57 @@ begin
 end.
 ```
 
+Step 4: move your custom setup to a ctfConfig unit (optional)
+
+Instead of placing the configuration in the project source file (dpr), you can write a unit and include all tests (and required units) there.
+
+```pascal
+program FormTests;
+
+uses
+  OpenCTF,
+  ctfConfig, // unit containing my custom configuration
+  GUITestRunner,
+  TestForm in 'TestForm.pas' {Form1},
+  TestFrame in 'TestFrame.pas' {Frame1: TFrame};
+
+begin
+  OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
+
+  RunRegisteredTests;
+end.
+```
+
+Example for ctfConfig:
+
+```pascal
+unit ctfConfig;
+
+interface
+
+implementation
+
+uses
+  OpenCTF,
+  ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder, ctfTestControls,
+  ctfTestMenus, ctfTestComCtrls, ctfTestActnList,
+  StdCtrls, ExtCtrls, Forms, Classes;
+
+initialization
+  OpenCTF.Add((TComponentNameTests.Create)
+    .Exclude(StdCtrls.TLabel) // exclude TLabel from tests (allow default name)
+    .Exclude(Forms.TFrame)    // exclude TFrame
+    .Exclude(ExtCtrls.TPanel) // exclude TPanel
+    );
+  OpenCTF.Add(TBasicFormTests.Create);
+  OpenCTF.Add(TTabOrderTests.Create);
+  OpenCTF.Add(TMenuItemTests.Create);
+  OpenCTF.Add(TImageListTests.Create);
+  OpenCTF.Add(TTabSheetTests.Create);
+  OpenCTF.Add(TCustomActionListTests.Create);
+end.  
+```
+
 ### Requirements ###
 
 Compiled and tested with Delphi 2009.
