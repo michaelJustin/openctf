@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getsuite',['GetSuite',['../classTComponentHandler.html#a8a44834098e14c5a95bc89d316734e97',1,'TComponentHandler']]]
+  ['exclude',['Exclude',['../classTComponentHandler.html#a6b12fe17d3a2dece2a7f832b15bc35b7',1,'TComponentHandler']]]
 ];

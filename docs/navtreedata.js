@@ -29,8 +29,6 @@ var NAVTREE =
       [ "Limited Warranty", "index.html#warranty", null ],
       [ "TRADEMARKS", "index.html#trademarks", null ]
     ] ],
-    [ "Users guide", "howto.html", null ],
-    [ "Tools used to develop OpenCTF", "credits.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

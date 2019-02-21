@@ -24,6 +24,19 @@
 				</patternset>
 			</fileset>
 		</apply>
+		
+		<delete>
+          <fileset dir="." includes="*.dcu" />
+		</delete>
+		
+		<delete>
+          <fileset dir="." includes="*.exe" />
+		</delete>
+		
+		<delete>
+          <fileset dir="." includes="build.xml" />
+		</delete>
+		
 	</target>
 	
 </project>

@@ -38,7 +38,6 @@ type
    *
    * \li The method TComponentHandler#Accepts controls which components will
    * be tested, it can be overriden to change the default behaviour.
-   *
    *)
   TComponentHandler = class(TInterfacedObject, IComponentHandler)
   private
@@ -59,7 +58,6 @@ type
      * test suite. The default implementation checks if the component class
      * is a subclass of the handled class. This method may be overriden to add
      * more filter conditions.
-     *
      *
      * \param Component the component to be checked
      *)
@@ -86,7 +84,6 @@ type
      *   CurrentSuite.AddTest(TMenuItemTest.Create(CurrentComponent));
      * end;
      * \endcode
-     *
      *)
     procedure AddTests; virtual; abstract;
 
@@ -94,7 +91,6 @@ type
      * \brief Adds tests for the form to the test suite.
      *
      * \li To add tests for the form, overwrite the empty default declaration of this method.
-     *
      *)
     procedure AddFormTests; virtual;
 
@@ -186,8 +182,27 @@ type
     constructor Create(const ComponentClass: TClass; const Suitename: string =
       ''); overload;
 
+    (**
+     * \brief Creates a handler instance.
+     * This constructor will create a handler instance which will by default
+     * generate a test for every component in the form (or datamodule) which
+     * is a subtype of TComponent.
+     *)
     constructor Create; overload;
 
+    (**
+     * \brief Exclude a component class from tests
+     * Example:
+     * \code
+     *  OpenCTF.Add((TComponentNameTests.Create)
+     *    .Exclude(TLabel) // exclude TLabel from tests (allow default name)
+     *    .Exclude(TFrame) // and TFrame
+     *    .Exclude(TPanel) // and TPanel
+     *    );
+     * \endcode
+     *
+     * \param ExcludedClass the class to be excluded from tests
+     *)
     function Exclude(ExcludedClass: TComponentClass): IComponentHandler;
 
     (**
@@ -206,7 +221,6 @@ type
    *
    * The only instance of this class is declared and initialized in the OpenCTF
    * main unit (OpenCTF.pas).
-   *
    *)
   THandlerManager = class(TObject)
   private
@@ -245,7 +259,6 @@ type
      * initialization
      * OpenCTF.Add(TCustomActionListTestHandler.Create(TCustomActionList));
      * \endcode
-     *
      *)
     procedure Add(const Handler: IComponentHandler);
 
@@ -425,8 +438,6 @@ procedure RegisterFormClasses(const FormClasses: array of TComponentClass);
  *)
 procedure RegisterForms; overload;
 
-// function GetStringProperty(const Instance: TComponent; PropName: string): string;
-
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
 
 var
@@ -510,8 +521,6 @@ begin
 end;
 
 (*
-{.$WARN UNSAFE_CODE OFF}
-
 function GetStringProperty(const Instance: TComponent; PropName: string):
   string;
 var
@@ -531,8 +540,6 @@ begin
     end;
   end;
 end;
-
-{.$WARN UNSAFE_CAST OFF}
 *)
 
 function HasPropValue(Instance: TComponent; PropName: string): Boolean;
@@ -588,10 +595,6 @@ begin
     end;
   end;
 end;
-
-{.$WARN UNSAFE_CODE ON}
-
-{.$WARN UNSAFE_CAST ON}
 
 { TFormTest }
 
@@ -864,7 +867,8 @@ begin
   end;
 end;
 
-(** \mainpage OpenCTF Documentation
+(**
+ * \mainpage OpenCTF Documentation
  *
  * \section intro Introduction
  * OpenCTF is a test framework add-on for Embarcadero Delphi&reg; which performs
@@ -883,11 +887,7 @@ end;
  *
  * \li OpenCTF GitHub main page: https://github.com/michaelJustin/openctf
  *
- * \li \ref howto
- *
- * OpenCTF (c) Michael Justin http://www.habarisoft.com/
- *
- * \ref credits
+ * OpenCTF (c) Michael Justin
  *
  * \section warranty Limited Warranty
  * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS. HABARISOFT DISCLAIMS ALL
@@ -914,48 +914,6 @@ end;
  * Microsoft, Windows, Windows NT, and/or other Microsoft products referenced
  * herein are either registered trademarks or trademarks of Microsoft
  * Corporation in the United States and/or other countries.
- *)
-
-(**
- * \page howto Users guide
- *
- * OpenCTF is based on the DUnit open source test framework and extends it
- * by specialized test classes and helper functions.
- *
- * An OpenCTF test project contains these elements:
- *
- * \li OpenCTF, OpenCTFRunner and test units in the uses clause
- * \li Registration of form, frame or datamodule classes (e.g. OpenCTF.RegisterFormClasses([TDataModule1, TForm1, TForm2]);
- * \li Test execution with GUITestRunner.RunRegisteredTests or TextTestRunner.RunRegisteredTests;
- * Example:
- * \code
- * program FormTests;
- *
- * uses
- *   OpenCTF,
- *   ctfStandardTests,
- *   GUITestRunner,
- *   TestForm in 'TestForm.pas' {Form1},
- *   TestFrame in 'TestFrame.pas' {Frame1: TFrame};
- *
- * begin
- *   OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
- *
- *   RunRegisteredTests;
- * end.
- * \endcode
- *)
-
-(**
- * \page credits Tools used to develop OpenCTF
- *
- * OpenCTF was developed and tested using the following open-source tools:
- *
- * \li <a target="_blank" src="http://ant.apache.org/">Apache Ant</a> Pure Java build tool, simpler and easier to use than GNU Make.
- * \li <a target="_blank" src="http://www.doxygen.org/">doxygen</a> A documentation system for C++, C, Java and IDL.4
- * \li <a target="_blank" src="http://dunit.sourceforge.net/">DUnit</a> An Xtreme testing framework for Delphi programs.
- * \li <a target="_blank" src="http://sourceforge.net/projects/pas2dox/">pas2dox</a> Pas2Dox is a pre-processor addon for the Doxygen documentation generator. 
- *
  *)
 
 initialization

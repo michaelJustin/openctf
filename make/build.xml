@@ -26,14 +26,15 @@
   <!-- =================================================================== -->
   <target name="prepare">
   
-    <echo>${user.dir}</echo>
+    <echo>User dir is             ${user.dir}</echo>	
+	<echo>The project root is in  ${project_root}</echo>
+	<echo>The build script is in  ${basedir}</echo>
+	<echo>The target directory is ${target_root}</echo>
 	
-	<echo message="The project root is in  ${project_root}" />
-	<echo message="The build script is in  ${basedir}" />
-	<echo message="The target directory is ${target_root}" />
+	<echo>Delete ${project_root}/${target}</echo>
 
     <delete includeEmptyDirs="true" failonerror="false">
-      <fileset dir="${target}" />
+      <fileset dir="${project_root}/${target}" />
     </delete>
 
     <mkdir dir="${target_root}/" />
@@ -113,7 +114,7 @@
   <!-- =================================================================== -->
   <target name="zip" depends="compile">
 
-    <zip zipfile="${user.dir}/${target}/${Name}-${version}-source.zip" basedir="${user.dir}/${target}" includes="**" />
+    <zip zipfile="${user.dir}/${target}/${ShortName}-${version}-source.zip" basedir="${user.dir}/${target}" includes="**" />
 
   </target>
 
