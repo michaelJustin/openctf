@@ -2,7 +2,7 @@ program FormTests;
 
 uses
   OpenCTF,
-  ctfStandardTests,
+  ctfConfig,
   GUITestRunner,
   TestForm in 'TestForm.pas' {Form1},
   TestFrame in 'TestFrame.pas' {Frame1: TFrame};

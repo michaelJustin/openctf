@@ -2,7 +2,7 @@ program DatamoduleTests;
 
 uses
   OpenCTF,
-  ctfStandardTests,
+  ctfConfig,
   GUITestRunner,
   DatamoduleUnit in 'DatamoduleUnit.pas' {DataModule1: TDataModule};
 
