@@ -16,80 +16,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-unit ctfStandardTests;
+unit ctfConfig;
 
 interface
-
-uses
-  // Classes,
-    ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder,
-  // Controls,
-    ctfTestControls,
-  // Menus,
-    ctfTestMenus,
-  // ComCtrls,
-    ctfTestComCtrls,
-  // ActnList,
-    ctfTestActnList,
-  // DB,
-    ctfTestDB,
-  // Provider,
-    ctfTestProvider,
-  // DBClient,
-    ctfTestDBClient,
-  // SqlExpr,
-    ctfTestDBX
-  ;
 
 implementation
 
 uses
   OpenCTF,
-  StdCtrls, ExtCtrls, Forms, Classes,
-  DB, Provider, DBClient, SqlExpr;
+  ctfTestForm, ctfTestFrame, ctfTestNames, ctfTestTabOrder, ctfTestControls,
+  ctfTestMenus, ctfTestComCtrls, ctfTestActnList,
+  StdCtrls, ExtCtrls, Forms, Classes;
 
 initialization
-  // Classes.pas
   OpenCTF.Add((TComponentNameTests.Create)
-    .Exclude(TLabel) // exclude TLabel from tests (allow default name)
-    .Exclude(TFrame) // and TFrame
-    .Exclude(TPanel) // and TPanel
+    .Exclude(StdCtrls.TLabel) // exclude TLabel from tests (allow default name)
+    .Exclude(Forms.TFrame)    // exclude TFrame
+    .Exclude(ExtCtrls.TPanel) // exclude TPanel
     );
-
   OpenCTF.Add(TBasicFormTests.Create);
-
-  // Controls.pas
   OpenCTF.Add(TTabOrderTests.Create);
-
-  // Menus.pas
   OpenCTF.Add(TMenuItemTests.Create);
-
-  // Controls.pas
   OpenCTF.Add(TImageListTests.Create);
-
-  // ComCtrls.pas
   OpenCTF.Add(TTabSheetTests.Create);
-
-  // ActnList.pas
   OpenCTF.Add(TCustomActionListTests.Create);
-
-  // DB.pas
-  OpenCTF.Add(TCustomConnectionTests.Create);
-  OpenCTF.Add(TFieldTests.Create);
-  OpenCTF.Add(TDataSetTests.Create);
-  OpenCTF.Add(TDataSourceTests.Create);
-  OpenCTF.Add(TParamTests.Create);
-
-  OpenCTF.Add(TDbAwareComponentTests.Create);
-
-  // Provider.pas
-  OpenCTF.Add(TCustomProviderTests.Create);
-
-  // DBClient.pas
-  OpenCTF.Add(TCustomClientDataSetTests.Create);
-
-  // SqlExpr.pas
-  OpenCTF.Add(TDBXComponentTests.Create);
 
 end.
 
