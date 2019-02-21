@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['runtest',['RunTest',['../classTRequiredEventsTest.html#a9ba9221cd6eb24908ad4739114e34608',1,'TRequiredEventsTest::RunTest()'],['../classTRequiredPropertiesTest.html#a71d9b98ea62073270c7d01f33f3d6a4e',1,'TRequiredPropertiesTest::RunTest()']]]
+  ['handles',['Handles',['../classTComponentHandler.html#abcc07787f633546ff20d2ca596755f33',1,'TComponentHandler']]],
+  ['hasproperty',['HasProperty',['../classTComponentHandler.html#a87d8640140c58c97059b1d6cd11f0a7d',1,'TComponentHandler']]]
 ];
