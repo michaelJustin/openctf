@@ -31,7 +31,7 @@ type
     constructor Create;
   end;
 
-  TImageListTest = class(TComponentTest)
+  TImageListMustContainImages = class(TComponentTest)
   protected
     procedure RunTest(testResult: TTestResult); override;
   end;
@@ -48,7 +48,7 @@ procedure TImageListTests.AddTests;
 begin
   inherited;
 
-  CurrentSuite.AddTest(TImageListTest.Create(CurrentComponent));
+  CurrentSuite.AddTest(TImageListMustContainImages.Create(CurrentComponent));
 end;
 
 constructor TImageListTests.Create;
@@ -56,14 +56,13 @@ begin
   inherited Create(Controls.TImageList);
 end;
 
-{ TImageListTest }
+{ TImageListMustContainImages }
 
-procedure TImageListTest.RunTest;
+procedure TImageListMustContainImages.RunTest;
 begin
   inherited;
 
-  if TImageList(Component).Count=0 then
-    Fail('ImageList is empty');
+  CheckNotEquals(0, (Component as TImageList).Count, 'ImageList is empty');
 end;
 
 end.
