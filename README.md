@@ -136,11 +136,7 @@ uses
 
 initialization
   OpenCTF.Add(TBasicFormTests.Create);
-  OpenCTF.Add((TComponentNameTests.Create)
-    .Exclude(StdCtrls.TLabel) // exclude TLabel from tests (allow default name)
-    .Exclude(Forms.TFrame)    // exclude TFrame
-    .Exclude(ExtCtrls.TPanel) // exclude TPanel
-    );
+  OpenCTF.Add((TComponentNameTests.Create);
   OpenCTF.Add(TTabOrderTests.Create);
   OpenCTF.Add(TMenuItemTests.Create);
 end.  
