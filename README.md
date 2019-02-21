@@ -138,7 +138,7 @@ uses
 
 initialization
   OpenCTF.Add(TBasicFormTests.Create);
-  OpenCTF.Add((TComponentNameTests.Create);
+  OpenCTF.Add(TComponentNameTests.Create);
   OpenCTF.Add(TTabOrderTests.Create);
   OpenCTF.Add(TMenuItemTests.Create);
 end.  
