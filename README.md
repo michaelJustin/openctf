@@ -47,6 +47,7 @@ begin
   inherited;
 
   CurrentSuite.AddTest(TImageListMustContainImages.Create(CurrentComponent)); // see below
+  // add more tests ...
 end;
   
 ```
@@ -56,7 +57,7 @@ end;
 Our custom test class is derived from TComponentTest (which in turn is a DUnit TAbstractTest).
 So we can use all CheckEquals / CheckNotEquals / ...  methods of DUnit.
 For our example we only test that the number of images in the ImageList is not equal to zero.
-Note that the for every component on the form, one TComponentTest class instance will be created, and its Component property points to the component under test. 
+Note that for every component on the form, one TComponentTest instance will be created, and its Component property points to the component under test. 
 
 ```pascal
 TImageListMustContainImages = class(TComponentTest)
@@ -70,6 +71,29 @@ begin
 
   CheckNotEquals(0, (Component as TImageList).Count, 'ImageList is empty');
 end;
+```
+
+#### Step 3: register
+
+Now we need to add the test to our setup. This must happen before registering the form classes. 
+
+```pascal
+program FormTests;
+
+uses
+  OpenCTF,
+  ctfTestControls, // unit containing my custom TImageList tests
+  GUITestRunner,
+  TestForm in 'TestForm.pas' {Form1},
+  TestFrame in 'TestFrame.pas' {Frame1: TFrame};
+
+begin
+  OpenCTF.Add(TImageListTests.Create);
+
+  OpenCTF.RegisterFormClasses([TForm1, TFrame1]);
+
+  RunRegisteredTests;
+end.
 ```
 
 ### Requirements ###
