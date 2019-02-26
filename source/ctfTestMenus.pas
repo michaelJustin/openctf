@@ -54,7 +54,7 @@ procedure TMenuItemTests.AddTests;
 begin
   inherited;
 
-  CheckProperties(['OnClick']);
+  CheckEvents(['OnClick']);
 end;
 
 constructor TMenuItemTests.Create;
